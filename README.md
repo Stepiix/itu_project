@@ -8,4 +8,4 @@ Tento projekt byl vytvořen v rámci předmětu "Tvorba uživatelských rozhran�
 
 - **/doc**: Složka doc obsahuje veškerou dokumentaci spojenou s projektem. Zahrnuje popisy funkcionalit, uživatelskou dokumentaci a jiné relevantní dokumenty týkající se projektu.
 
-- **/src**: V této složce se nachází samotná implementace projektu. Všichni
+- **/src**: V této složce se nachází samotná implementace projektu.Všichni

@@ -8,7 +8,7 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
-     * Define the application's command schedule.
+     * Define the application's command schedule. jebignos
      */
     protected function schedule(Schedule $schedule): void
     {

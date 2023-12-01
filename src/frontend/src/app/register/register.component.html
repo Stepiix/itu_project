@@ -1,0 +1,19 @@
+<div>
+    <h2>Registrace</h2>
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      <label for="firstName">Jméno:</label>
+      <input type="text" id="firstName" formControlName="firstName" required>
+  
+      <label for="lastName">Příjmení:</label>
+      <input type="text" id="lastName" formControlName="lastName" required>
+  
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" formControlName="email" required>
+  
+      <label for="password">Heslo:</label>
+      <input type="password" id="password" formControlName="password" required>
+  
+      <button type="submit" [disabled]="!registrationForm.valid">Vytvořit účet</button>
+    </form>
+  </div>
+  

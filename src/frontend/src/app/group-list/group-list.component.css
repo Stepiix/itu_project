@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.searchInput {
+    width: 300px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    /* Optional padding for better visual appearance */
+}
+
+#searchInput {
+    width: 75%;
+    /* Adjust width as needed */
+    box-sizing: border-box;
+    /* Include padding and border in the total width */
+}

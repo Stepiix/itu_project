@@ -1,0 +1,25 @@
+.vertical-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px; /* Adjust padding as needed */
+  }
+  
+  .home, .icons {
+    margin: 0; /* Remove margin for home and icons */
+  }
+  
+  .logo {
+    text-align: center;
+    width: 100%;
+    font-size: xx-large;
+  }
+  
+  .centered-text {
+    /* You can adjust this margin to fine-tune the vertical alignment */
+  }
+  
+  .icons {
+    margin-left: auto; /* Pushes the icons to the right */
+  }
+  

@@ -14,7 +14,7 @@
 .logo {
   text-align: center;
   width: 100%;
-  font-size: 2.5em;
+  font-size: 3em;
 }
 
 .icons {
@@ -22,19 +22,31 @@
 }
 
 i {
-  font-size: 2.25rem;
+  font-size: 2.75rem;
 }
 
 .profNoti>i:first-of-type {
-  margin-top: 2px;
+  margin-top: 8px;
+  font-size: 2rem;
 }
 
 .profNoti {
   flex-direction: row;
 }
 
+.home {
+  display: flex;
+  flex-direction: row;
+  width: 90px;
+}
+
+.home i:last-child {
+  visibility: hidden;
+}
+
 .profNoti a {
   margin-left: 1em;
+  color: inherit;
 }  
 
 

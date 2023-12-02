@@ -2,4 +2,12 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+    /* background-image: url("./assets/img/back.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; */
+}
+

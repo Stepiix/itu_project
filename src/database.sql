@@ -10,7 +10,7 @@ CREATE TABLE User (
     user_firstname VARCHAR(32) NOT NULL,
     user_lastname VARCHAR(32) NOT NULL,
     user_email VARCHAR(32) NOT NULL,
-    user_password VARCHAR(32) NOT NULL
+    user_password VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE AGroup (

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('User', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('user_firstname'); // Upraveno z 'name' na 'user_firstname'
-            $table->string('user_lastname');  // Přidáno pole pro příjmení
-            $table->string('user_email')->unique(); // Upraveno z 'email' na 'user_email'
+            $table->string('name');
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('user_password'); // Upraveno z 'password' na 'user_password'
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('User');
+        Schema::dropIfExists('users');
     }
 };

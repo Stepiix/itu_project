@@ -1,25 +1,41 @@
 .vertical-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px; /* Adjust padding as needed */
-  }
-  
-  .home, .icons {
-    margin: 0; /* Remove margin for home and icons */
-  }
-  
-  .logo {
-    text-align: center;
-    width: 100%;
-    font-size: xx-large;
-  }
-  
-  .centered-text {
-    /* You can adjust this margin to fine-tune the vertical alignment */
-  }
-  
-  .icons {
-    margin-left: auto; /* Pushes the icons to the right */
-  }
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid black; */
+}
+
+.nav{
+  margin: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-align: center;
+  width: 100%;
+  font-size: 2.5em;
+}
+
+.icons {
+  display: flex;
+}
+
+i {
+  font-size: 2.25rem;
+}
+
+.profNoti>i:first-of-type {
+  margin-top: 2px;
+}
+
+.profNoti {
+  flex-direction: row;
+}
+
+.profNoti a {
+  margin-left: 1em;
+}  
+
+
   

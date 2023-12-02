@@ -12,10 +12,10 @@ export class RegisterComponent {
 
   constructor(private formBuilder: FormBuilder, private authserviceService: AuthserviceService) {
     this.registrationForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required] //tady by se jeste mohl pridat neco ze treba heslo musi byt dlouhe aspon 6 pismen
+      user_firstName: ['', Validators.required],
+      user_lastName: ['', Validators.required],
+      user_email: ['', [Validators.required, Validators.email]],
+      user_password: ['', Validators.required] //tady by se jeste mohl pridat neco ze treba heslo musi byt dlouhe aspon 6 pismen
     });
   }
 

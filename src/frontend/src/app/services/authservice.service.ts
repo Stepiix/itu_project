@@ -11,6 +11,7 @@ export class AuthserviceService {
   constructor(private http: HttpClient) { }
 
   register(information: any): Observable<any> {
+    console.log(information);
     return this.http.post(this.apiUrl, information);
   }
 }

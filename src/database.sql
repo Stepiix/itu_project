@@ -10,19 +10,25 @@ CREATE TABLE User (
     user_firstname VARCHAR(32) NOT NULL,
     user_lastname VARCHAR(32) NOT NULL,
     user_email VARCHAR(32) NOT NULL,
-    user_password VARCHAR(32) NOT NULL
+    user_password VARCHAR(128) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE AGroup (
     group_id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
     group_name VARCHAR(32) NOT NULL,
     group_label VARCHAR(64),
-    group_link VARCHAR(128)
+    group_link VARCHAR(128),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE GroupUser (
     group_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (group_id, user_id),
 
@@ -46,6 +52,8 @@ CREATE TABLE Transaction (
     t_exchange_rate INTEGER NOT NULL,
     t_label VARCHAR(64),
     t_timestamp TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     CONSTRAINT FK_t_group_id
         FOREIGN KEY (t_group_id) REFERENCES AGroup(group_id)
@@ -68,6 +76,8 @@ CREATE TABLE Chat (
     message_user_id INTEGER NOT NULL,
     message_text TEXT NOT NULL,
     message_timestamp TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 
     CONSTRAINT FK_message_group_id
         FOREIGN KEY (message_group_id) REFERENCES AGroup(group_id)

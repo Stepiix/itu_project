@@ -2,16 +2,14 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class userMy extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
+    use HasFactory;
+    protected $table='User';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -31,7 +29,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'user_password',   // upraveno z 'password' na 'user_password'
-        'remember_token',
     ];
 
     /**

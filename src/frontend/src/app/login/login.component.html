@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="login-form">
+    <form>
+        <h2>Přihlášení</h2>
+        <div class="input-field">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" formControlName="user_email" required>
+        </div>
+        
+        <div class="input-field">
+          <label for="password">Heslo:</label>
+          <input type="password" id="password" formControlName="user_password" required>
+        </div>
+        
+        <button type="submit" [disabled]="">Přihlásit</button>
+        <div class="crumbs">    
+            <p>Nejsi členem? <a href="">Registrovat se</a></p>
+        </div>
+      </form>
+  </div>

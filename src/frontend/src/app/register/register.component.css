@@ -23,6 +23,7 @@ form {
     border-radius: 20px;
     padding: 15px;
     padding-top: 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .input-field {
@@ -38,7 +39,7 @@ input {
     height: 40px;
     border-radius: 25px;
     padding: 0 15px;
-    border: 2px solid gray;
+    border: 1px solid gray;
 }
 
 

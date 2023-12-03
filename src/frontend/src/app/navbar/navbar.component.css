@@ -38,9 +38,14 @@ i {
   display: flex;
   flex-direction: row;
   width: 90px;
+  height: auto;
 }
 
-.home i:last-child {
+.home a {
+  color: black;
+}
+
+.filler {
   visibility: hidden;
 }
 

@@ -17,10 +17,10 @@ body {
     z-index: -1;
     top: 0;
     position: absolute;
-    /* background-image: url("./assets/img/back.jpg");
+    background-image: url("./assets/img/back.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    opacity: 0.3; */
+    opacity: 0.3;
 }
 

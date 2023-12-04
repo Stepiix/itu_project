@@ -44,7 +44,7 @@ input {
 button {
     color: black;
     background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
-    padding: 10px 50px;
+    padding: 8px 50px;
     border-radius: 41px;
     border: 0cm;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -60,4 +60,5 @@ p {
 a {
     color: #2ed205;
     font-weight: bolder;
+    margin-left: 5px;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceGroupListService } from '../services/service-group-list.service';
-
+import { SessionService } from './../services/session.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-group-list',
   templateUrl: './group-list.component.html',
@@ -9,9 +10,12 @@ import { ServiceGroupListService } from '../services/service-group-list.service'
 export class GroupListComponent {
   groups: any[] = [];
 
-  constructor(private serviceGroupListService: ServiceGroupListService) {}
+  constructor(private serviceGroupListService: ServiceGroupListService, private session: SessionService, private router: Router) {}
   
   ngOnInit() {
+    if(!this.session.isLoggedIn()){
+      this.router.navigate(['/login'])
+    }
     this.loadGroups();
   }
   

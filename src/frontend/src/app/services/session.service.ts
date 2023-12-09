@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  constructor() { }
+  constructor(private router: Router) { }
   
   private isAuthenticated = false;
 
@@ -17,5 +17,11 @@ export class SessionService {
       this.isAuthenticated = false;
     }
     return this.isAuthenticated;
+  }
+
+  odhlasitSe(){
+    this.isAuthenticated = false;
+    sessionStorage.removeItem("userSession");
+    this.router.navigate(['/login']);
   }
 }

@@ -13,10 +13,11 @@ export class GroupListComponent {
   constructor(private serviceGroupListService: ServiceGroupListService, private session: SessionService, private router: Router) {}
   
   ngOnInit() {
-    if(!this.session.isLoggedIn()){
+    if(!this.session.isLoggedIn()){ // neni prihlaseny
       this.router.navigate(['/login'])
+    } else { // je prihlaseny
+      this.loadGroups();
     }
-    this.loadGroups();
   }
   
   loadGroups() {

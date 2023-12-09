@@ -28,4 +28,22 @@ class AuthController extends Controller
 
         return response()->json(['user' => $user, 'message' => 'User registered successfully']);
     }
+
+        public function login(Request $request)
+    {
+        $request->validate([
+            'user_email' => 'required|email',
+            'user_password' => 'required|string|min:6',
+        ]);
+
+        // Attempt to authenticate the user
+        if (Auth::attempt(['user_email' => $request->user_email, 'password' => $request->user_password])) {
+            $user = Auth::user();
+            $token = $user->createToken('authToken')->plainTextToken;
+
+            return response()->json(['user' => $user, 'token' => $token, 'message' => 'Login successful']);
+        }
+
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
 }

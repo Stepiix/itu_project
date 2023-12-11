@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\groups;
+use App\Models\GroupUser;
 use Illuminate\Http\Request;
 
 class GroupsController extends Controller
@@ -18,7 +19,7 @@ class GroupsController extends Controller
 
         // Získání skupin pro konkrétního uživatele
         $groups = Groups::whereHas('users', function ($query) use ($userId) {
-            $query->where('user_id', $userId);
+            $query->where('GroupUser.user_id', $userId);
         })->get();
 
         return response()->json($groups);
@@ -36,11 +37,11 @@ class GroupsController extends Controller
             'group_label' => $request->input('group_label'),
         ]);
 
-        // $userId = $request->input('user_id'); // Předpokládáme, že máte nějaký způsob získání user_id
-        // GroupUser::create([
-        //     'group_id' => $group->group_id,
-        //     'user_id' => $userId,
-        // ]);
+        $userId = $request->input('user_id'); // Předpokládáme, že máte nějaký způsob získání user_id
+        GroupUser::create([
+            'group_id' => $group->group_id,
+            'user_id' => $userId,
+        ]);
 
         return response()->json(['group' => $group, 'message' => 'Group created successfully']);
     }

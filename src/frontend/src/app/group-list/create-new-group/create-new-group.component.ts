@@ -24,7 +24,7 @@ export class CreateNewGroupComponent {
       group_name: this.name,
       group_label: this.label,
       group_photo: this.photo,
-      idUser: this.idUser //dal jsem ti to sem teda to id jak jsi chtel
+      user_id: this.idUser //dal jsem ti to sem teda to id jak jsi chtel KOKOTE POJEMNOVAVEJ TO NORMALNE idUser != user_id
     };
     console.log('Název: ' + this.name);
     console.log('label: ' + this.label);

@@ -11,7 +11,7 @@ class userMy extends Model
     use HasFactory;
 //    use Authenticatable;
     protected $table='User';
-    
+    protected $primaryKey = 'user_id';
     /**
      * The attributes that are mass assignable.
      *

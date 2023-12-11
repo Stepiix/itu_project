@@ -10,6 +10,7 @@ class groups extends Model
     use HasFactory;
 
     protected $table = 'AGroup';
+    protected $primaryKey = 'group_id';
     protected $fillable = [   
     'group_name', // upraveno z 'name' na 'user_firstname'
     'group_label',  // upraveno z 'name' na 'user_lastname'

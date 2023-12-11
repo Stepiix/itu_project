@@ -24,13 +24,39 @@ export class SessionService {
     sessionStorage.removeItem("userSession");
     this.router.navigate(['/login']);
   }
-  
-  startUserSession(userID: string){
+  startUserSession(userID: string, firstName: string, lastName: string, email: string){
     const sessionData = {
       userID: userID,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
       expirationTime: new Date().getTime() + 10 * 60 * 1000
     };
     sessionStorage.setItem('userSession', JSON.stringify(sessionData));
+  }
+  getUserSession() {
+    const sessionDataString = sessionStorage.getItem('userSession');
+  
+    if (sessionDataString) {
+      const sessionData = JSON.parse(sessionDataString);
+      const currentTime = new Date().getTime();
+  
+      // Kontrola, zda session nevypršela
+      if (currentTime < sessionData.expirationTime) {
+        return {
+          userID: sessionData.userID,
+          firstName: sessionData.firstName,
+          lastName: sessionData.lastName,
+          email: sessionData.email
+        };
+      } else {
+        // Session vypršela, odstranění dat
+        sessionStorage.removeItem('userSession');
+      }
+    }
+  
+    // Session neexistuje nebo vypršela
+    return null;
   }
   //get userovo id
   getID(): string | null { 

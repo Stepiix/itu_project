@@ -1,2 +1,7 @@
-<p>profile works!</p>
+<h1>tady bude jeho fotka</h1>
+<div *ngIf="userInfo">
+    <p>{{ userInfo.firstName }} {{ userInfo.lastName }}</p>
+</div>
+<p>aktualni balanc TODO</p>
+<p>historie plateb TODO</p>
 <button (click)="odhlasit()">Odhlásit se</button>

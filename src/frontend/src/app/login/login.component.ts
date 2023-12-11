@@ -32,7 +32,10 @@ export class LoginComponent implements OnInit {
           // Zde můžete zpracovat odpověď z přihlašovacího požadavku
           console.log('Uživatel byl úspěšně přihlášen:', response);
           console.log('uzivatelo id je: ' + response.user.user_id);
-          this.session.startUserSession(response.user.user_id);
+          console.log('uzivatelovo jmeno je: ' + response.user.user_firstname);
+          console.log('uzivatelovo prijmeni je: ' + response.user.user_lastname);
+          console.log('uzivateluv email je: ' + response.user.user_email);
+          this.session.startUserSession(response.user.user_id, response.user.user_firstname, response.user.user_lastname, response.user.user_email);
           this.router.navigate(['/']);
         },
         (error) => {

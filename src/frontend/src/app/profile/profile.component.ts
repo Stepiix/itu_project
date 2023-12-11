@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
+  userInfo: any;
 
   constructor( private session: SessionService, private router: Router) {}
 
@@ -14,7 +15,7 @@ export class ProfileComponent {
     if(!this.session.isLoggedIn()){ // neni prihlaseny
       this.router.navigate(['/login'])
     } else { // je prihlaseny
-      
+      this.userInfo = this.session.getUserSession();
     }
   }
   odhlasit(): void {

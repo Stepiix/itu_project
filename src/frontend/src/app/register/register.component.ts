@@ -27,7 +27,11 @@ export class RegisterComponent {
         (response) => {
           console.log('Registrace proběhla úspěšně', response);
           console.log("id: ", response.user.id);
-          this.session.startUserSession(response.user.id);
+          console.log("jmeno: ", response.user.user_firstname);
+          console.log("prijmeni: ", response.user.user_lastname);
+          console.log("email: ", response.user.user_email)  ;
+          
+          this.session.startUserSession(response.user.id, response.user.user_firstname, response.user.user_lastname, response.user.user_email);
           alert("uspesne ses prihlasil");//TODO vylepsit
           this.router.navigate(['/']);
 

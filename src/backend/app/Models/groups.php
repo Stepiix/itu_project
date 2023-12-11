@@ -15,4 +15,9 @@ class groups extends Model
     'group_label',  // upraveno z 'name' na 'user_lastname'
     'group_link',     // upraveno z 'email' na 'user_email'
     ];
+
+    public function users()
+    {
+        return $this->belongsToMany(userMy::class, 'GroupUser', 'group_id', 'user_id');
+    }
 }

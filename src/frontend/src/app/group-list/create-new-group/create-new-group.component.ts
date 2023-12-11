@@ -7,19 +7,19 @@ import { ServiceGroupListService } from '../../services/service-group-list.servi
 })
 export class CreateNewGroupComponent {
 
-  nazev: string = '';
-  popis: string = '';
-  fotka: string = ''; //tohle zmenit tady bude nejaky file
+  name: string = '';
+  label: string = '';
+  photo: string = ''; //tohle zmenit tady bude nejaky file
   constructor(private serviceGroupListService: ServiceGroupListService){}
   vytvoritSkupinu() {
     const groupData = {
-      nazev: this.nazev,
-      popis: this.popis,
-      fotka: this.fotka,
+      group_name: this.name,
+      group_label: this.label,
+      group_photo: this.photo,
     };
-    console.log('Název: ' + this.nazev);
-    console.log('Popis: ' + this.popis);
-    console.log('Fotka: ' + this.fotka);
+    console.log('Název: ' + this.name);
+    console.log('label: ' + this.label);
+    console.log('fotka: ' + this.photo);
 
         this.serviceGroupListService.createGroup(groupData).subscribe(
       (response) => {

@@ -26,3 +26,5 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/groups', [GroupsController::class, 'index']);
+
+Route::post('/create-group', [GroupsController::class, 'createGroup']);

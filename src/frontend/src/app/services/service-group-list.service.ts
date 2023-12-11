@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ServiceGroupListService {
-  private apiUrl = 'http://localhost:8000/api/groups';
+  private apiUrl = 'http://localhost:8000/api/';
 
   constructor(private http: HttpClient) { }
 
   getGroups(userId: string): Observable<any> {
-    const apiUrlWithUserId = `${this.apiUrl}?userId=${userId}`;
+    const apiUrlWithUserId = `${this.apiUrl}groups?userId=${userId}`;
     return this.http.get(apiUrlWithUserId);
   }
 
@@ -19,6 +19,6 @@ export class ServiceGroupListService {
     console.log('---tady se muzes podivat co ti tam posilam-----')
     console.log(groupData)
     console.log('--------')
-    return this.http.post(`${this.apiUrl}/create-group`, groupData);
+    return this.http.post(`${this.apiUrl}create-group`, groupData);
   }
 }

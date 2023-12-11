@@ -4,6 +4,7 @@ import { SessionService } from './../services/session.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateNewGroupComponent } from '../group-list/create-new-group/create-new-group.component'; // Vytvořte komponentu pro dialog
+import { JoinGroupComponent } from './join-group/join-group.component';
 
 @Component({
   selector: 'app-group-list',
@@ -56,7 +57,14 @@ export class GroupListComponent {
   }
 
   openJoinGroup(): void {
-    // Podobně jako pro vytvoření skupiny
-    // Vytvořte komponentu pro dialog pro přidání se ke skupině a otevřete ji pomocí dialogu
+    const dialogRef = this.dialog.open(JoinGroupComponent, {
+      width: '400px',
+      // Další možnosti konfigurace dialogu
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog zavřen');
+      // Zde můžete zpracovat výsledek dialogu (pokud potřebujete)
+    });
   }
 }

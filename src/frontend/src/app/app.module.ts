@@ -16,6 +16,9 @@ import { RegisterComponent } from './register/register.component';
 import { CreateNewGroupComponent } from './group-list/create-new-group/create-new-group.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { ConfirmEditOfProfileComponent } from './profile/edit-profile/confirm-edit-of-profile/confirm-edit-of-profile.component';
+import { JoinGroupComponent } from './group-list/join-group/join-group.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { FormsModule } from '@angular/forms';
     ProfileComponent,
     LoginComponent,
     RegisterComponent,
-    CreateNewGroupComponent
+    CreateNewGroupComponent,
+    EditProfileComponent,
+    ConfirmEditOfProfileComponent,
+    JoinGroupComponent,
   ],
   imports: [
     BrowserModule,

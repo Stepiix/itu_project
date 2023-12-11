@@ -2,6 +2,7 @@
 <div *ngIf="userInfo">
     <p>{{ userInfo.firstName }} {{ userInfo.lastName }}</p>
 </div>
+<mat-icon (click)="openEditDialog()">edit</mat-icon>
 <p>aktualni balanc TODO</p>
 <p>historie plateb TODO</p>
 <button (click)="odhlasit()">Odhlásit se</button>

@@ -7,6 +7,8 @@ namespace App\Http\Controllers;
 use App\Models\userMy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+
 
 class AuthController extends Controller
 {
@@ -36,14 +38,24 @@ class AuthController extends Controller
             'user_password' => 'required|string|min:6',
         ]);
 
-        // Attempt to authenticate the user
-        if (Auth::attempt(['user_email' => $request->user_email, 'password' => $request->user_password])) {
-            $user = Auth::user();
-            $token = $user->createToken('authToken')->plainTextToken;
+        $user = UserMy::where('user_email', $request->user_email)->first();
 
-            return response()->json(['user' => $user, 'token' => $token, 'message' => 'Login successful']);
+
+        $credentials = $request->only('user_email', 'user_password');
+
+        if ($user && Hash::check($request->user_password, $user->user_password)) {
+            return response()->json(['user' => $user, 'message' => 'Login successful']);
         }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        return response()->json(['message' => 'Logout successful']);
+    }
+
+
 }

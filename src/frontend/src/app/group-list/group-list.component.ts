@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceGroupListService } from '../services/service-group-list.service';
 import { SessionService } from './../services/session.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateNewGroupComponent } from '../group-list/create-new-group/create-new-group.component'; // Vytvořte komponentu pro dialog
+
 @Component({
   selector: 'app-group-list',
   templateUrl: './group-list.component.html',
@@ -10,7 +13,7 @@ import { Router } from '@angular/router';
 export class GroupListComponent {
   groups: any[] = [];
 
-  constructor(private serviceGroupListService: ServiceGroupListService, private session: SessionService, private router: Router) {}
+  constructor(private serviceGroupListService: ServiceGroupListService, private session: SessionService, private router: Router, public dialog: MatDialog) {}
   
   ngOnInit() {
     if(!this.session.isLoggedIn()){ // neni prihlaseny
@@ -21,14 +24,39 @@ export class GroupListComponent {
   }
   
   loadGroups() {
-    this.serviceGroupListService.getGroups().subscribe(
-      (data) => {
-        this.groups = data;
-        console.log("tady musis zobrazit skupiny " + this.groups);
-      },
-      (error) => {
-        console.error('Error loading groups', error);
-      }
-    );
+    const userId = this.session.getID();
+    
+    if (userId !== null) {
+      console.log("Userovo ID je: " + userId);
+  
+      this.serviceGroupListService.getGroups(userId).subscribe(
+        (data) => {
+          this.groups = data;
+          console.log("Tady jsou informace o skupinách:", this.groups);
+        },
+        (error) => {
+          console.error('Error loading groups', error);
+        }
+      );
+    } else {
+      console.error('User ID is null');
+    }
+  }
+
+  openCreateGroup(): void {
+    const dialogRef = this.dialog.open(CreateNewGroupComponent, {
+      width: '400px',
+      // Další možnosti konfigurace dialogu
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog zavřen');
+      // Zde můžete zpracovat výsledek dialogu (pokud potřebujete)
+    });
+  }
+
+  openJoinGroup(): void {
+    // Podobně jako pro vytvoření skupiny
+    // Vytvořte komponentu pro dialog pro přidání se ke skupině a otevřete ji pomocí dialogu
   }
 }

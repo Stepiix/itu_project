@@ -13,6 +13,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProfileComponent } from './profile/profile.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CreateNewGroupComponent } from './group-list/create-new-group/create-new-group.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { RegisterComponent } from './register/register.component';
     GroupListComponent,
     ProfileComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    CreateNewGroupComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,9 @@ import { RegisterComponent } from './register/register.component';
     BrowserAnimationsModule,
     MatIconModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

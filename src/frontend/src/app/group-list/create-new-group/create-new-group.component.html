@@ -1,0 +1,12 @@
+<h2>Nová skupina</h2>
+<div class="groupInput">
+    <input id="nazev" [(ngModel)]="nazev" placeholder="Název" type="text">
+    <input id="popis" [(ngModel)]="popis" placeholder="Popis" type="text">
+    <div class="fotkainput">
+        <mat-icon class="icon">camera_alt</mat-icon>
+        <input id="fotka" [(ngModel)]="fotka" placeholder="Přidat fotku" type="text">
+    </div>
+</div>
+<h3>Přidat členy</h3>
+
+<button (click)="vytvoritSkupinu()">Vytvořit</button>

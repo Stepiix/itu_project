@@ -10,7 +10,15 @@ export class ServiceGroupListService {
 
   constructor(private http: HttpClient) { }
 
-  getGroups(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  getGroups(userId: string): Observable<any> {
+    const apiUrlWithUserId = `${this.apiUrl}?userId=${userId}`;
+    return this.http.get(apiUrlWithUserId);
+  }
+
+  createGroup(groupData: any): Observable<any> {
+    console.log('---tady se muzes podivat co ti tam posilam-----')
+    console.log(groupData)
+    console.log('--------')
+    return this.http.post(`${this.apiUrl}/create-group`, groupData);
   }
 }

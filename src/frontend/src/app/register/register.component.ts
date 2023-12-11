@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthserviceService } from './../services/authservice.service';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SessionService } from '../services/session.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegisterComponent {
   registrationForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authserviceService: AuthserviceService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authserviceService: AuthserviceService, private router: Router, private session: SessionService) {
     this.registrationForm = this.formBuilder.group({
       user_firstname: ['', Validators.required],
       user_lastname: ['', Validators.required],
@@ -25,10 +26,10 @@ export class RegisterComponent {
       this.authserviceService.register(this.registrationForm.value).subscribe(
         (response) => {
           console.log('Registrace proběhla úspěšně', response);
-          console.log("id: ", response.user.id)
-          this.startUserSession(response.user.id);
+          console.log("id: ", response.user.id);
+          this.session.startUserSession(response.user.id);
           alert("uspesne ses prihlasil");//TODO vylepsit
-          this.router.navigate(['/'])
+          this.router.navigate(['/']);
 
           // Provedení dalších akcí po úspěšné registraci, například přesměrování na jinou stránku nebo zobrazení potvrzující zprávy
           // this.router.navigate(['/success-page']); // Přesměrování
@@ -41,12 +42,5 @@ export class RegisterComponent {
         }
       );
     }
-  }
-  startUserSession(userID: string){
-    const sessionData = {
-      userID: userID,
-      expirationTime: new Date().getTime() + 10 * 60 * 1000
-    };
-    sessionStorage.setItem('userSession', JSON.stringify(sessionData));
   }
 }

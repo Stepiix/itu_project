@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthserviceService } from '../services/authservice.service';
-
+import { SessionService } from '../services/session.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,7 @@ import { AuthserviceService } from '../services/authservice.service';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthserviceService) {}
+  constructor(private fb: FormBuilder, private auth: AuthserviceService, private session: SessionService, private router: Router) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -30,6 +31,9 @@ export class LoginComponent implements OnInit {
         (response) => {
           // Zde můžete zpracovat odpověď z přihlašovacího požadavku
           console.log('Uživatel byl úspěšně přihlášen:', response);
+          console.log('uzivatelo id je: ' + response.user.user_id);
+          this.session.startUserSession(response.user.user_id);
+          this.router.navigate(['/']);
         },
         (error) => {
           // Zde můžete zpracovat chybu při přihlášení

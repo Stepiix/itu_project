@@ -1,9 +1,18 @@
-<h1>Vaše skupiny</h1>
-<div class="searchInput">
-    <mat-icon class="icon">search</mat-icon>
-    <input id="searchInput" type="text">
-</div>
+<div class="group-menu">
+    <h1>Vaše skupiny</h1>
+    <div class="searchInput">
+        <mat-icon class="icon">search</mat-icon>
+        <input id="searchInput" type="text">
+    </div>
 
-<!-- Tlačítka -->
-<button mat-button (click)="openCreateGroup()">Vytvořit novou skupinu</button>
-<button mat-button (click)="openJoinGroup()">Přidat se ke skupině</button>
+    <div class="groups">
+        <!-- tady bude seznam skupin -->
+    </div>
+
+    <!-- Tlačítka -->
+    <div class="buttons">
+        <button mat-button (click)="openCreateGroup()">Vytvořit novou skupinu</button>
+        <button mat-button (click)="openJoinGroup()">Přidat se ke skupině</button>
+    </div>
+</div>
+    

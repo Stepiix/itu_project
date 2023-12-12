@@ -1,5 +1,47 @@
-.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
+.new-group {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
+  border-radius: 20px;
+  padding: 1.5rem
+}
+
+.new-group h1 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.groupInput {
+  display: flex;
+  flex-direction: column;
+}
+
+.groupInput input {
+  padding: 1em 1.5em;
+  border-radius: 40px;
+  border: 0;
+  margin-bottom: 0.5em;
+}
+
+.fotka input{
+}
+
+.vytvorit {
+  display: flex;
+  justify-content: center;
+}
+
+.vytvorit button{
+  margin-bottom: 0.5em;
+  padding: 1em 1.5em;
+  background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
+  border-radius: 41px;
+  border: 0;
+}

@@ -1,8 +1,28 @@
-<h1>tady bude jeho fotka</h1>
-<div *ngIf="userInfo">
-    <p>{{ userInfo.firstName }} {{ userInfo.lastName }}</p>
+<div class="profile">
+    <div class="profile-pic">
+        <!-- <h1>tady bude jeho fotka</h1> -->
+        <mat-icon (click)="openEditDialog()" class="edit-pen">edit</mat-icon>
+    </div>
+
+    <div *ngIf="userInfo" class="user-name">
+        <h1>{{ userInfo.firstName }} {{ userInfo.lastName }}</h1>
+    </div>
+   
+    <div class="info">
+        <div class="balanc"> 
+            <h3>Aktuální balanc: TODO</h3>
+            <p>+25</p> 
+            <select>
+                <option>CZK</option>
+                <option>CZK</option>
+                <option>CZK</option>
+            </select>
+        </div>
+
+        <div class="payment-history">
+            <h3>Historie plateb TODO</h3>
+        </div>
+    </div>
+    
+    <button (click)="odhlasit()">Odhlásit se</button>
 </div>
-<mat-icon (click)="openEditDialog()">edit</mat-icon>
-<p>aktualni balanc TODO</p>
-<p>historie plateb TODO</p>
-<button (click)="odhlasit()">Odhlásit se</button>

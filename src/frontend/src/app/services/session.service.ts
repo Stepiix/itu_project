@@ -30,7 +30,7 @@ export class SessionService {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      expirationTime: new Date().getTime() + 10 * 60 * 1000
+      expirationTime: new Date().getTime() + 10 * 60 * 1000 * 6 * 2
     };
     sessionStorage.setItem('userSession', JSON.stringify(sessionData));
   }

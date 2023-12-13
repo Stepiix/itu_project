@@ -15,4 +15,15 @@ class GroupUser extends Model
         'group_id',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(userMy::class, 'user_id', 'user_id');
+    }
+
+    public function group()
+    {
+        return $this->belongsTo(groups::class, 'group_id', 'group_id');
+    }
+
 }

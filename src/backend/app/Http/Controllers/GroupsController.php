@@ -46,4 +46,25 @@ class GroupsController extends Controller
         return response()->json(['group' => $group, 'message' => 'Group created successfully']);
     }
 
+    public function getUsersInGroup(Request $request)
+    {
+        $groupId = $request->input('group_id', null);
+
+        if (!$groupId) {
+            return response()->json(['message' => 'Group ID is required.'], 400);
+        }
+    
+        // Získání informací o skupině
+        $group = groups::find($groupId);
+    
+        if (!$group) {
+            return response()->json(['message' => 'Group not found.'], 404);
+        }
+    
+        // Získání všech uživatelů této skupiny
+        $users = $group->users;
+    
+        return response()->json(['group' => $group]);
+    }
+
 }

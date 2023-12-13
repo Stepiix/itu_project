@@ -3,12 +3,17 @@
   flex-direction: column;
   background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
   border-radius: 20px;
-  padding: 1.5rem
+  padding: 1.5rem;
 }
 
 .new-group h1 {
   text-align: center;
   margin-bottom: 0;
+}
+
+.close-button {
+  background-color: transparent;
+  border: 0;
 }
 
 .header {
@@ -30,8 +35,15 @@
   margin-bottom: 0.5em;
 }
 
-/* .fotka input{
+/* .fotka {
+  width: 100%;
 } */
+
+.icon {   /*tady to vymyslet lip*/
+  position: relative;
+  /* top: 53.2%; 
+  left: 84%; */
+}
 
 .vytvorit {
   display: flex;
@@ -40,8 +52,11 @@
 
 .vytvorit button{
   margin-bottom: 0.5em;
-  padding: 1em 1.5em;
+  padding: 0.5em 1.5em;
+  color: white;
   background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
   border-radius: 41px;
   border: 0;
+  width: 300px;
+  font-size: large;
 }

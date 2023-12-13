@@ -10,14 +10,17 @@
     <div class="groupInput">
         <input id="name" [(ngModel)]="name" placeholder="Název" type="text">
         <input id="label" [(ngModel)]="label" placeholder="Popis" type="text">
-        <div class="fotka">
-            <mat-icon class="icon">camera_alt</mat-icon>
+        <!-- <div class="fotka"> -->
             <input id="photo" [(ngModel)]="photo" placeholder="Přidat fotku" type="text">
-        </div>
+            <mat-icon class="icon">camera_alt</mat-icon>
+        <!-- </div> -->
     </div>
     
-    <h3>Přidat členy</h3>
+    <br>
+    <h2>Přidat členy</h2>
     
+
+
     <div class="vytvorit">    
         <button (click)="vytvoritSkupinu()">Vytvořit</button>
     </div>

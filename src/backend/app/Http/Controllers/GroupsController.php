@@ -9,6 +9,16 @@ use Illuminate\Http\Request;
 
 class GroupsController extends Controller
 {
+    // Funkce pro získání base64 kódovaného obrázku z binárních dat
+    private function getBase64Image($imageData)
+    {
+        if ($imageData) {
+            return base64_encode($imageData);
+        } else {
+            return null;
+        }
+    }
+
     public function index(Request $request)
     {
         $userId = $request->input('userId', null);
@@ -21,6 +31,10 @@ class GroupsController extends Controller
         $groups = Groups::whereHas('users', function ($query) use ($userId) {
             $query->where('GroupUser.user_id', $userId);
         })->get();
+
+        foreach ($groups as $group) {
+            $group->group_photo = $this->getBase64Image($group->group_photo);
+        }
 
         return response()->json($groups);
     }

@@ -4,8 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GroupsController;
-
-
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +30,13 @@ Route::get('/groups', [GroupsController::class, 'index']);
 Route::post('/create-group', [GroupsController::class, 'createGroup']);
 
 Route::get('/group', [GroupsController::class, 'getUsersInGroup']);
+
+Route::post('/create-transactions', [TransactionController::class, 'createTransaction']);
+
+Route::get('/getall-transactions', [TransactionController::class, 'getTransactionsByGroup']);
+
+Route::put('/update-user', [UserController::class, 'updateUser']);
+
+Route::get('/get-user', [UserController::class, 'getUser']);
+
+Route::put('/update-group', [GroupsController::class, 'updateGroup']);

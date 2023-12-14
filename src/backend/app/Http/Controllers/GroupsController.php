@@ -90,4 +90,31 @@ class GroupsController extends Controller
         return response()->json(['group' => $group]);
     }
 
+
+    public function updateGroup(Request $request)
+    {
+        // Validace vstupních dat
+        $request->validate([
+            'group_id' => 'required|integer',
+            'group_name' => 'required|string|max:32',
+            'group_label' => 'nullable|string|max:64',
+        ]);
+
+        // Získání skupiny podle group_id
+        $group = groups::find($request->input('group_id'));
+
+        if (!$group) {
+            return response()->json(['message' => 'Group not found'], 404);
+        }
+
+        // Aktualizace údajů skupiny
+        $group->group_name = $request->input('group_name');
+        $group->group_label = $request->input('group_label');
+
+        $group->save();
+
+        return response()->json(['message' => 'Group was updated succesfully'], 200);
+    }
+
+
 }

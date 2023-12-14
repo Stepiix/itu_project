@@ -81,6 +81,11 @@ h1 {
     margin-bottom: 0.6em;
     height: 180px;
     width: 250px;
+    padding-top: 3px;
+}
+
+.dluh-item:first-child {
+    margin-top: 1em;
 }
 
 .platby-list > span:first-child {
@@ -158,4 +163,13 @@ h1 {
     padding: 0 0.5em;
     margin-left: 0.5em;
     border: 0;
+}
+
+/* Mobil */
+@media only screen and (max-width: 600px) {
+    .info {
+        flex-direction: column;
+    }
+
+    /* upravit sirky a mezery vseho */
 }

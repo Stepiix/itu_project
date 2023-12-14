@@ -5,7 +5,7 @@ import { ConfirmEditOfProfileComponent } from './confirm-edit-of-profile/confirm
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css']
+  styleUrls: ['./edit-profile.component.css'],
 })
 export class EditProfileComponent implements OnInit{
   name: string = '';

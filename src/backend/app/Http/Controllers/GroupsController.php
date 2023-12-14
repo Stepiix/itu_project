@@ -44,7 +44,7 @@ class GroupsController extends Controller
         $request->validate([
             'group_name' => 'required|string|max:32',
             'group_label' => 'nullable|string|max:64',
-            'group_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'group_photo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
 

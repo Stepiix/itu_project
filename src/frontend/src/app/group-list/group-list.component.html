@@ -5,8 +5,9 @@
         <input id="searchInput" type="text">
     </div>
 
-    <div class="groups">
-        <!-- tady bude seznam skupin -->
+    <div class="groups" *ngFor="let group of groups" (click)="showGroupId(group.group_id)">
+        <img [src]="'data:image/jpeg;base64,' + group.group_photo" alt="{{ group.group_name }}" />
+        {{ group.group_name }}
     </div>
 
     <!-- Tlačítka -->

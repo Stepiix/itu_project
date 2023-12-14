@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { ConfirmEditOfProfileComponent } from './profile/edit-profile/confirm-edit-of-profile/confirm-edit-of-profile.component';
 import { JoinGroupComponent } from './group-list/join-group/join-group.component';
+import { InsidegroupComponent } from './insidegroup/insidegroup.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { JoinGroupComponent } from './group-list/join-group/join-group.component
     EditProfileComponent,
     ConfirmEditOfProfileComponent,
     JoinGroupComponent,
+    InsidegroupComponent,
   ],
   imports: [
     BrowserModule,

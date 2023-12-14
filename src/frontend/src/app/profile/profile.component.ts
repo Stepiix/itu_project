@@ -16,7 +16,7 @@ export class ProfileComponent {
 
   ngOnInit() {
     if(!this.session.isLoggedIn()){ // neni prihlaseny
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
     } else { // je prihlaseny
       this.userInfo = this.session.getUserSession();
     }

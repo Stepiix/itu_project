@@ -67,4 +67,9 @@ export class GroupListComponent {
       // Zde můžete zpracovat výsledek dialogu (pokud potřebujete)
     });
   }
+  showGroupId(groupId: number) {
+    console.log('Clicked on group with ID:', groupId);
+    // Zde můžete provést další akce s ID skupiny, např. získání dat této skupiny nebo navigace na jinou stránku.
+    this.router.navigate(['/group', groupId]);
+  }
 }

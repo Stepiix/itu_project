@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ServiceGroupListService } from '../../services/service-group-list.service';
 import { SessionService } from 'src/app/services/session.service';
 import { MatDialogRef } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-create-new-group',
   templateUrl: './create-new-group.component.html',
@@ -11,28 +12,33 @@ export class CreateNewGroupComponent {
   idUser: string | null;
   name: string = '';
   label: string = '';
-  photo: string = ''; //tohle zmenit tady bude nejaky file
+  selectedFile: File | null = null;
   dialogRef: MatDialogRef<CreateNewGroupComponent>;
+  selectedImageBase64: string | null = null;
 
   constructor(private serviceGroupListService: ServiceGroupListService, private session: SessionService, dialogRef: MatDialogRef<CreateNewGroupComponent>){
     this.dialogRef = dialogRef;
     this.idUser = this.session.getID() || '';
   }
-  vytvoritSkupinu() {
+  vytvoritSkupinu(): void {
     this.idUser = this.session.getID();
-    const groupData = {
-      group_name: this.name,
-      group_label: this.label,
-      group_photo: this.photo,
-      user_id: this.idUser //dal jsem ti to sem teda to id jak jsi chtel KOKOTE POJEMNOVAVEJ TO NORMALNE idUser != user_id
-    };
-    console.log('Název: ' + this.name);
-    console.log('label: ' + this.label);
-    console.log('fotka: ' + this.photo);
-    console.log('id uzivatele ktery zaklada skupinu: ' + this.idUser);
 
+    const formData = new FormData();
+    formData.append('group_name', this.name);
+    formData.append('group_label', this.label);
 
-        this.serviceGroupListService.createGroup(groupData).subscribe(
+    // Check if selectedFile is not null before appending
+    if (this.selectedFile !== null) {
+      // Append the original File to FormData
+      formData.append('group_photo', this.selectedFile, this.selectedFile.name);
+    }
+
+    // Check if idUser is not null before appending
+    if (this.idUser !== null) {
+      formData.append('user_id', this.idUser);
+    }
+
+    this.serviceGroupListService.createGroup(formData).subscribe(
       (response) => {
         console.log('Skupina byla vytvořena úspěšně.');
       },
@@ -44,6 +50,15 @@ export class CreateNewGroupComponent {
   }
   zavritDialog(): void {
     this.dialogRef.close();
+  }
+  handleFileInput(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+  displayImage(): Blob | null {
+    if (this.selectedFile) {
+      return new Blob([this.selectedFile], { type: this.selectedFile.type });
+    }
+    return null;
   }
   
 

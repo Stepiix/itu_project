@@ -15,10 +15,11 @@ export class ServiceGroupListService {
     return this.http.get(apiUrlWithUserId);
   }
 
-  createGroup(groupData: any): Observable<any> {
-    console.log('---tady se muzes podivat co ti tam posilam-----')
-    console.log(groupData)
-    console.log('--------')
-    return this.http.post(`${this.apiUrl}create-group`, groupData);
+  createGroup(formData: FormData): Observable<any> {
+    return this.http.post(`${this.apiUrl}create-group`, formData);
+  }
+  
+  getInfoAboutGroup(groupId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/${groupId}`);
   }
 }

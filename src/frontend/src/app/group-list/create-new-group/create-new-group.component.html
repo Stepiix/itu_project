@@ -1,5 +1,4 @@
 <div class="new-group">
-
     <div class="header">
         <h1>Nová skupina</h1>
         <button mat-icon-button class="close-button" (click)="zavritDialog()">
@@ -10,20 +9,20 @@
     <div class="groupInput">
         <input id="name" [(ngModel)]="name" placeholder="Název" type="text">
         <input id="label" [(ngModel)]="label" placeholder="Popis" type="text">
-        <!-- <div class="fotka"> -->
-            <input id="photo" [(ngModel)]="photo" placeholder="Přidat fotku" type="text">
+
+        <input id="photo" type="file" (change)="handleFileInput($event)" style="display: none">
+        <label for="photo" class="file-input-label">
             <mat-icon class="icon">camera_alt</mat-icon>
-        <!-- </div> -->
+        </label>
+
+        <!-- Display selected image -->
+        <img *ngIf="selectedFile" [src]="displayImage()" alt="Selected Image" class="selected-image">
     </div>
-    
+
     <br>
     <h2>Přidat členy</h2>
-    
 
-
-    <div class="vytvorit">    
+    <div class="vytvorit">
         <button (click)="vytvoritSkupinu()">Vytvořit</button>
     </div>
-    
-    
 </div>

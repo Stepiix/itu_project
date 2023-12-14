@@ -1,11 +1,10 @@
 .profile {
     position: relative;
-    height: 92%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    top: -7%;
+    top: 15%;
 }
 
 .user-name h1{

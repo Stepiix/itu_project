@@ -1,10 +1,10 @@
 <div class="inside-group">
     <h1>{{ groupInfo?.group.group_name }}</h1>
 
-    <div class="users">
+    <div class="users" *ngFor="let user of groupInfo?.group.users">
         <div class="user">
-            <h2>Pepik</h2>
-            <span>300</span>
+            <h2>{{ user.user_firstname }}</h2>
+            <!-- tady dodelat + - -->
         </div>
     </div>
 

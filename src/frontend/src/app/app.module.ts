@@ -24,6 +24,7 @@ import { AddnewpayComponent } from './insidegroup/addnewpay/addnewpay.component'
 import { SettledebtComponent } from './insidegroup/settledebt/settledebt.component';
 import { PaymenthistoryComponent } from './insidegroup/paymenthistory/paymenthistory.component';
 import { EditgroupComponent } from './insidegroup/editgroup/editgroup.component';
+import { FilterComponent } from './insidegroup/paymenthistory/filter/filter.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { EditgroupComponent } from './insidegroup/editgroup/editgroup.component'
     SettledebtComponent,
     PaymenthistoryComponent,
     EditgroupComponent,
+    FilterComponent,
   ],
   imports: [
     BrowserModule,

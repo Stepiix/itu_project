@@ -1,38 +1,15 @@
 <div class="inside-group">
-<h1>{{ groupInfo?.group.group_name }}</h1>
+    <h1>{{ groupInfo?.group.group_name }}</h1>
 
-<div class="users">
-    <div class="user">
-        <h2>Pepik</h2>
-        <span>300</span>
-    </div>
-</div>
-
-<button (click)="openDialogAddNewPay()">Přidat novou platbu</button>
-
-<div class="dluhy">
-    <h2>Dluhy</h2>
-    <div class="dluh-list">
-        <div class="dluh-item">
-            <span>Pepa -> Jura</span>
-            <p>100
-            </p>
-        </div>
-    </div>
-    <button (click)="openDialogSettleDebt()">Srovnat dluh</button>
-</div>
-<div class="inside-group">
-
-    <h1>jmeno skupiny</h1>
-    
     <div class="users">
         <div class="user">
             <h2>Pepik</h2>
             <span>300</span>
         </div>
     </div>
-    
-    <button class="nova-platba">Přidat novou platbu</button>
+
+    <button (click)="openDialogAddNewPay()" class="nova-platba">Přidat novou platbu</button>
+
     
     <div class="info">
         <div class="dluhy">
@@ -48,7 +25,7 @@
                     <p>100</p>
                 </div>
             </div>
-            <button>Srovnat dluh</button>
+            <button (click)="openDialogSettleDebt()">Srovnat dluh</button>
         </div>
         
         <div class="platby">
@@ -67,26 +44,16 @@
                     <p>Trencle</p>
                 </div>
             </div>
-            <button>Srovnat dluh</button>
+            <button (click)="openDialogPaymentHistory()">Zobrazit celou historii</button>
         </div>
     </div>
-    <button (click)="openDialogPaymentHistory()">Zobrazit celou historii</button>
-</div>
 
-<div class="bottom">
-    <button (click)="openDialogEditGroup()">Upravit skupinu</button>
-    <select name="mena" id="mena">
-        <option value="CZK">CZK</option>
-        <option value="EUR">EUR</option>
-    </select>
-</div>
-        
     <div class="bottom">
-        <button>Upravit skupinu</button>
+        <button (click)="openDialogEditGroup()" class="upravit-skupinu">Upravit skupinu</button>
         <select name="mena" id="mena">
             <option value="CZK">CZK</option>
             <option value="EUR">EUR</option>
         </select>
     </div>
-    
+        
 </div>

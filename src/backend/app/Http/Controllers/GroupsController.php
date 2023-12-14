@@ -30,11 +30,20 @@ class GroupsController extends Controller
         $request->validate([
             'group_name' => 'required|string|max:32',
             'group_label' => 'nullable|string|max:64',
+            'group_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+
+        // Získání base64 kódované fotky z requestu
+        $base64Image = $request->input('group_photo');
+        
+        // Dekódování base64 kódu do binární podoby
+        $imageData = base64_decode($base64Image);
 
         $group = groups::create([
             'group_name' => $request->input('group_name'),
             'group_label' => $request->input('group_label'),
+            'group_photo' => $imageData,
         ]);
 
         $userId = $request->input('user_id'); // Předpokládáme, že máte nějaký způsob získání user_id

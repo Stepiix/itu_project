@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { FilterComponent } from './filter/filter.component';
 
 @Component({
   selector: 'app-paymenthistory',
@@ -6,5 +8,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./paymenthistory.component.css']
 })
 export class PaymenthistoryComponent {
+
+  constructor(public dialog: MatDialog) {}
+
+  openFilterDialog(): void {
+    const dialogRef = this.dialog.open(FilterComponent, {
+      width: '400px', // Nastavte šířku dialogu dle potřeby
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The filter dialog was closed');
+      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
+    });
+  }
 
 }

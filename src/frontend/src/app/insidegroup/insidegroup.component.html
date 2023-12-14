@@ -1,10 +1,10 @@
 <div class="inside-group">
     <h1>{{ groupInfo?.group.group_name }}</h1>
 
-    <div class="users">
+    <div class="users" *ngFor="let user of groupInfo?.group.users">
         <div class="user">
-            <h2>Pepik</h2>
-            <span>300</span>
+            <h2>{{ user.user_firstname }}</h2>
+            <!-- tady dodelat + - -->
         </div>
     </div>
 
@@ -17,12 +17,7 @@
             <div class="dluh-list">
                 <div class="dluh-item">
                     <span>Pepa -> Jura</span>
-                    <p>100</p>
-                </div>
-
-                <div class="dluh-item">
-                    <span>Pepa -> Jura</span>
-                    <p>100</p>
+                    <p class="castka">100</p>
                 </div>
             </div>
             <button (click)="openDialogSettleDebt()">Srovnat dluh</button>
@@ -30,22 +25,24 @@
         
         <div class="platby">
             <h2>Historie plateb</h2>
-            <div class="platby-list">
-                <p>Posledni platby</p>
-                <div class="platby-item">
-                    <span>Pepa -> Jura</span>
-                    <p>100</p>
-                    <p>Trencle</p>
-                </div>
 
+            <div class="platby-list">
+                <span>Posledni platby</span>
                 <div class="platby-item">
-                    <span>Pepa -> Jura</span>
-                    <p>100</p>
-                    <p>Trencle</p>
+                    <div class="platba-detail">
+                        <div class="description">
+                            <span>Pepa -> Jura </span>
+                            <span>Trencle</span>
+                        </div>
+                        <p class="castka">100</p>
+                    </div>
                 </div>
             </div>
+
             <button (click)="openDialogPaymentHistory()">Zobrazit celou historii</button>
+        
         </div>
+
     </div>
 
     <div class="bottom">

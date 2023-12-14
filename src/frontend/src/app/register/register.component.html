@@ -1,30 +1,31 @@
 <div class="register-form">
+  
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-      <h2>Registrace</h2>
-        <div class="input-field">
-          <label for="firstName">Jméno:</label>
-          <input type="text" id="firstName" formControlName="user_firstname" required>
-        </div>
-        
-        <div class="input-field">
-          <label for="lastName">Příjmení:</label>
-          <input type="text" id="lastName" formControlName="user_lastname" required>
-        </div>
-        
-        <div class="input-field">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" formControlName="user_email" required>
-      </div>
-      
-      <div class="input-field">
-        <label for="password">Heslo:</label>
-        <input type="password" id="password" formControlName="user_password" required>
-      </div>
-      
-      <button type="submit" [disabled]="!registrationForm.valid">Vytvořit účet</button>
-      <div class="crumbs">
-        <p>Už jsi členem? <a href="">Přihlásit se</a></p>
-      </div>
-    </form>
+    <h2>Registrace</h2>
+    <div class="input-field">
+      <label for="firstName">Jméno:</label>
+      <input type="text" id="firstName" formControlName="user_firstname" placeholder="Jméno" required>
+    </div>
+    
+    <div class="input-field">
+      <label for="lastName">Příjmení:</label>
+      <input type="text" id="lastName" formControlName="user_lastname" placeholder="Příjmení" required>
+    </div>
+    
+    <div class="input-field">
+      <label for="email">E-mail:</label>
+      <input type="email" id="email" formControlName="user_email" placeholder="E-mail" required>
+    </div>
+    
+    <div class="input-field">
+      <label for="password">Heslo:</label>
+      <input type="password" id="password" formControlName="user_password" placeholder="Heslo" required>
+    </div>
+    
+    <button type="submit" [disabled]="!registrationForm.valid">Registrovat se</button>
+    <div class="crumbs">
+      <p>Už jsi členem? <a href="">Přihlásit se</a></p>
+    </div>
+  </form>
 </div>
   

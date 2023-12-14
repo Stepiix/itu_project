@@ -1,13 +1,17 @@
 
-    {{ data.title }}
-    <button mat-icon-button (click)="cancel()" class="close-button">
+    <!-- {{ data.title }} -->
+    <!-- <button mat-icon-button (click)="cancel()" class="close-button">
       <mat-icon aria-label="Close dialog">close</mat-icon>
-    </button>
-  <div mat-dialog-content>
-    <p>{{ data.message }}</p>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="confirm()">Potvrdit</button>
-    <button mat-button (click)="cancel()">Zrušit</button>
+    </button> -->
+
+  <div class="confirm">
+    <!-- <div mat-dialog-content class="message"> -->
+      <p>{{ data.message }}</p>
+    <!-- </div> -->
+    
+    <div mat-dialog-actions class="decision">
+      <div class="zrusit"><button mat-button (click)="cancel()">Zrušit</button></div>
+      <div class="potvrdit"><button mat-raised-button color="primary" (click)="confirm()">Potvrdit</button></div>
+    </div>
   </div>
   

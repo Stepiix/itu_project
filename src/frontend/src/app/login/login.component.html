@@ -1,19 +1,21 @@
 <div class="login-form">
     <form [formGroup]="form" (ngSubmit)="prihlasit()">
-        <h2>Přihlášení</h2>
-        <div class="input-field">
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" formControlName="user_email" required>
-        </div>
-        
-        <div class="input-field">
-          <label for="password">Heslo:</label>
-          <input type="password" id="password" formControlName="user_password" required>
-        </div>
-        
-        <button type="submit" [disabled]="!form.valid"><p>Přihlásit</p></button>
-        <div class="crumbs">    
-            <p>Nejsi členem? <a routerLink="/register">Registrovat se</a></p>
-        </div>
-      </form>
-  </div>
+
+      <h2>Přihlášení</h2>
+      <div class="input-field">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" formControlName="user_email" placeholder="E-mail" required>
+      </div>
+      
+      <div class="input-field">
+        <label for="password">Heslo:</label>
+        <input type="password" id="password" formControlName="user_password" placeholder="Heslo" required>
+      </div>
+      
+      <button type="submit" [disabled]="!form.valid"><p>Přihlásit se</p></button>
+      <div class="crumbs">    
+          <p>Nejsi členem? <a routerLink="/register">Registrovat se</a></p>
+      </div>
+
+    </form>
+</div>

@@ -1,6 +1,6 @@
 .edit-profile-container {
   background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
-  border-radius: 20px;
+  /* border-radius: 20px; */
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -23,21 +23,31 @@
   border: 0;
 }
 
+.change-form {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
 .form-group {
   display: flex;
   flex-direction: row;
-  justify-content: end;
   align-items: center;
+  justify-content: flex-end;  
+  margin-bottom: 0.5em; 
   font-size: 16px;
-  margin-bottom: 0.5em;
-  justify-content: space-between;         /* cachruje*/
 }
 
 .form-group input {
-  padding: 1em 1.5em;
+  padding: 0.75em 1.5em;
   margin-left: 1em;
   border-radius: 40px;
   border: 0;
+}
+
+.form-group label {
+  flex: 2;
 }
 
 .password button {
@@ -57,7 +67,6 @@
 }
 
 .decision button {
-  background: linear-gradient(90deg, #D3D3D3 0%, #EDEDED 100%);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border: 0;
   padding: 0.4rem 2rem;
@@ -70,4 +79,8 @@
   margin-bottom: 0.5em;
   background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
   border-radius: 41px;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  background-color: black;
 }

@@ -28,30 +28,36 @@ form {
 .input-field {
     display: flex;
     flex-direction: row;
-    margin-bottom: 10px;
-    gap: 8px;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: flex-end;  
+    margin-bottom: 0.5em; 
+    font-size: 16px;
 }
 
 input {
     width: 180px;
     height: 40px;
     border-radius: 25px;
+    margin-left: 0.5em;   
     padding: 0 15px;
     border: 1px solid gray;
 }
 
+label {
+    flex: 2;
+}
 
 button {
-    color: black;
+    color: white;
     background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
-    padding: 10px 50px;
+    padding: 8px 50px;
     border-radius: 41px;
     border: 0cm;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     letter-spacing: 1px;
     font-size: 16px;
     margin-bottom: 10px;
+    margin-top: 0.5em;
 }
 
 p {
@@ -61,4 +67,29 @@ p {
 a {
     color: #2ed205;
     font-weight: bolder;
+}
+
+/* Mobil */
+@media only screen and (max-width: 600px) {
+    .login-form {
+      top: 25%;
+    }
+
+    form {
+      width: 300px;
+    }
+
+    input {
+        width: 100%;
+    }
+
+    .input-field label {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 600px) {
+    input::placeholder {
+        color: transparent;
+    }
 }

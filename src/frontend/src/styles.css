@@ -4,8 +4,12 @@
 html, body { height: 100%; }
 body { 
     margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif; 
-    /* font-family: 'Noto Sans'; */
+    /* font-family: Roboto, "Helvetica Neue", sans-serif;  */
+    /* font-family: Noto Sans, sans-serif; */
+}
+
+* {
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .back {

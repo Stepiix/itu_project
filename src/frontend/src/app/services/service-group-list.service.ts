@@ -20,6 +20,6 @@ export class ServiceGroupListService {
   }
   
   getInfoAboutGroup(groupId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${groupId}`);
+    return this.http.get(`${this.apiUrl}group?group_id=${groupId}`);
   }
 }

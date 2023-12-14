@@ -1,4 +1,4 @@
-<h1>jmeno skupiny</h1>
+<h1>{{ groupInfo?.group.group_name }}</h1>
 
 <div class="users">
     <div class="user">
@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<button>pridat novou platbu</button>
+<button (click)="openDialogAddNewPay()">Přidat novou platbu</button>
 
 <div class="dluhy">
     <h2>Dluhy</h2>
@@ -18,7 +18,7 @@
             </p>
         </div>
     </div>
-    <button>Srovnat dluh</button>
+    <button (click)="openDialogSettleDebt()">Srovnat dluh</button>
 </div>
 
 <div class="platby">
@@ -31,11 +31,11 @@
             <p>Trencle</p>
         </div>
     </div>
-    <button>Srovnat dluh</button>
+    <button (click)="openDialogPaymentHistory()">Zobrazit celou historii</button>
 </div>
 
 <div class="bottom">
-    <button>Upravit skupinu</button>
+    <button (click)="openDialogEditGroup()">Upravit skupinu</button>
     <select name="mena" id="mena">
         <option value="CZK">CZK</option>
         <option value="EUR">EUR</option>

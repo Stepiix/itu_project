@@ -20,6 +20,10 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
 import { ConfirmEditOfProfileComponent } from './profile/edit-profile/confirm-edit-of-profile/confirm-edit-of-profile.component';
 import { JoinGroupComponent } from './group-list/join-group/join-group.component';
 import { InsidegroupComponent } from './insidegroup/insidegroup.component';
+import { AddnewpayComponent } from './insidegroup/addnewpay/addnewpay.component';
+import { SettledebtComponent } from './insidegroup/settledebt/settledebt.component';
+import { PaymenthistoryComponent } from './insidegroup/paymenthistory/paymenthistory.component';
+import { EditgroupComponent } from './insidegroup/editgroup/editgroup.component';
 
 
 @NgModule({
@@ -35,6 +39,10 @@ import { InsidegroupComponent } from './insidegroup/insidegroup.component';
     ConfirmEditOfProfileComponent,
     JoinGroupComponent,
     InsidegroupComponent,
+    AddnewpayComponent,
+    SettledebtComponent,
+    PaymenthistoryComponent,
+    EditgroupComponent,
   ],
   imports: [
     BrowserModule,

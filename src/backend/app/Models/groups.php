@@ -15,6 +15,7 @@ class groups extends Model
     'group_name', // upraveno z 'name' na 'user_firstname'
     'group_label',  // upraveno z 'name' na 'user_lastname'
     'group_link',     // upraveno z 'email' na 'user_email'
+    'group_photo', 
     ];
 
     public function users()

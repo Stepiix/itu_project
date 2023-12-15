@@ -1,12 +1,105 @@
 /* addnewpay.component.css */
+.add-new-payment {
+  background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.close-button {
+  background-color: transparent;
+  border: 0;
+}
+
+.header h1 {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;  
+  margin-bottom: 0.5em; 
+  font-size: 16px;
+}
+
+.form-group label {
+  flex: 2;
+}
+
+select, .form-group input {
+  padding: 0.5rem 1rem;
+  width: 60%;
+  border-radius: 20px;
+  border: 0;
+}
+
+select {
+  padding: 0.5rem 1.5rem;
+  width: 68.7%;
+}
+
+
+
+.division-container {
+  background-color: white;
+  padding: 0.5em 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.split-style {
+  margin-bottom: 0.5em;
+  width: 100%;
+}
+
+.split-style button {
+  width: 50%;
+  border: 0;
+}
+
+.split-style button:first-child {
+  border-radius: 15px 0 0 15px;
+}
+
+.split-style button:last-child {
+  border-radius: 0 15px 15px 0;
+}
+
+.split-equally, .confirm-payment {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: 0;
+  border-radius: 40px;
+}
+
+.split-equally {
+  background: linear-gradient(90deg, #D3D3D3 0%, #EDEDED 100%);
+  padding: 0.2rem 2rem;
+  margin-top: 0.5em;
+}
+
+.confirm-payment {
+  background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
+  color: white;
+  padding: 0.4rem 2rem;
+}
 
 .selected-green {
-    background-color: green;
-    color: white;
-  }
-  
-  .selected-red {
-    background-color: red;
-    color: white;
-  }
+  background-color: green;
+  color: white;
+}
+
+.selected-red {
+  background-color: red;
+  color: white;
+}
   

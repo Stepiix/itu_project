@@ -1,37 +1,60 @@
 <!-- addnewpay.component.html -->
+<div class="add-new-payment">
 
-<h1>Nová platba</h1>
+  <div class="header">
+    <h1>Nová platba</h1>
+    <button mat-icon-button class="close-button">
+      <mat-icon aria-label="Close dialog">close</mat-icon>
+    </button>
+  </div>
+  
+  <!-- Vstup pro vybrání uživatele -->
+  <div class="form-group">
+    <label for="selectedUserId">Platil:</label>
+    <select id="selectedUserId" [(ngModel)]="selectedUserId" (ngModelChange)="checkButtonAvailability()">
+      <option *ngFor="let user of personInfo.group.users" [value]="user.user_id">
+        {{ user.user_firstname }} ({{ user.user_id }})
+      </option>
+    </select>
+  </div>
+  
+  <!-- Vstup pro zadání částky -->
+  <div class="form-group">
+    <label for="paymentAmount">Částka:</label>
+    <input type="number" id="paymentAmount" [(ngModel)]="paymentAmount" (ngModelChange)="checkButtonAvailability()">
+  </div>
+  
+  <!-- Vstup pro zadání důvodu platby -->
+  <div class="form-group">
+    <label for="paymentReason">Za co:</label>
+    <input type="text" id="paymentReason" [(ngModel)]="paymentReason">
+  </div>
+    
+  <!-- Tlačítka pro výběr "Částky" a "Poměru" -->
+  
+  <!-- Vstupy pro zadání podílu pro každého uživatele -->
+  <div class="division-container">
 
-<!-- Vstup pro vybrání uživatele -->
-<label for="selectedUserId">Vyberte uživatele:*</label>
-<select id="selectedUserId" [(ngModel)]="selectedUserId" (ngModelChange)="checkButtonAvailability()">
-  <option *ngFor="let user of personInfo.group.users" [value]="user.user_id">
-    {{ user.user_firstname }} ({{ user.user_id }})
-  </option>
-</select>
+    <div class="split-style">
+      <button (click)="onAmountClick()" [ngClass]="{'selected-green': isAmountSelected, 'selected-red': isRatioSelected}">Částka</button>
+      <button (click)="onRatioClick()" [ngClass]="{'selected-green': isRatioSelected, 'selected-red': isAmountSelected}">Poměr</button>
+    </div>
 
-<!-- Vstup pro zadání částky -->
-<label for="paymentAmount">Zadejte částku:*</label>
-<input type="number" id="paymentAmount" [(ngModel)]="paymentAmount" (ngModelChange)="checkButtonAvailability()">
-
-<!-- Vstup pro zadání důvodu platby -->
-<label for="paymentReason">Za co:</label>
-<input type="text" id="paymentReason" [(ngModel)]="paymentReason">
-
-<!-- Tlačítka pro výběr "Částky" a "Poměru" -->
-<button (click)="onAmountClick()" [ngClass]="{'selected-green': isAmountSelected, 'selected-red': isRatioSelected}">Částka</button>
-<button (click)="onRatioClick()" [ngClass]="{'selected-green': isRatioSelected, 'selected-red': isAmountSelected}">Poměr</button>
-
-<!-- Vstupy pro zadání podílu pro každého uživatele -->
-<div *ngFor="let user of personInfo.group.users">
-    <label for="userShare{{ user.user_id }}">Podíl pro {{ user.user_firstname }}:</label>
-    <input type="number" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isAmountSelected">
-    <input type="number" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isRatioSelected">
+    <div *ngFor="let user of personInfo.group.users">
+      <label for="userShare{{ user.user_id }}">{{ user.user_firstname }}</label>
+      <input type="number" class="payment-part" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isAmountSelected">
+      <input type="number" class="payment-part" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isRatioSelected">
+    </div>
+    
+    <!-- <div class="division-container">
+      <p>Platil: {{ selectedUserId }}</p>
+      <p>Částka: {{ paymentAmount }}</p>
+      <p>Za co: {{ paymentReason }}</p>
+      <button class="split-equally" (click)="splitEqually()">Rozdělit rovnoměrně</button>
+  </div> -->
+  
+    <button class="split-equally" (click)="splitEqually()">Rozdělit rovnoměrně</button>
+  </div>
+  
+  <button class="confirm-payment" (click)="confirmPayment()" [disabled]="!isButtonEnabled">Přidat platbu</button>
 </div>
-<button (click)="splitEqually()">Rozdělit rovnoměrně</button>
-<button (click)="confirmPayment()" [disabled]="!isButtonEnabled">Potvrdit platbu</button>
-
-<p>Platil: {{ selectedUserId }}</p>
-<p>Částka: {{ paymentAmount }}</p>
-<p>Za co: {{ paymentReason }}</p>
-<!-- takhle good -->

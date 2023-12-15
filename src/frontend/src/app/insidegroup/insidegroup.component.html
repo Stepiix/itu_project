@@ -38,7 +38,7 @@
                 <div class="platby-item" *ngFor="let transaction of transactions">
                     <div class="platba-detail">
                         <div class="description">
-                            <span>{{ transaction.debtor.user_firstname }} -> {{ transaction.payer.user_firstname }}</span>
+                            <span>{{ transaction.debtor.user_firstname }} <mat-icon class="arrow">arrow_forward</mat-icon> {{ transaction.payer.user_firstname }}</span>
                             <span>{{ transaction.t_label }}</span>
                         </div>
                         <p class="castka">{{ transaction.t_amount }}</p>

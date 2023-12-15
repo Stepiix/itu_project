@@ -129,9 +129,9 @@ class GroupsController extends Controller
         $group->group_link = $invitationCode;
         $group->save();
         // Vytvoření odkazu
-        $invitationLink = route('group.invite', ['code' => $invitationCode]);
+        // $invitationLink = route('group.invite', ['code' => $invitationCode]);
 
-        return response()->json(['group' => $group, 'invitationLink' => $invitationLink, 'message' => 'Group created successfully']);
+        return response()->json(['group' => $group, 'invitationLink' => $invitationCode, 'message' => 'Group created successfully']);
     }
 
     public function getUsersInGroup(Request $request)

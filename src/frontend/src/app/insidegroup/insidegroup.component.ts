@@ -50,6 +50,8 @@ export class InsidegroupComponent {
         // Zpracování dat z backendu
         this.groupInfo = data;
         console.log('Data from backend:', this.groupInfo);
+        console.log('Link ------ ', this.groupInfo.group.group_link);
+        this.dataSharingService.setGroupLink(this.groupInfo.group.group_link);
       },
       (error) => {
         console.error('Error fetching data from backend:', error);
@@ -86,16 +88,18 @@ export class InsidegroupComponent {
     });
   }
 
-  openDialogEditGroup(): void {
-    const dialogRef = this.dialog.open(EditgroupComponent, {
-      width: '400px', // Nastavte šířku dialogu dle potřeby
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
-    });
-  }
+openDialogEditGroup(): void {
+  const dialogRef = this.dialog.open(EditgroupComponent, {
+    width: '400px', // Nastavte šířku dialogu dle potřeby
+    data: { groupLink: this.dataSharingService.currentGroupLink }, // Předejte data dialogu
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
+  });
+}
+
 
   openDialogPaymentHistory(): void {
     const dialogRef = this.dialog.open(PaymenthistoryComponent, {

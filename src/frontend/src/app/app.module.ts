@@ -25,6 +25,7 @@ import { SettledebtComponent } from './insidegroup/settledebt/settledebt.compone
 import { PaymenthistoryComponent } from './insidegroup/paymenthistory/paymenthistory.component';
 import { EditgroupComponent } from './insidegroup/editgroup/editgroup.component';
 import { FilterComponent } from './insidegroup/paymenthistory/filter/filter.component';
+import { ClipboardModule } from 'ngx-clipboard';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { FilterComponent } from './insidegroup/paymenthistory/filter/filter.comp
     HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    ClipboardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

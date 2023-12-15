@@ -1,5 +1,6 @@
-<div class="join">
+<!-- join-group.component.html -->
 
+<div class="join">
     <div class="header">
         <h1>Přidat se ke skupině</h1>
         <button mat-icon-button class="close-button">
@@ -7,6 +8,6 @@
         </button>
     </div>
 
-    <input type="text" placeholder="Vložte prosím link">
+    <input type="text" placeholder="Vložte prosím link" [(ngModel)]="link">
     <button mat-button (click)="pridatSeKeSkupine()">Přidat se ke skupině</button>
 </div>

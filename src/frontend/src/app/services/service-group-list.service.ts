@@ -41,4 +41,9 @@ export class ServiceGroupListService {
   loadTransactions(groupId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}getall-transactions?t_group_id=${groupId}`);
   }
+
+  pridatSeKeSkupine(link: string, userId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}group-invite/${link}?user_id=${userId}`);
+  }
+  
 }

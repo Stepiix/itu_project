@@ -1,1 +1,11 @@
-<p>editgroup works!</p>
+<!-- editgroup.component.html -->
+
+<p *ngIf="isLinkVisible">Group Link: {{ groupLink }}</p>
+
+<button mat-icon-button (click)="toggleLink()">
+  <mat-icon>{{ isLinkVisible ? 'remove' : 'add' }}</mat-icon>
+</button>
+
+<button mat-icon-button (click)="copyLink()" *ngIf="isLinkVisible">
+  <mat-icon>content_copy</mat-icon>
+</button>

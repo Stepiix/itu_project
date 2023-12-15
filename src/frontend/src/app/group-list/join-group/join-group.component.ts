@@ -1,4 +1,8 @@
+// join-group.component.ts
+
 import { Component } from '@angular/core';
+import { ServiceGroupListService } from 'src/app/services/service-group-list.service';
+import { SessionService } from 'src/app/services/session.service';
 
 @Component({
   selector: 'app-join-group',
@@ -6,9 +10,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./join-group.component.css']
 })
 export class JoinGroupComponent {
+  link: string = '';
+  user_id: string = '';
+
+  constructor(private groupService: ServiceGroupListService, private session: SessionService) {
+
+  }
 
   pridatSeKeSkupine() {
-    // Implement the logic you want to execute when the button is clicked
-    console.log('Button clicked! Add logic here.');
+    // Předpokládáme, že chcete odeslat odkaz, který byl zadaný do vstupu
+    console.log("chci se pripojit - ", this.link)
+    console.log('moje id je ', this.session.getID);
+    this.user_id = this.session.getID() ?? '';
+    this.groupService.pridatSeKeSkupine(this.link, this.user_id).subscribe(
+      response => {
+        console.log('Odpověď z backendu:', response);
+        // Zpracujte odpověď z backendu podle potřeby
+      },
+      error => {
+        console.error('Chyba při komunikaci s backendem:', error);
+        // Zpracujte chybu podle potřeby
+      }
+    );
   }
 }

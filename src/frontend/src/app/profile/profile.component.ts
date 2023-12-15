@@ -32,6 +32,7 @@ export class ProfileComponent {
 
     dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
+        this.userInfo = this.session.getUserSession();
         // Zpracujte výsledek z dialogu, pokud je potřeba
     });
   }

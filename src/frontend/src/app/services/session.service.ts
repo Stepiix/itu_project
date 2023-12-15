@@ -32,6 +32,7 @@ export class SessionService {
       email: email,
       expirationTime: new Date().getTime() + 10 * 60 * 1000 * 6 * 2
     };
+    console.log(sessionData)
     sessionStorage.setItem('userSession', JSON.stringify(sessionData));
   }
   getUserSession() {
@@ -40,7 +41,7 @@ export class SessionService {
     if (sessionDataString) {
       const sessionData = JSON.parse(sessionDataString);
       const currentTime = new Date().getTime();
-  
+      
       // Kontrola, zda session nevypršela
       if (currentTime < sessionData.expirationTime) {
         return {
@@ -68,4 +69,29 @@ export class SessionService {
       return null;
     }
   }
+  updateUserSession(updatedUser: any) {
+    const sessionDataString = sessionStorage.getItem('userSession');
+  
+    if (sessionDataString) {
+      const sessionData = JSON.parse(sessionDataString);
+  
+      // Update specific properties in the session data
+      if (updatedUser.user_id) {
+        sessionData.userID = updatedUser.user_id;
+      }
+      if (updatedUser.user_firstname) {
+        sessionData.firstName = updatedUser.user_firstname;
+      }
+      if (updatedUser.user_lastname) {
+        sessionData.lastName = updatedUser.user_lastname;
+      }
+      if (updatedUser.email) {
+        sessionData.email = updatedUser.email;
+      }
+      sessionStorage.setItem('userSession', JSON.stringify(sessionData));
+    }
+  }
+  
+  
+  
 }

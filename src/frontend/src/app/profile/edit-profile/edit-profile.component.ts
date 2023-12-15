@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SessionService } from 'src/app/services/session.service';
 import { ConfirmEditOfProfileComponent } from './confirm-edit-of-profile/confirm-edit-of-profile.component';
+import { AuthserviceService } from 'src/app/services/authservice.service';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
@@ -16,11 +17,12 @@ export class EditProfileComponent implements OnInit{
   zmenitHesloVisible: boolean = false;
   userInfo: any;
 
-  constructor(private dialogRef: MatDialogRef<EditProfileComponent>, private session: SessionService, private dialog: MatDialog) {}
+  constructor(private dialogRef: MatDialogRef<EditProfileComponent>, private session: SessionService, private dialog: MatDialog, private authservice: AuthserviceService) {}
 
   ngOnInit(): void {
     // Tady můžete provádět inicializace nebo načítání dat, pokud je to potřeba při inicializaci komponentu.
     // Například můžete načíst data o uživateli pro úpravu profilu.
+    console.log("beru veci ze session")
     this.userInfo = this.session.getUserSession();
   }
 
@@ -37,22 +39,36 @@ export class EditProfileComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
+      if (result) {//dal upravit
         // Uživatel potvrdil, můžete provést úpravu profilu
         this.performProfileUpdate();
+      } else if (!result){//dal storno
+        console.log("profil nebyl upraven protoze dal storno")
       }
     });
-    // Zde můžete implementovat odesílání dat na backend nebo jinou požadovanou logiku
-    console.log('Formulář odeslán:');
-    console.log('Jméno:', this.name);
-    console.log('Příjmení:', this.last_name);
-    console.log('Email:', this.email);
-    console.log('Obrázek:', this.picture);
-
   }
   private performProfileUpdate(): void {
-    // Zde implementujte skutečné odeslání formuláře nebo úpravu profilu
-    console.log('Profil byl úspěšně upraven.');
+    // Prepare user information for update
+    const updatedUserInfo = {
+      user_id: this.userInfo.userID, // Add user ID property based on your user object structure
+      user_firstname: this.userInfo.firstName,
+      user_lastname: this.userInfo.lastName,
+      user_email: this.userInfo.email,
+    };
+  
+    // Call editUser method
+    this.authservice.editUser(updatedUserInfo).subscribe(
+      (response) => {
+        console.log('Profile updated successfully');
+        this.session.updateUserSession(updatedUserInfo);
+        this.dialogRef.close();
+        // Add any additional logic or feedback for successful update
+      },
+      (error) => {
+        console.error('Error updating profile:', error);
+        // Handle error, display error message, etc.
+      }
+    );
   }
   storno() {
     this.dialogRef.close();

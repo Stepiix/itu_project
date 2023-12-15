@@ -40,3 +40,9 @@ Route::put('/update-user', [UserController::class, 'updateUser']);
 Route::get('/get-user', [UserController::class, 'getUser']);
 
 Route::put('/update-group', [GroupsController::class, 'updateGroup']);
+
+Route::get('/group-invite/{code}', [GroupsController::class, 'invite']);
+
+Route::delete('/group-remove-user', [GroupsController::class, 'removeUserFromGroup']);
+
+Route::get('/group-balance', [TransactionController::class, 'calculateUserBalances']);

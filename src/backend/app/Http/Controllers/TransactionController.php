@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\userMy;
+use App\Models\GroupUser;
 
 class TransactionController extends Controller
 {
@@ -53,5 +55,42 @@ class TransactionController extends Controller
         ];
 
         return response()->json($result, 200);
+    }
+
+    public function calculateUserBalances(Request $request)
+    {
+        $request->validate([
+            'group_id' => 'required|integer',
+        ]);
+
+        $groupId = $request->input('group_id');
+
+        // Načtení všech transakcí pro danou skupinu
+        $transactions = Transaction::where('t_group_id', $groupId)->get();
+
+        // Načtení informací o uživatelích ve skupině pomocí relace
+        $users = GroupUser::where('group_id', $groupId)->with('user')->get()->pluck('user');
+
+        // Vytvoření asociativního pole pro udržení salda každého uživatele
+        $userBalances = [];
+
+        // Procházení každé transakce
+        foreach ($transactions as $transaction) {
+            // Přidání částky od payera
+            $userBalances[$transaction->t_user_payer_id] = 
+                ($userBalances[$transaction->t_user_payer_id] ?? 0) + $transaction->t_amount;
+
+            // Odčítání částky od debtorů
+            $userBalances[$transaction->t_user_debtor_id] = 
+                ($userBalances[$transaction->t_user_debtor_id] ?? 0) - $transaction->t_amount;
+        }
+
+
+        // Přidání informací o saldu do asociativního pole
+        foreach ($users as $user) {
+            $user->balance = $userBalances[$user->user_id] ?? 0;
+        }
+
+        return response()->json(['users' => $users]);
     }
 }

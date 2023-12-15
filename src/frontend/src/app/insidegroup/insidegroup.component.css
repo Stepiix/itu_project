@@ -43,9 +43,7 @@
     align-items: center;
 }
 
-.user h2 {
-    margin-bottom: 0;
-}
+.user h2 { margin-bottom: 0; }
 
 .nova-platba {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -132,6 +130,11 @@
     margin-bottom: 0.5em;
 }
 
+.arrow {
+    font-size: 14px;
+    display: inline;
+}
+
 .castka {
     font-size: 14px;
     font-weight: 600;
@@ -184,9 +187,7 @@
 @media only screen and (max-width: 600px) {
     .header h1 { margin-bottom: 0; }
 
-    .header {
-        margin-bottom: 16px;
-    }
+    .header { margin-bottom: 16px; }
 
     .info { 
         flex-direction: column; 
@@ -227,31 +228,17 @@
         font-size: 24px;
     }
 
-    .dluh-item, .description, .castka {
-        font-size: 24px;
-    }
+    .dluh-item, .description, .castka { font-size: 24px; }
 
-    /* .dluh-item:first-child {
-        margin-top: 0.5em;
-    } */
+    .description { line-height: 20px; }
 
-    .description {
-        line-height: 20px;
-    }
+    .description span:last-child { font-size: 15px; }
 
-    .description span:last-child {
-        font-size: 15px;
-    }
+    .arrow { font-size: 20px; }
 
-    .castka {
-        padding: 0.5rem 1em;
-    }
+    .castka { padding: 0.5rem 1em; }
     
-    .upravit-skupinu {
-        display: none;
-    }
+    .upravit-skupinu { display: none; }
 
-    .upravit-skupinu-mobil{
-        display: block;
-    }
+    .upravit-skupinu-mobil{ display: block; }
 }

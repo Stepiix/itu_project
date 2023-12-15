@@ -46,3 +46,5 @@ Route::get('/group-invite/{code}', [GroupsController::class, 'invite']);
 Route::delete('/group-remove-user', [GroupsController::class, 'removeUserFromGroup']);
 
 Route::get('/group-balance', [TransactionController::class, 'calculateUserBalances']);
+
+Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);

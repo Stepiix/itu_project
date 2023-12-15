@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\userMy;
 use App\Models\GroupUser;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -93,4 +94,47 @@ class TransactionController extends Controller
 
         return response()->json(['users' => $users]);
     }
+
+    public function calculateDebts(Request $request)
+    {
+        $request->validate([
+            'group_id' => 'required|integer',
+        ]);
+
+        $groupId = $request->input('group_id');
+
+        // Načtení všech transakcí pro danou skupinu
+        $transactions = DB::table('Transaction')
+            ->where('t_group_id', $groupId)
+            ->select(
+                't_user_payer_id',
+                't_user_debtor_id',
+                DB::raw('SUM(t_amount) as total_amount')
+            )
+            ->groupBy('t_user_payer_id', 't_user_debtor_id')
+            ->get();
+
+        // Vytvoření asociativního pole pro udržení dluhů
+        $debts = [];
+
+        // Procházení každé transakce
+        foreach ($transactions as $transaction) {
+            $payerId = $transaction->t_user_payer_id;
+            $debtorId = $transaction->t_user_debtor_id;
+            $amount = $transaction->total_amount;
+
+            // Přidání dluhu k příslušným účastníkům
+            $debts[$debtorId][$payerId] = ($debts[$debtorId][$payerId] ?? 0) + $amount;
+            $debts[$payerId][$debtorId] = ($debts[$payerId][$debtorId] ?? 0) - $amount;
+        }
+
+        // Vyfiltrování pouze těch, kteří něco dluží
+        $filteredDebts = array_filter($debts, function ($userDebts) {
+            return array_sum($userDebts) > 0;
+        });
+
+
+        return response()->json(['debts' => $filteredDebts]);
+    }
+
 }

@@ -1,5 +1,12 @@
 <div class="inside-group">
-    <h1>{{ groupInfo?.group.group_name }}</h1>
+    <div class="header">
+        <h1>{{ groupInfo?.group.group_name }}</h1>
+        <button (click)="openDialogEditGroup()" class="upravit-skupinu-mobil">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.0" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+            </svg>
+        </button>
+    </div>
 
     <div class="users" *ngFor="let user of groupInfo?.group.users">
         <div class="user">
@@ -16,7 +23,7 @@
             <h2>Dluhy</h2>
             <div class="dluh-list">
                 <div class="dluh-item">
-                    <span>Pepa -> Jura</span>
+                    <span>Pepa <mat-icon class="arrow">arrow_forward</mat-icon> Jura</span>
                     <p class="castka">100</p>
                 </div>
             </div>
@@ -27,14 +34,14 @@
             <h2>Historie plateb</h2>
 
             <div class="platby-list">
-                <span>Posledni platby</span>
-                <div class="platby-item">
+                <span>Poslední platby</span>
+                <div class="platby-item" *ngFor="let transaction of transactions">
                     <div class="platba-detail">
                         <div class="description">
-                            <span>Pepa -> Jura </span>
-                            <span>Trencle</span>
+                            <span>{{ transaction.debtor.user_firstname }} <mat-icon class="arrow">arrow_forward</mat-icon> {{ transaction.payer.user_firstname }}</span>
+                            <span>{{ transaction.t_label }}</span>
                         </div>
-                        <p class="castka">100</p>
+                        <p class="castka">{{ transaction.t_amount }}</p>
                     </div>
                 </div>
             </div>
@@ -54,3 +61,6 @@
     </div>
         
 </div>
+
+
+  

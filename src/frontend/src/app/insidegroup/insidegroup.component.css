@@ -5,10 +5,27 @@
     align-items: center;
 }
 
-h1 {
-    color: gray;
+.header {
+    display: flex;
+    flex-direction: row;
+    color: #525252;
     margin-top: 20px;
     margin-bottom: 60px;
+}
+
+.header h1 {
+    margin-bottom: 0;
+    font-weight: 350;
+}
+
+.upravit-skupinu-mobil{
+    background: transparent;
+    color: gray;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    margin-top: -3px;
+    display: none;
 }
 
 .users {
@@ -26,9 +43,7 @@ h1 {
     align-items: center;
 }
 
-.user h2 {
-    margin-bottom: 0;
-}
+.user h2 { margin-bottom: 0; }
 
 .nova-platba {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -46,6 +61,7 @@ h1 {
     flex-direction: row;
     gap: 3rem;
     margin-bottom: 50px;
+    height: 310px;
 }
 
 .info button {
@@ -61,7 +77,8 @@ h1 {
 .platby {
     background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 0.6em 1rem;
+    padding: 1rem;
+    padding-top: 0.6rem;
     border-radius: 25px;
 }
 
@@ -77,28 +94,28 @@ h1 {
     flex-direction: column;
     background-color: white;
     border-radius: 20px;
-    padding: 1em;
-    margin-bottom: 0.6em;
-    height: 180px;
+    padding: 0.5em 1em;
+    margin-bottom: 1rem;
+    height: 188px;
     width: 250px;
-    padding-top: 3px;
-}
-
-.dluh-item:first-child {
-    margin-top: 1em;
+    overflow-y: scroll;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .platby-list > span:first-child {
     font-size: 10px;
-    margin: 0;
+    margin-bottom: 2px;
     font-weight: bold;
+    color: gray;
 }
 
 .dluh-item {
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
     margin-bottom: 0.5em;
+    font-size: 16px;
 }
 
 .platby-item {
@@ -113,15 +130,20 @@ h1 {
     margin-bottom: 0.5em;
 }
 
+.arrow {
+    font-size: 14px;
+    display: inline;
+}
+
 .castka {
-    font-size: 10px;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .castka{
     background-color: lightgray;
-    padding: 0 0.5rem;
+    padding: 0.2em 0.8rem;
     border-radius: 1rem;
-    margin-left: 1em;
     margin-bottom: 0;
     max-height: 20px;
 }
@@ -129,18 +151,14 @@ h1 {
 .description {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    line-height: 15px;
+    line-height: 12px;
+    font-size: 16px;
 }
 
 .description span:last-child {
     font-size: 10px;
-}
-
-.platby {
-    background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
-    padding: 0.5em 1rem;
-    border-radius: 30px;
+    color: gray;
+    margin-top: 2px;
 }
 
 .bottom {
@@ -167,9 +185,60 @@ h1 {
 
 /* Mobil */
 @media only screen and (max-width: 600px) {
-    .info {
-        flex-direction: column;
+    .header h1 { margin-bottom: 0; }
+
+    .header { margin-bottom: 16px; }
+
+    .info { 
+        flex-direction: column; 
+        margin-bottom: 2rem;
+        width: 100%;
+        gap: 1rem;
     }
 
-    /* upravit sirky a mezery vseho */
+    .info button {
+        font-size: 20px;
+        padding: 0.3em 1em;
+    }
+
+    .nova-platba { margin-bottom: 25px; font-size: 20px;}
+
+    .dluhy, .platby {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 0;
+        padding-bottom: 1rem;
+    }
+
+    .dluh-list, .platby-list {
+        width: 93%;
+        margin-bottom: 1rem;
+    }
+
+    .platby-list > span:first-child {
+        font-size: 15px;
+        margin: 8px 0 8px 0;
+    }
+
+    .dluhy h2, 
+    .platby h2 {
+        margin: 0em 0 0.35em 0;
+        font-size: 24px;
+    }
+
+    .dluh-item, .description, .castka { font-size: 24px; }
+
+    .description { line-height: 20px; }
+
+    .description span:last-child { font-size: 15px; }
+
+    .arrow { font-size: 20px; }
+
+    .castka { padding: 0.5rem 1em; }
+    
+    .upravit-skupinu { display: none; }
+
+    .upravit-skupinu-mobil{ display: block; }
 }

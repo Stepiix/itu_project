@@ -31,9 +31,9 @@ Route::post('/create-group', [GroupsController::class, 'createGroup']);
 
 Route::get('/group', [GroupsController::class, 'getUsersInGroup']);
 
-Route::post('/create-transactions', [TransactionController::class, 'createTransaction']);
+Route::post('/create-transactions', [TransactionController::class, 'createTransaction']); //done
 
-Route::get('/getall-transactions', [TransactionController::class, 'getTransactionsByGroup']);
+Route::get('/getall-transactions', [TransactionController::class, 'getTransactionsByGroup']);//done
 
 Route::put('/update-user', [UserController::class, 'updateUser']);
 

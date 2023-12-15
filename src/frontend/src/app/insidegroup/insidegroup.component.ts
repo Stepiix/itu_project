@@ -7,6 +7,7 @@ import { AddnewpayComponent } from './addnewpay/addnewpay.component';
 import { EditgroupComponent } from './editgroup/editgroup.component';
 import { PaymenthistoryComponent } from './paymenthistory/paymenthistory.component';
 import { SettledebtComponent } from './settledebt/settledebt.component';
+import { DataSharingService } from './services/data-sharing.service';
 @Component({
   selector: 'app-insidegroup',
   templateUrl: './insidegroup.component.html',
@@ -14,19 +15,33 @@ import { SettledebtComponent } from './settledebt/settledebt.component';
 })
 export class InsidegroupComponent {
   groupInfo: any;
+  groupId: any;
+  transactions: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private groupservice: ServiceGroupListService,  public dialog: MatDialog) {}
+  constructor(private router: Router, private route: ActivatedRoute, private groupservice: ServiceGroupListService,  public dialog: MatDialog, private dataSharingService: DataSharingService) {}
 
   ngOnInit() {
     // Předpokládáme, že "groupId" je název parametru z cesty definovaný v trasování
     this.route.params.subscribe(params => {
-      const groupId = params['groupId'];
-      console.log('Group ID from route:', groupId);
+      this.groupId = params['groupId'];
+      console.log('Group ID from route:', this.groupId);
   
-      this.loadInfoAboutGroup(groupId);
+      this.loadInfoAboutGroup(this.groupId);
     });
-
     
+    this.loadTransactions();
+  }
+  loadTransactions() {
+    this.groupservice.loadTransactions(this.groupId).subscribe(
+      (data: any) => {
+        // Zpracování dat z backendu
+        this.transactions = data.transactions;
+        console.log('Transactions from backend:', this.transactions);
+      },
+      (error) => {
+        console.error('Error fetching transactions from backend:', error);
+      }
+    );
   }
 
   loadInfoAboutGroup(id: number) {
@@ -42,7 +57,14 @@ export class InsidegroupComponent {
     );
   }
 
+  loadPeopleForAddNewPay(){
+    return this.groupInfo;
+  }
+
   openDialogAddNewPay(): void {
+    this.dataSharingService.setSharedValue(this.groupInfo);
+    this.dataSharingService.setSharedID(this.groupId);
+
     const dialogRef = this.dialog.open(AddnewpayComponent, {
       width: '400px', // Nastavte šířku dialogu dle potřeby
     });

@@ -1,0 +1,12 @@
+/* addnewpay.component.css */
+
+.selected-green {
+    background-color: green;
+    color: white;
+  }
+  
+  .selected-red {
+    background-color: red;
+    color: white;
+  }
+  

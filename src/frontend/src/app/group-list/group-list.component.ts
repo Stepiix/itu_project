@@ -46,7 +46,7 @@ export class GroupListComponent {
 
   openCreateGroup(): void {
     const dialogRef = this.dialog.open(CreateNewGroupComponent, {
-      width: '400px',
+      panelClass: 'custom-dialog-container',
       // Další možnosti konfigurace dialogu
     });
 
@@ -59,7 +59,7 @@ export class GroupListComponent {
 
   openJoinGroup(): void {
     const dialogRef = this.dialog.open(JoinGroupComponent, {
-      width: '400px',
+      panelClass: 'custom-dialog-container',
       // Další možnosti konfigurace dialogu
     });
 

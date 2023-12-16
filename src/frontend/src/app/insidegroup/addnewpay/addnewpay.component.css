@@ -3,7 +3,8 @@
   background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .header {
@@ -42,7 +43,7 @@ select, .form-group input {
 }
 
 select {
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.7rem;
   width: 68.7%;
 }
 
@@ -127,6 +128,12 @@ h2 {
   padding: 0.4rem 2rem;
   color: white;
   font-size: 16px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .selected-green { background-color: #BABABA; }

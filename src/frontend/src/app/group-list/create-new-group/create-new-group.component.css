@@ -4,6 +4,7 @@
   background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
   border-radius: 20px;
   padding: 1.5rem;
+  padding-bottom: 1rem;
 }
 
 .new-group h1 {
@@ -51,7 +52,6 @@
 }
 
 .vytvorit button{
-  margin-bottom: 0.5em;
   padding: 0.5em 1.5em;
   color: white;
   background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);

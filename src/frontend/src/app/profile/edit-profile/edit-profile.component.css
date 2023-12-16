@@ -74,9 +74,3 @@
   background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
   border-radius: 41px;
 }
-
-.mat-mdc-dialog-container .mdc-dialog__surface {
-  background-color: black;
-}
-
-

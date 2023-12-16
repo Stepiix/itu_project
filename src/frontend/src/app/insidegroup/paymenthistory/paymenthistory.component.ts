@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef  } from '@angular/material/dialog';
 import { FilterComponent } from './filter/filter.component';
 
 @Component({
@@ -9,8 +9,11 @@ import { FilterComponent } from './filter/filter.component';
 })
 export class PaymenthistoryComponent {
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private dialogRef: MatDialogRef<FilterComponent>) {}
 
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
   openFilterDialog(): void {
     const dialogRef = this.dialog.open(FilterComponent, {
       width: '400px', // Nastavte šířku dialogu dle potřeby

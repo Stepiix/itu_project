@@ -19,6 +19,7 @@ export class ProfileComponent {
       this.router.navigate(['/login']);
     } else { // je prihlaseny
       this.userInfo = this.session.getUserSession();
+      console.log(this.userInfo)
     }
   }
   odhlasit(): void {

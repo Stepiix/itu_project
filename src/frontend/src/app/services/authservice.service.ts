@@ -27,6 +27,7 @@ export class AuthserviceService {
   }
 
   editUser(userInformation: FormData): Observable<any> {
+    console.log('xxxxxxxxxxxxxxxxxxx',userInformation)
     return this.http.post(this.apiUrlUpdateUser, userInformation);
   }
   

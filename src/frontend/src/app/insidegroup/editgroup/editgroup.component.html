@@ -21,11 +21,11 @@
     
     <input id="photo" type="file" (change)="handleFileInput($event)" style="display: none">
     <label for="photo" class="file-input-label">
-        <mat-icon class="icon">camera_alt</mat-icon>
+    <mat-icon class="icon">camera_alt</mat-icon>
     </label>
+    <img *ngIf="selectedFile" [src]="displayImage()" alt="Selected Image" class="selected-image">
 
     <!-- Display selected image -->
-    <img *ngIf="selectedFile" [src]="displayImage()" alt="Selected Image" class="selected-image">
     
   </div>
 

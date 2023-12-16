@@ -87,19 +87,19 @@ export class EditgroupComponent implements OnInit {
   }
 
   updateGroup() {
-    // Convert the selected image to base64 before sending it to the backend
-    const imageBase64 = this.selectedImageBase64 ? this.selectedImageBase64.split(',')[1] : null;
+    const formData = new FormData();
+    formData.append('group_id', this.groupInfo.group.group_id.toString());
+    formData.append('group_name', this.groupName);
+    formData.append('group_label', this.groupLabel);
+    if (this.selectedFile) {
+      formData.append('group_photo', this.selectedFile, this.selectedFile.name);
+    }
   
-    this.groupservice.updateGroup(
-      this.groupInfo.group.group_id,
-      this.groupName,
-      this.groupLabel,
-      imageBase64  // Add the imageBase64 parameter to the updateGroup method
-    ).subscribe(
+    this.groupservice.updateGroup(formData).subscribe(
       (response) => {
         console.log('Group updated successfully:', response);
         this.dialogRef.close();
-        
+  
         // Additional actions after a successful update
       },
       (error) => {

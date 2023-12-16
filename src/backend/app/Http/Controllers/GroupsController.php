@@ -176,7 +176,8 @@ class GroupsController extends Controller
     
         // Získání všech uživatelů této skupiny
         $users = $group->users;
-        $group->group_photo = null;
+
+        $group->group_photo = $this->getBase64Image($group->group_photo);
     
         return response()->json(['group' => $group]);
     }

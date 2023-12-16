@@ -8,10 +8,12 @@
         </button>
     </div>
 
-    <div class="users" *ngFor="let user of groupInfo?.group.users">
-        <div class="user">
-            <h2>{{ user.user_firstname }}</h2>
-            <!-- tady dodelat + - -->
+    <div class="user-list">
+        <div class="users" *ngFor="let user of groupInfo?.group.users">
+            <div class="user">
+                <h2>{{ user.user_firstname }}</h2>
+                <h3>300</h3><!-- tady dodelat + - -->
+            </div>
         </div>
     </div>
 

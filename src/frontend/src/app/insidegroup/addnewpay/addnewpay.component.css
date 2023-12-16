@@ -1,6 +1,8 @@
 /* addnewpay.component.css */
 .add-new-payment {
   background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
 }
 
@@ -25,14 +27,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-end;  
+  justify-content: space-between;  
   margin-bottom: 0.5em; 
   font-size: 16px;
 }
 
-.form-group label {
-  flex: 2;
-}
+.form-group label, .persons label { font-size: large; }
 
 select, .form-group input {
   padding: 0.5rem 1rem;
@@ -46,15 +46,46 @@ select {
   width: 68.7%;
 }
 
-
+h2 {
+  margin-top: 0.2rem;
+  margin-bottom: 0;
+}
 
 .division-container {
   background-color: white;
-  padding: 0.5em 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: 20px;
+  padding: 0.5em;
+}
+
+.persons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 0.5em;
+}
+
+.persons input {
+  background-color: lightgray;
+  padding: 0.3em 1em;
+  border-radius: 1rem;
+  margin-bottom: 0;
+  max-width: 4rem;
+  border: 0;
+  text-align: center;
+}
+
+.person-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5em;
+  font-size: 16px;
+  width: 95%;
 }
 
 .split-style {
@@ -64,42 +95,41 @@ select {
 
 .split-style button {
   width: 50%;
-  border: 0;
+  padding: 0.25em 0;
+  border: 1px solid #BABABA;
+  font-size: 14px;
 }
 
-.split-style button:first-child {
-  border-radius: 15px 0 0 15px;
-}
+.split-style button:first-child { border-radius: 15px 0 0 15px; }
 
-.split-style button:last-child {
-  border-radius: 0 15px 15px 0;
-}
+.split-style button:last-child { border-radius: 0 15px 15px 0; }
 
 .split-equally, .confirm-payment {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border: 0;
+  margin-bottom: 0.2rem;
   border-radius: 40px;
+  border: 0;
 }
 
 .split-equally {
   background: linear-gradient(90deg, #D3D3D3 0%, #EDEDED 100%);
-  padding: 0.2rem 2rem;
+  width: 100%;
+  padding: 0.3rem 2rem;
   margin-top: 0.5em;
 }
 
 .confirm-payment {
   background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
-  color: white;
+  position: relative;
+  width: max-content;
+  left: 25%;
+  margin-top: 1rem; 
   padding: 0.4rem 2rem;
+  color: white;
+  font-size: 16px;
 }
 
-.selected-green {
-  background-color: green;
-  color: white;
-}
+.selected-green { background-color: #BABABA; }
 
-.selected-red {
-  background-color: red;
-  color: white;
-}
+.selected-red { background-color: #D9D9D9; }
   

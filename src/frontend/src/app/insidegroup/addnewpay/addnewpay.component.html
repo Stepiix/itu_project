@@ -27,12 +27,13 @@
   <!-- Vstup pro zadání důvodu platby -->
   <div class="form-group">
     <label for="paymentReason">Za co:</label>
-    <input type="text" id="paymentReason" [(ngModel)]="paymentReason">
+    <input type="text" id="paymentReason" [(ngModel)]="paymentReason" placeholder="Např.: kino">
   </div>
     
   <!-- Tlačítka pro výběr "Částky" a "Poměru" -->
   
   <!-- Vstupy pro zadání podílu pro každého uživatele -->
+  <h2>Účastníci</h2>
   <div class="division-container">
 
     <div class="split-style">
@@ -40,10 +41,12 @@
       <button (click)="onRatioClick()" [ngClass]="{'selected-green': isRatioSelected, 'selected-red': isAmountSelected}">Poměr</button>
     </div>
 
-    <div *ngFor="let user of personInfo.group.users">
-      <label for="userShare{{ user.user_id }}">{{ user.user_firstname }}</label>
-      <input type="number" class="payment-part" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isAmountSelected">
-      <input type="number" class="payment-part" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isRatioSelected">
+    <div class="persons">
+      <div class="person-list" *ngFor="let user of personInfo.group.users">
+        <label for="userShare{{ user.user_id }}">{{ user.user_firstname }}</label>
+        <input type="number" class="payment-part" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isAmountSelected">
+        <input type="number" class="payment-part" id="userShare{{ user.user_id }}" [(ngModel)]="userShares[user.user_id]" (ngModelChange)="checkButtonAvailability()" *ngIf="isRatioSelected">
+      </div>
     </div>
     
     <!-- <div class="division-container">

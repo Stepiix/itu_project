@@ -19,6 +19,10 @@ export class InsidegroupComponent {
   groupId: any;
   transactions: any;
   userBalances: any;
+  userId: any;
+  debts: { [debtorName: string]: { [payerName: string]: number } } = {};
+
+
 
   constructor(private router: Router, private route: ActivatedRoute, private groupservice: ServiceGroupListService,  public dialog: MatDialog, private dataSharingService: DataSharingService, private session: SessionService) {}
 
@@ -34,9 +38,62 @@ export class InsidegroupComponent {
     });
     this.loadUsersBalances();
     this.loadTransactions();
+    this.calculateDebts();
     }
     
   }
+  getKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
+
+  calculateDebts() {
+    this.groupservice.calculateDebts(this.groupId).subscribe(
+      (data: any) => {
+        console.log('Debts from backend:', data.debts);
+        this.debts = this.transformDebts(data.debts);
+      },
+      (error) => {
+        console.error('Error fetching debts from backend:', error);
+      }
+    );
+  }
+  transformDebts(rawDebts: any): any {
+    const transformedDebts: any = {};
+    Object.keys(rawDebts).forEach((debtorId) => {
+      const debtorName = this.getUserNameById(parseInt(debtorId)) || ''; // Provide a default value
+      const transactions: any = {};
+      Object.keys(rawDebts[debtorId]).forEach((payerId) => {
+        const payerName = this.getUserNameById(parseInt(payerId)) || ''; // Provide a default value
+        transactions[payerName] = rawDebts[debtorId][payerId];
+      });
+      transformedDebts[debtorName] = transactions;
+    });
+    return transformedDebts;
+  }
+  getUserNameById(userId: number): string | undefined {
+    const user = this.userBalances.find((userBalance: any) => userBalance.user_id === userId);
+    return user ? user.user_firstname : undefined;
+  }
+
+  shouldNotSeeWhatIsInThisGroup(data: any) {
+    this.userId = this.session.getID();
+    console.log('----------', this.userId);
+  
+    if (data && data.group && data.group.users) {
+      // Iterate through users in the group
+      for (const user of data.group.users) {
+        if (user.user_id === this.userId) {
+          // User is in the group, should see what is in the group
+          console.log("ma pravo na tuto stranku")
+          return false;
+        }
+      }
+    }
+    console.log('nema pravo na tuto stranku')
+    // User is not in the group, should not see what is in the group
+    return true;
+  }
+
 
   loadUsersBalances() {
     this.groupservice.loadUserBalances(this.groupId).subscribe(
@@ -67,6 +124,9 @@ export class InsidegroupComponent {
     this.groupservice.getInfoAboutGroup(id).subscribe(
       (data: any) => {
         // Zpracování dat z backendu
+        if (this.shouldNotSeeWhatIsInThisGroup(data)) {
+          this.router.navigate(['']);
+        }
         this.groupInfo = data;
         console.log('Data from backend:', this.groupInfo);
         console.log('data o skupine ------ ', this.groupInfo.group);
@@ -93,6 +153,8 @@ export class InsidegroupComponent {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.loadUsersBalances();
+      this.loadTransactions();
+      this.calculateDebts();
       // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }

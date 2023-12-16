@@ -70,5 +70,14 @@ export class ServiceGroupListService {
   loadUserBalances(groupId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}group-balance?group_id=${groupId}`);
   }
+
+  calculateDebts(groupId: number): Observable<any> {
+    const requestData = {
+      group_id: groupId,
+    };
+  
+    // Return the observable without subscribing here
+    return this.http.get(`${this.apiUrl}group-depts`, { params: requestData });
+  }
   
 }

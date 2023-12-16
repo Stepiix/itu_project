@@ -52,6 +52,7 @@ export class GroupListComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog zavřen');
+      this.loadGroups();
       // Zde můžete zpracovat výsledek dialogu (pokud potřebujete)
     });
   }
@@ -64,6 +65,7 @@ export class GroupListComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog zavřen');
+      this.loadGroups();
       // Zde můžete zpracovat výsledek dialogu (pokud potřebujete)
     });
   }

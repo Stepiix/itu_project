@@ -1,8 +1,11 @@
 <div class="chat-container">
     <div class="messages-container">
-        <div *ngFor="let message of messages" class="message">
-            <p><span>{{ message.message_user_id }}</span>{{ message.message_text }}</p>
-        </div>
+        
+      <div *ngFor="let message of messages" class="message">
+        <p><span>{{ message.message_user_id }}</span>{{ message.message_text }}</p>
+        <button *ngIf="message.message_user_id === getLoggedInUserId()" (click)="removeMessage(message.message_id!)">Odstranit</button>
+      </div>
+      
     </div>
   
     <div class="new-message-container">

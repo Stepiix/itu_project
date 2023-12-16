@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 interface ChatMessage {
+  message_id?: number;
   message_group_id: number;
   message_user_id: string;
   message_text: string;
@@ -49,6 +50,7 @@ export class ChatComponent {
 
   sendMessage() {
     const newChatMessage: ChatMessage = {
+ //     message_id: 0,
       message_text: this.newMessage,  // předpokládám, že 'message_text' odpovídá obsahu zprávy
       message_group_id: this.groupId,  // nahraď skutečným ID skupiny
       message_user_id: this.session.getID() || '',   // nahraď skutečným ID uživatele
@@ -60,6 +62,22 @@ export class ChatComponent {
       this.newMessage = '';
     });
   }
+
+  getLoggedInUserId(): string {
+    return this.session.getID() || '';
+  }
+
+  removeMessage(messageId: number) {//tady jeste kontrola na to jestli ze muzu odstranit jen zaznamy ktere jsou moje
+    if (messageId !== undefined) {
+      console.log("nemam id");
+    
+    this.serviceGroupListService.removeMessage(messageId).subscribe(() => {
+      // Aktualizace zpráv po odstranění zprávy
+      this.loadMessages(this.groupId);
+    });
+  }
+  }
+  // }
   //   this.chatService.addMessage(newChatMessage).subscribe(() => {
   //     this.loadMessages(); // Aktualizuj zprávy po odeslání nové zprávy
   //     this.newMessage = '';

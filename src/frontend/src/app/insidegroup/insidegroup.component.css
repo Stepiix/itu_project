@@ -31,10 +31,8 @@
 .user-list {
     display: flex;
     flex-wrap: nowrap;
-    /* flex-wrap: wrap; */
     justify-content: center;
     gap: 1rem;
-    /* max-width: 420px; */
     width: 100%;
     padding-bottom: 0.5em;
     margin-bottom: 30px;
@@ -48,8 +46,6 @@
     background: #D9D9D9;
     border-radius: 50%;
     padding: 1.5rem;
-    /* width: 80px;
-    height: 80px; */
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -62,16 +58,20 @@
     height: 80px;
 }
 
-.user h2 { 
-    margin-bottom: 0; 
-    font-size: 22px;
-}
+.user h2 { font-size: 22px; }
 
 .user h3 {
     font-size: 18px;
     line-height: 20px;
     font-weight: lighter;
-    margin-bottom: 0;
+}
+
+.user h2, .user h3 {
+    max-width: 120px;
+    margin-bottom: 0; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .nova-platba {
@@ -184,6 +184,12 @@
     font-size: 16px;
 }
 
+.description span, .dluh-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .description span:last-child {
     font-size: 10px;
     color: gray;
@@ -222,26 +228,27 @@
     border: 0;
 }
 
+
 /* Mobil */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 670px) {
     .header h1 { margin-bottom: 0; }
-
+    
     .header { margin-bottom: 3rem; }
-
+    
     .info { 
         flex-direction: column; 
         margin-bottom: 2rem;
         width: 100%;
         gap: 1rem;
     }
-
+    
     .info button {
         font-size: 20px;
         padding: 0.3em 1em;
     }
-
+    
     .nova-platba { margin-bottom: 25px; font-size: 20px;}
-
+    
     .dluhy, .platby {
         display: flex;
         flex-direction: column;
@@ -250,38 +257,40 @@
         border-radius: 0;
         padding-bottom: 1rem;
     }
-
+    
     .dluh-list, .platby-list {
         width: 93%;
         margin-bottom: 1rem;
     }
-
+    
     .platby-list > span:first-child {
         font-size: 15px;
         margin: 2px 0 8px 0;
     }
-
+    
     .dluhy h2, 
     .platby h2 {
         margin: 0em 0 0.35em 0;
         font-size: 24px;
     }
-
+    
     .dluh-item, .description, .castka { font-size: 20px; }
-
+    
     .description { line-height: 20px; }
-
+    
     .description span:last-child { font-size: 15px; }
-
+    
     .arrow { font-size: 18px; }
-
+    
     .castka { 
         padding: 0.5rem 1em;
         font-size: 18px;
     }
     
     .upravit-skupinu { display: none; }
-
+    
     .upravit-skupinu-mobil{ display: block; }
+
+    .bottom { display: none; }
 }
 

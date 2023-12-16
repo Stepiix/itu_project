@@ -27,7 +27,7 @@ export class ProfileComponent {
   }
   openEditDialog() {
     const dialogRef = this.dialog.open(EditProfileComponent, {
-        width: '300px', // přizpůsobte šířku dialogu dle potřeby
+        panelClass: 'custom-dialog-container', 
         data: { userInfo: this.userInfo } // předání dat do dialogu
     });
 

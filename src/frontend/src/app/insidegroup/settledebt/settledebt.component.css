@@ -87,7 +87,7 @@ span:last-child { color: red; }
     background: linear-gradient(270deg, #60E03F 15.29%, #21A500 82.82%, #21A500 82.82%);
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 670px) {
     p {
         text-align: center;
     }

@@ -50,3 +50,9 @@ Route::get('/group-balance', [TransactionController::class, 'calculateUserBalanc
 Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);//coto kurva je?
 
 Route::get('/group-leader', [GroupsController::class, 'getGroupLeader']);
+
+Route::delete('/remove-transaction/{id}', [TransactionController::class, 'removeTransaction']); //done
+
+Route::get('/user-balance', [TransactionController::class, 'calculateUserBalance']);//done
+
+Route::get('/getall-transactions-user', [TransactionController::class, 'getTransactionsByUser']);//done

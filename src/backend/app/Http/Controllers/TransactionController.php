@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\DB;
 class TransactionController extends Controller
 {
 
+    public function removeTransaction($id)
+    {
+        $transaction_id = $id;
+
+        $transaction = Transaction::where('t_id', $transaction_id)
+        ->first();
+
+        if (!$transaction) {
+            return response()->json(['message' => 'Invalid id of transaction'], 404);
+        }
+
+        $transaction->delete();
+
+
+        return response()->json(['message' => 'Transaction deleted successfully']);
+    }
+
     public function createTransaction(Request $request)
     {
         // Validace vstupních dat
@@ -68,6 +85,33 @@ class TransactionController extends Controller
         return response()->json($result, 200);
     }
 
+    public function getTransactionsByUser(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
+        ]);
+
+        $userId = $request->input('user_id');
+
+        // Získání všech transakcí, kde je uživatel buď platcem nebo dlužníkem
+        $transactions = Transaction::where('t_user_payer_id', $userId)
+            ->orWhere('t_user_debtor_id', $userId)
+            ->with(['debtor'])
+            ->get();
+
+        // Dekódování fotek uživatelů
+        foreach ($transactions as $transaction) {
+            $transaction->debtor->user_photo = null;
+        }
+
+        $result = [
+            'user_id' => $userId,
+            'transactions' => $transactions,
+        ];
+
+        return response()->json($result, 200);
+    }
+
     public function calculateUserBalances(Request $request)
     {
         $request->validate([
@@ -106,6 +150,41 @@ class TransactionController extends Controller
         }
 
         return response()->json(['users' => $users]);
+    }
+
+    public function calculateUserBalance(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|integer',
+        ]);
+
+        $userId = $request->input('user_id');
+
+        if (!$userId) {
+            return response()->json(['message' => 'User ID is required.'], 400);
+        }
+        // Načtení všech transakcí pro daného uživatele (jako platce nebo dlužníka)
+        $transactions = Transaction::where('t_user_payer_id', $userId)
+            ->orWhere('t_user_debtor_id', $userId)
+            ->get();
+
+        // Vytvoření asociativního pole pro udržení salda uživatele
+        $userBalance = 0;
+
+        // Procházení každé transakce
+        foreach ($transactions as $transaction) {
+            // Přidání částky od platce
+            if ($transaction->t_user_payer_id == $userId) {
+                $userBalance += $transaction->t_amount;
+            }
+
+            // Odčítání částky od dlužníka
+            if ($transaction->t_user_debtor_id == $userId) {
+                $userBalance -= $transaction->t_amount;
+            }
+        }
+
+        return response()->json(['user_id' => $userId, 'balance' => $userBalance]);
     }
 
     public function calculateDebts(Request $request)

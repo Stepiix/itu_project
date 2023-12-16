@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+
+    private function getBase64Image($imageData)
+    {
+        if ($imageData) {
+            return base64_encode($imageData);
+        } else {
+            return null;
+        }
+    }
+
     public function register(Request $request)
     {
         $request->validate([
@@ -44,6 +54,7 @@ class AuthController extends Controller
         $credentials = $request->only('user_email', 'user_password');
 
         if ($user && Hash::check($request->user_password, $user->user_password)) {
+            $user->user_photo = $this->getBase64Image($user->user_photo);
             return response()->json(['user' => $user, 'message' => 'Login successful']);
         }
 

@@ -3,14 +3,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 90%;
 }
 
 .header {
     display: flex;
     flex-direction: row;
     color: #525252;
-    margin-top: 20px;
-    margin-bottom: 50px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .header h1 {
@@ -35,7 +36,7 @@
     gap: 1rem;
     width: 100%;
     padding-bottom: 0.5em;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
     overflow-x: scroll;
 }
 
@@ -100,14 +101,14 @@ img {
     border-radius: 40px;
     color: white;
     font-size: 16px;
-    margin-bottom: 60px;
+    margin-bottom: 4rem;
 }
 
 .info {
     display: flex;
     flex-direction: row;
     gap: 3rem;
-    margin-bottom: 50px;
+    margin-bottom: 3rem;
     height: 310px;
 }
 
@@ -238,9 +239,9 @@ img {
 
 .chat-button {
     background-color: white;
-    position: fixed;
+    position: absolute;
     top: 94%;
-    left: 93%;
+    left: 70%;
     padding: 0.5rem 1.5rem;
     border-radius: 20px;
     border: 0;
@@ -251,18 +252,26 @@ img {
 @media only screen and (max-width: 670px) {
     .header h1 { margin-bottom: 0; }
     
-    .header { margin-bottom: 3rem; }
+    .header { 
+        margin-top: 0;
+        margin-bottom: 3rem; 
+    }
     
     .info { 
         flex-direction: column; 
         margin-bottom: 2rem;
         width: 100%;
         gap: 1rem;
+        /* height: 100%; */
     }
     
     .info button {
         font-size: 20px;
         padding: 0.3em 1em;
+    }
+    
+    .user-list {
+        justify-content: unset;
     }
     
     .nova-platba { margin-bottom: 25px; font-size: 20px;}

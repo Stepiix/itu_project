@@ -1,13 +1,13 @@
 <div class="chat-container">
     <div class="messages-container">
-      <div *ngFor="let message of messages" class="message">
-        User ID: {{ message.message_user_id }} {{ message.message_text }}
-      </div>
+        <div *ngFor="let message of messages" class="message">
+            <p><span>{{ message.message_user_id }}</span>{{ message.message_text }}</p>
+        </div>
     </div>
   
     <div class="new-message-container">
-      <textarea [(ngModel)]="newMessage" placeholder="Napište zprávu..."></textarea>
-      <button (click)="sendMessage()">Odeslat</button>
+        <input type="text" [(ngModel)]="newMessage" placeholder="Napište zprávu...">
+        <button (click)="sendMessage()">Odeslat</button>
     </div>
 </div>
   

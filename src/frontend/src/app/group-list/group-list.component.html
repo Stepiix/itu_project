@@ -8,7 +8,7 @@
     <div class="group-list">
         <div class="group" *ngFor="let group of groups" (click)="showGroupId(group.group_id)">
             <div class="pic">
-                <img [src]="'data:image/jpeg;base64,' + group.group_photo" alt="{{ group.group_name }}" />
+                <img [src]="'data:image/jpeg;base64,' + group.group_photo"/>
             </div>
             <span>{{ group.group_name }}</span>
         </div>

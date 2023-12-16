@@ -1,30 +1,56 @@
-<h1>Upravit skupinu</h1>
-
-<input type="text" placeholder="Název" [(ngModel)]="groupName">
-
-<input type="text" placeholder="Popis" [(ngModel)]="groupLabel">
-
-<p>pridat fotku TODO</p>
-
-<h2>Přidat/odebrat členy</h2>
-<ul>
-  <li *ngFor="let member of groupInfo.group.users">
-    {{ member.user_firstname }}
-    <button mat-icon-button (click)="removeMember(member.user_id)">
-      <mat-icon>delete</mat-icon>
+<div class="edit-group-container">
+  
+  <div class="header">
+    <h1>Upravit skupinu</h1>
+    <button mat-icon-button class="close-button">
+      <mat-icon aria-label="Close dialog">close</mat-icon>
     </button>
-  </li>
-</ul>
+  </div>
+  
+  <div class="group-manage">
 
+    <div class="form-group">
+      <label for="name">Název</label>
+      <input type="text" id="name" placeholder="Název" [(ngModel)]="groupName">
+    </div>
+    
+    <div class="form-group">
+      <label for="description">Popis</label>
+      <input type="text" id="description" placeholder="Popis" [(ngModel)]="groupLabel">
+    </div>
+    
+    <div class="form-group">
+      <label for="myfile">Fotka</label>
+      <input type="file" id="myfile" name="myfile">
+    </div>
+    <p>pridat fotku TODO</p>  
+    
+  </div>
 
-<p *ngIf="isLinkVisible">Group Link: {{ groupLink }}</p>
+  <h2>Přidat/odebrat členy</h2>
+  <div class="user-manage-list">
+    <div class="user-list-container">
+      <ul>
+        <li *ngFor="let member of groupInfo.group.users">
+          <span>{{ member.user_firstname }}</span>
+          <button mat-icon-button (click)="removeMember(member.user_id)" class="delete">
+            <mat-icon >delete</mat-icon>
+          </button>
+        </li>
+      </ul>
+    </div>
 
-<button mat-icon-button (click)="toggleLink()">
-  <mat-icon>{{ isLinkVisible ? 'remove' : 'add' }}</mat-icon>
-</button>
+    <p *ngIf="isLinkVisible">Group Link: {{ groupLink }}</p>
+    
+    <button mat-icon-button (click)="toggleLink()" class="add-remove-button">
+      <mat-icon>{{ isLinkVisible ? 'remove' : 'add' }}</mat-icon>
+    </button>
+  </div>
+  
+  <button mat-icon-button (click)="copyLink()" *ngIf="isLinkVisible" >
+    <mat-icon>content_copy</mat-icon>
+  </button>
+  
+  <button mat-raised-button color="primary" (click)="updateGroup()" class="confirm">Upravit skupinu</button>
 
-<button mat-icon-button (click)="copyLink()" *ngIf="isLinkVisible">
-  <mat-icon>content_copy</mat-icon>
-</button>
-
-<button mat-raised-button color="primary" (click)="updateGroup()">Uložit změny</button>
+</div>

@@ -10,7 +10,6 @@ class GroupUser extends Model
     use HasFactory;
 
     protected $table = 'GroupUser';
-    protected $primaryKey = ['group_id', 'user_id'];
 
     protected $fillable = [
         'group_id',

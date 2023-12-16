@@ -62,4 +62,4 @@ Route::get('/all-messages', [ChatController::class, 'index']);
 
 Route::post('/add-message', [ChatController::class, 'addMessage']);
 
-Route::delete('/delete-massage', [ChatController::class, 'deleteMessage']);
+Route::delete('/remove-message/{id}', [ChatController::class, 'removeMessage']);

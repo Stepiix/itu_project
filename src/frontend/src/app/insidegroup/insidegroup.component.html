@@ -11,15 +11,14 @@
     <div class="user-list">
         <div class="users" *ngFor="let user of groupInfo?.group.users; let i = index">
             <div class="pic">
-                <img [src]="'data:image/jpeg;base64,' + user.user_photo" alt="profilova fotka" /> 
+                <img [src]="'data:image/jpeg;base64,' + user.user_photo"/> 
                 <div class="user">
-                    <!-- nevim jak to dat do pozadi -->
                     <h2>{{ user.user_firstname }}</h2>
                     <h3>{{ userBalances && userBalances[i]?.balance || 0 }}</h3>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <button (click)="openDialogAddNewPay()" class="nova-platba">Přidat novou platbu</button>
 

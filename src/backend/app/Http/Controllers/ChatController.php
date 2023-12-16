@@ -22,7 +22,6 @@ class ChatController extends Controller
             return response()->json(['message' => 'User ID is required.'], 400);
         }
 
-        // Validace netreba
         $chat = Chat::create([
             'message_user_id'=> $request->input('message_user_id'),
             'message_group_id'=> $request->input('message_group_id'),
@@ -35,13 +34,12 @@ class ChatController extends Controller
 
     }
 
-    // mazat zpeavy
-    public function removeMessage(Request $request)
+    public function removeMessage($id)
     {
-        $chatId = $request->input('message_id');
+        $chatId = $id;
 
         if (!$chatId) {
-            return response()->json(['message' => 'Chat ID is required.'], 400);
+            return response()->json(['message' => 'message_id is required.'], 400);
         }
 
         $chat = Chat::where('message_id', $chatId)->first();

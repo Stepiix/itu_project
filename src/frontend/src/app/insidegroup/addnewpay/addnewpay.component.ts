@@ -90,6 +90,10 @@ splitEqually() {
     this.isRatioSelected = true;
     this.checkButtonAvailability();
   }
+
+  zavritDialog() {
+    this.dialogRef.close();
+  }
   
 
   confirmPayment() {

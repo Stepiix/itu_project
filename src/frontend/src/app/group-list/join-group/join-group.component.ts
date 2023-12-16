@@ -35,6 +35,8 @@ export class JoinGroupComponent {
         // Zpracujte chybu podle potřeby
       }
     );
-    //TODO tady zavrit
+  }
+  zavritDialog() {
+    this.dialogRef.close();
   }
 }

@@ -3,9 +3,9 @@
 <div class="join">
     <div class="header">
         <h1>Přidat se ke skupině</h1>
-        <button mat-icon-button class="close-button">
+        <button mat-icon-button class="close-button" (click)="zavritDialog()">
             <mat-icon aria-label="Close dialog">close</mat-icon>
-        </button>
+          </button>
     </div>
 
     <input type="text" placeholder="Vložte prosím link" [(ngModel)]="link">

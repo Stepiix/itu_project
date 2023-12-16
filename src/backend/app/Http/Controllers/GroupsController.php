@@ -60,9 +60,7 @@ class GroupsController extends Controller
             return response()->json(['message' => 'User is not part of this group.'], 404);
         }
 
-        $groupUser = GroupUser::where('group_id', $groupId)
-            ->where('user_id', $userId)
-            ->first()->delete();
+        $groupUser->delete();
 
         return response()->json(['message' => 'User was removed succesfully']);
     }

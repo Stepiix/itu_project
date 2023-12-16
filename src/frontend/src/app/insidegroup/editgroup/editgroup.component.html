@@ -40,16 +40,22 @@
       </ul>
     </div>
 
-    <p *ngIf="isLinkVisible">Group Link: {{ groupLink }}</p>
-    
-    <button mat-icon-button (click)="toggleLink()" class="add-remove-button">
-      <mat-icon>{{ isLinkVisible ? 'remove' : 'add' }}</mat-icon>
-    </button>
+    <div class="add-to-group">
+      <button mat-icon-button (click)="toggleLink()" class="add-remove-button">
+        <mat-icon>{{ isLinkVisible ? 'remove' : 'add' }}</mat-icon>
+      </button>
+
+      <div class="group-link" *ngIf="isLinkVisible">
+        <p ><strong>Group Link:</strong> {{ groupLink }}</p>
+        
+        <button mat-icon-button (click)="copyLink()" class="add-remove-button">
+          <mat-icon>content_copy</mat-icon>
+        </button>
+      </div>
+    </div>
+
   </div>
   
-  <button mat-icon-button (click)="copyLink()" *ngIf="isLinkVisible" >
-    <mat-icon>content_copy</mat-icon>
-  </button>
   
   <button mat-raised-button color="primary" (click)="updateGroup()" class="confirm">Upravit skupinu</button>
 

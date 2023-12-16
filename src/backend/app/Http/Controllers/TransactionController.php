@@ -133,6 +133,12 @@ class TransactionController extends Controller
             return array_sum($userDebts) > 0;
         });
 
+        // Odstranění záporných hodnot z každého záznamu
+        $filteredDebts = array_map(function ($userDebts) {
+            return array_filter($userDebts, function ($debt) {
+                return $debt > 0;
+            });
+        }, $filteredDebts);
 
         return response()->json(['debts' => $filteredDebts]);
     }

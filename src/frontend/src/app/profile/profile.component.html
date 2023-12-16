@@ -4,11 +4,11 @@
         <div class="pic">
             <img [src]="'data:image/jpeg;base64,' + userInfo.photo" alt="profilova fotka" /> 
         </div>
-        <mat-icon (click)="openEditDialog()" class="edit-pen">edit</mat-icon>
     </div>
-
+    
     <div *ngIf="userInfo" class="user-name">
         <h1>{{ userInfo.firstName }} {{ userInfo.lastName }}</h1>
+        <mat-icon (click)="openEditDialog()" class="edit-pen">edit</mat-icon>
     </div>
    
     <div class="info">

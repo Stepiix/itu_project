@@ -26,22 +26,23 @@ img {
     object-fit: cover;   
 }
 
+.user-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .user-name h1{
     font-size: 2rem;
+    margin: 0 0.5rem 0 0;
 }
 
 .profile-pic { 
-    /* position: relative; */
     width: 200px;
     height: 200px;
     margin-bottom: 1rem;
     border-radius: 50%;
-}
-
-.edit-pen {
-    position: relative;
-    left: 90%;
-    top: 90%;
 }
 
 .info div {

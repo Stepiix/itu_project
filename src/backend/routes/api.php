@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -50,3 +51,9 @@ Route::get('/group-balance', [TransactionController::class, 'calculateUserBalanc
 Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);//coto kurva je?
 
 Route::get('/group-leader', [GroupsController::class, 'getGroupLeader']);
+
+Route::get('/all-messages', [ChatController::class, 'index']);
+
+Route::post('/add-message', [ChatController::class, 'addMessage']);
+
+Route::delete('/delete-massage', [ChatController::class, 'deleteMessage']);

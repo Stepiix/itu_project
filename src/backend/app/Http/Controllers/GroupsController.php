@@ -177,6 +177,10 @@ class GroupsController extends Controller
         // Získání všech uživatelů této skupiny
         $users = $group->users;
 
+        foreach ($users as $user) {
+            $user->user_photo = $this->getBase64Image($user->user_photo);
+        }
+
         $group->group_photo = $this->getBase64Image($group->group_photo);
     
         return response()->json(['group' => $group]);

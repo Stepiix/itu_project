@@ -30,8 +30,10 @@ class UserController extends Controller
             'user_firstname' => 'required|string|max:32',
             'user_lastname' => 'required|string|max:32',
             'user_email' => 'required|string|email|max:32|unique:User,user_email,' . $user_id . ',user_id',
+            'user_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+        $imageData = $request->file('user_photo')->get();
         // Aktualizace údajů uživatele
         $user = userMy::find($user_id);
 
@@ -42,6 +44,7 @@ class UserController extends Controller
         $user->user_firstname = $request->input('user_firstname');
         $user->user_lastname = $request->input('user_lastname');
         $user->user_email = $request->input('user_email');
+        $user->user_photo = $imageData;
 
         $user->save();
 

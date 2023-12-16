@@ -82,7 +82,7 @@ export class EditProfileComponent implements OnInit{
   
     // Check if an image is selected
     if (this.selectedFile) {
-      formData.append('user_image', this.selectedFile, this.selectedFile.name);
+      formData.append('user_photo', this.selectedFile, this.selectedFile.name);
     }
   
     // Call editUser method with FormData

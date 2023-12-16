@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\groups;
 use App\Models\GroupUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GroupsController extends Controller
 {
@@ -16,6 +17,27 @@ class GroupsController extends Controller
             return base64_encode($imageData);
         } else {
             return null;
+        }
+    }
+
+    public function getGroupLeader(Request $request)
+    {
+        $group_id = $request->input('group_id');
+
+        if (!$group_id) {
+            return response()->json(['message' => 'No group_id given'], 404);
+        }
+
+        $oldestRecord = DB::table('GroupUser')
+            ->where('group_id', $group_id)
+            ->orderBy('created_at', 'asc')
+            ->first();
+
+        if ($oldestRecord) {
+            $user_id = $oldestRecord->user_id;
+            return response()->json(['user_id' => $user_id]);
+        } else {
+            return response()->json(['error' => 'No records found for the specified group_id.']);
         }
     }
 
@@ -38,7 +60,9 @@ class GroupsController extends Controller
             return response()->json(['message' => 'User is not part of this group.'], 404);
         }
 
-        $groupUser->delete();
+        $groupUser = GroupUser::where('group_id', $groupId)
+            ->where('user_id', $userId)
+            ->first()->delete();
 
         return response()->json(['message' => 'User was removed succesfully']);
     }

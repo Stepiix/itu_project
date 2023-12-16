@@ -36,11 +36,12 @@ export class ChatComponent {
    const groupId = this.groupId; // Nahraď skutečnými hodnotami
    const user_id = this.session.getID() || '';
     this.messages = []; // inicializace prázdného pole
-    this.loadMessages(groupId, user_id);
+    this.loadMessages(groupId);
   }
 
-  loadMessages(groupId: number, user_id: string) {
-    this.serviceGroupListService.getAllMessages(groupId, user_id).subscribe((messages) => {
+  loadMessages(groupId: number) {
+    // this.serviceGroupListService.getAllMessages(groupId, user_id).subscribe((messages) => {
+    this.serviceGroupListService.getAllMessages(groupId).subscribe((messages) => {
       console.log('Získané zprávy:', messages);
       this.messages.push(...messages);
     });
@@ -55,7 +56,7 @@ export class ChatComponent {
     };
   
     this.serviceGroupListService.addMessage(newChatMessage).subscribe(() => {
-      this.loadMessages(this.groupId, this.session.getID() || '');  // aktualizace zpráv po odeslání nové zprávy
+      this.loadMessages(this.groupId);  // aktualizace zpráv po odeslání nové zprávy
       this.newMessage = '';
     });
   }

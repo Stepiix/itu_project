@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   form!: FormGroup;
+  loginFailed = false;
 
   constructor(private fb: FormBuilder, private auth: AuthserviceService, private session: SessionService, private router: Router) {}
 
@@ -21,6 +22,8 @@ export class LoginComponent implements OnInit {
   }
 
   prihlasit(): void {
+    this.loginFailed = false;
+
     if (this.form.valid) {
       const credentials = {
         email: this.form.value.user_email,
@@ -42,6 +45,7 @@ export class LoginComponent implements OnInit {
         (error) => {
           // Zde můžete zpracovat chybu při přihlášení
           console.error('Chyba při přihlašování:', error);
+          this.loginFailed = true;
         }
       );
     }

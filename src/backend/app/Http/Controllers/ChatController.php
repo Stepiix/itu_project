@@ -8,9 +8,15 @@ use App\Models\Chat;
 class ChatController extends Controller
 {
 
-    public function index()
+    public function index($group)
     {
-        $chats = Chat::all();
+        $groupId = $group;
+
+        if (!$groupId) {
+            return response()->json(['message' => 'Group ID is required.'], 400);
+        }
+
+        $chats = Chat::where('message_group_id', $groupId)->get();
         return response()->json($chats);
     }
 

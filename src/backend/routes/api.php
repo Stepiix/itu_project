@@ -58,7 +58,7 @@ Route::get('/user-balance', [TransactionController::class, 'calculateUserBalance
 
 Route::get('/getall-transactions-user', [TransactionController::class, 'getTransactionsByUser']);//done
 
-Route::get('/all-messages', [ChatController::class, 'index']);
+Route::get('/all-messages/{id}', [ChatController::class, 'index']);
 
 Route::post('/add-message', [ChatController::class, 'addMessage']);
 

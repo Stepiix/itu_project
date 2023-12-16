@@ -3,17 +3,21 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 3rem;;
 }
 
 .group-list {
     display: flex;
     flex-wrap: wrap;
-    max-width: 30rem;
+    width: 30rem;
     justify-content: center;
     align-items: center;
     gap: 1rem;
     padding: 1rem;
     margin-bottom: 1rem;
+    height: 373px;
+    overflow-y: scroll;
+    /* backdrop-filter: blur(2px); */
 }
 
 .group {
@@ -24,20 +28,23 @@
 }
 
 .group span {
-    max-width: 29rem;
-    word-wrap: break-word;
+    max-width: 128px;
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .pic {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gray;
+    background: #D9D9D9;
     height: 8rem;
     width: 8rem;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: 1em;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 img {
@@ -49,7 +56,6 @@ img {
 h1 {
     text-align: center;
     margin-bottom: 0;
-    margin-top: 2.5rem;
     color: #525252;
     font-weight: 350;
 }
@@ -90,4 +96,11 @@ button {
     flex-direction: column;
     align-items: center;
     gap: 0.5em
+}
+
+@media only screen and (max-width: 670px) {
+    .group-list {
+        max-width: 300px;
+        max-height: 373px;
+    }
 }

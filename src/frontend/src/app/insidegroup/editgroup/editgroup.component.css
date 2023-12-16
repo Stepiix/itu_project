@@ -1,7 +1,7 @@
 .edit-group-container {
     background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
-    /* border-radius: 20px; */
     padding: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 .header {
@@ -73,6 +73,10 @@ li span {
 
 .group-link p {
     overflow-wrap: break-word;
+    background-color: white;
+    padding: 0.5em;
+    border-radius: 16px;
+    margin-top: 0.5em;
 }
 
 .add-remove-button {
@@ -99,4 +103,5 @@ li span {
     left: 25%;
     margin-top: 1rem; 
     padding: 0.4rem 2rem;
+    font-size: 16px;
 }

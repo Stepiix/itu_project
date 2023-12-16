@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -56,3 +57,9 @@ Route::delete('/remove-transaction/{id}', [TransactionController::class, 'remove
 Route::get('/user-balance', [TransactionController::class, 'calculateUserBalance']);//done
 
 Route::get('/getall-transactions-user', [TransactionController::class, 'getTransactionsByUser']);//done
+
+Route::get('/all-messages', [ChatController::class, 'index']);
+
+Route::post('/add-message', [ChatController::class, 'addMessage']);
+
+Route::delete('/delete-massage', [ChatController::class, 'deleteMessage']);

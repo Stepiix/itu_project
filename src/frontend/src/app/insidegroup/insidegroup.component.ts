@@ -9,6 +9,7 @@ import { PaymenthistoryComponent } from './paymenthistory/paymenthistory.compone
 import { SettledebtComponent } from './settledebt/settledebt.component';
 import { DataSharingService } from './services/data-sharing.service';
 import { SessionService } from '../services/session.service';
+import { ChatComponent } from '../chat/chat.component';
 @Component({
   selector: 'app-insidegroup',
   templateUrl: './insidegroup.component.html',
@@ -168,7 +169,8 @@ export class InsidegroupComponent {
     this.dataSharingService.setSharedID(this.groupId);
 
     const dialogRef = this.dialog.open(AddnewpayComponent, {
-      width: '400px', // Nastavte šířku dialogu dle potřeby
+      width: '400px',
+      panelClass: 'custom-dialog-container', 
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -182,7 +184,7 @@ export class InsidegroupComponent {
 
   openDialogSettleDebt(): void {
     const dialogRef = this.dialog.open(SettledebtComponent, {
-      width: '400px', // Nastavte šířku dialogu dle potřeby
+      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -193,7 +195,7 @@ export class InsidegroupComponent {
 
 openDialogEditGroup(): void {
   const dialogRef = this.dialog.open(EditgroupComponent, {
-    width: '400px', // Nastavte šířku dialogu dle potřeby
+    panelClass: 'custom-dialog-container',
     data: { groupInfo: this.groupInfo }, // Předejte data dialogu
   });
 
@@ -207,7 +209,18 @@ openDialogEditGroup(): void {
 
   openDialogPaymentHistory(): void {
     const dialogRef = this.dialog.open(PaymenthistoryComponent, {
-      width: '400px', // Nastavte šířku dialogu dle potřeby
+      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
+    });
+  }
+
+  openChat(): void {
+    const dialogRef = this.dialog.open(ChatComponent, {
+      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
     });
   
     dialogRef.afterClosed().subscribe(result => {

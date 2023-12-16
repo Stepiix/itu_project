@@ -41,6 +41,10 @@
     overflow-x: scroll;
 }
 
+.user-list::-webkit-scrollbar {
+    display: none;
+}
+
 .users {
     display: flex;
     justify-content: center;

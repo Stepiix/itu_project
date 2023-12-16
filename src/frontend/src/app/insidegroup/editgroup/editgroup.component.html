@@ -1,4 +1,21 @@
-<!-- editgroup.component.html -->
+<h1>Upravit skupinu</h1>
+
+<input type="text" placeholder="Název" [(ngModel)]="groupName">
+
+<input type="text" placeholder="Popis" [(ngModel)]="groupLabel">
+
+<p>pridat fotku TODO</p>
+
+<h2>Přidat/odebrat členy</h2>
+<ul>
+  <li *ngFor="let member of groupInfo.group.users">
+    {{ member.user_firstname }}
+    <button mat-icon-button (click)="removeMember(member.user_id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </li>
+</ul>
+
 
 <p *ngIf="isLinkVisible">Group Link: {{ groupLink }}</p>
 
@@ -9,3 +26,5 @@
 <button mat-icon-button (click)="copyLink()" *ngIf="isLinkVisible">
   <mat-icon>content_copy</mat-icon>
 </button>
+
+<button mat-raised-button color="primary" (click)="updateGroup()">Uložit změny</button>

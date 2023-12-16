@@ -45,5 +45,30 @@ export class ServiceGroupListService {
   pridatSeKeSkupine(link: string, userId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}group-invite/${link}?user_id=${userId}`);
   }
+
+  updateGroup(groupId: number, groupName: string, groupLabel: string): Observable<any> {
+    const updateData = {
+      group_id: groupId,
+      group_name: groupName,
+      group_label: groupLabel,
+    };
+
+    return this.http.put(`${this.apiUrl}update-group`, updateData);
+  }
+
+  removeUserFromGroup(groupId: number, userId: number): Observable<any> {
+    const removeUserData = {
+      group_id: groupId,
+      user_id: userId,
+    };
+    console.log('tohle posilam na backend po delete',removeUserData)
+
+    // Return the observable without subscribing here
+    return this.http.delete(`${this.apiUrl}group-remove-user`, { body: removeUserData });
+  }
+
+  loadUserBalances(groupId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}group-balance?group_id=${groupId}`);
+  }
   
 }

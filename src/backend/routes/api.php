@@ -39,12 +39,12 @@ Route::put('/update-user', [UserController::class, 'updateUser']); //done
 
 Route::get('/get-user', [UserController::class, 'getUser']);//neni potreba vsechno ukladam do session (updatuju moji session)
 
-Route::put('/update-group', [GroupsController::class, 'updateGroup']);
+Route::put('/update-group', [GroupsController::class, 'updateGroup']);//done
 
-Route::get('/group-invite/{code}', [GroupsController::class, 'invite']);
+Route::get('/group-invite/{code}', [GroupsController::class, 'invite']);//done
 
-Route::delete('/group-remove-user', [GroupsController::class, 'removeUserFromGroup']);
+Route::delete('/group-remove-user', [GroupsController::class, 'removeUserFromGroup']);//nefunguje ti to Valiku??
 
-Route::get('/group-balance', [TransactionController::class, 'calculateUserBalances']);
+Route::get('/group-balance', [TransactionController::class, 'calculateUserBalances']);//done
 
-Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);
+Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);//coto kurva je?

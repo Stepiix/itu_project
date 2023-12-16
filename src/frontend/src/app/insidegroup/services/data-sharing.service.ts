@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -7,10 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 export class DataSharingService {
   private sharedValue = new BehaviorSubject<any>(null);
   private sharedId = new BehaviorSubject<any>(null);
+  private groupInfoSource = new BehaviorSubject<any>(null);
+  groupInfoUpdated = new EventEmitter<any>();
+
   sharedValue$ = this.sharedValue.asObservable();
-  sharedId$ = this.sharedId.asObservable(); // Add this line
-  private groupLinkSource = new BehaviorSubject<string>('');
-  currentGroupLink = this.groupLinkSource.asObservable();
+  sharedId$ = this.sharedId.asObservable(); 
+  groupInfo$ = this.groupInfoSource.asObservable();
 
   setSharedValue(value: any): void {
     this.sharedValue.next(value);
@@ -20,7 +22,7 @@ export class DataSharingService {
     this.sharedId.next(id);
   }
 
-  setGroupLink(link: string) {
-    this.groupLinkSource.next(link);
+  setGroupInfo(groupInfo: any): void {
+    this.groupInfoSource.next(groupInfo);
   }
 }

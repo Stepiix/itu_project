@@ -8,6 +8,7 @@ import { EditgroupComponent } from './editgroup/editgroup.component';
 import { PaymenthistoryComponent } from './paymenthistory/paymenthistory.component';
 import { SettledebtComponent } from './settledebt/settledebt.component';
 import { DataSharingService } from './services/data-sharing.service';
+import { SessionService } from '../services/session.service';
 @Component({
   selector: 'app-insidegroup',
   templateUrl: './insidegroup.component.html',
@@ -17,20 +18,38 @@ export class InsidegroupComponent {
   groupInfo: any;
   groupId: any;
   transactions: any;
+  userBalances: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private groupservice: ServiceGroupListService,  public dialog: MatDialog, private dataSharingService: DataSharingService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private groupservice: ServiceGroupListService,  public dialog: MatDialog, private dataSharingService: DataSharingService, private session: SessionService) {}
 
   ngOnInit() {
-    // Předpokládáme, že "groupId" je název parametru z cesty definovaný v trasování
+    if(!this.session.isLoggedIn()){ // neni prihlaseny
+      this.router.navigate(['/login']);
+    } else {
+      // Předpokládáme, že "groupId" je název parametru z cesty definovaný v trasování
     this.route.params.subscribe(params => {
       this.groupId = params['groupId'];
       console.log('Group ID from route:', this.groupId);
-  
       this.loadInfoAboutGroup(this.groupId);
     });
-    
+    this.loadUsersBalances();
     this.loadTransactions();
+    }
+    
   }
+
+  loadUsersBalances() {
+    this.groupservice.loadUserBalances(this.groupId).subscribe(
+      (data: any) => {
+        this.userBalances = data.users;
+        console.log('User balances from backend:', this.userBalances);
+      },
+      (error) => {
+        console.error('Error fetching user balances from backend:', error);
+      }
+    );
+  }
+
   loadTransactions() {
     this.groupservice.loadTransactions(this.groupId).subscribe(
       (data: any) => {
@@ -50,8 +69,8 @@ export class InsidegroupComponent {
         // Zpracování dat z backendu
         this.groupInfo = data;
         console.log('Data from backend:', this.groupInfo);
-        console.log('Link ------ ', this.groupInfo.group.group_link);
-        this.dataSharingService.setGroupLink(this.groupInfo.group.group_link);
+        console.log('data o skupine ------ ', this.groupInfo.group);
+        this.dataSharingService.setGroupInfo(this.groupInfo.group);
       },
       (error) => {
         console.error('Error fetching data from backend:', error);
@@ -73,6 +92,7 @@ export class InsidegroupComponent {
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.loadUsersBalances();
       // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }
@@ -91,11 +111,12 @@ export class InsidegroupComponent {
 openDialogEditGroup(): void {
   const dialogRef = this.dialog.open(EditgroupComponent, {
     width: '400px', // Nastavte šířku dialogu dle potřeby
-    data: { groupLink: this.dataSharingService.currentGroupLink }, // Předejte data dialogu
+    data: { groupInfo: this.groupInfo }, // Předejte data dialogu
   });
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
+    this.loadInfoAboutGroup(this.groupId);
     // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
   });
 }

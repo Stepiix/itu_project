@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { DataSharingService } from '../services/data-sharing.service';
 import { ServiceGroupListService } from 'src/app/services/service-group-list.service';
+import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-addnewpay',
   templateUrl: './addnewpay.component.html',
@@ -16,7 +18,7 @@ export class AddnewpayComponent implements OnInit{
   isButtonEnabled: boolean = false;
   isAmountSelected: boolean = true;  // Defaultní výběr "Částky"
   isRatioSelected: boolean = false;  // Přepnutí na "Poměr"
-  constructor(private dataSharingService: DataSharingService, private grouplistservice: ServiceGroupListService){}
+  constructor(private dataSharingService: DataSharingService, private grouplistservice: ServiceGroupListService,private dialogRef: MatDialogRef<AddnewpayComponent>){}
 
 
   ngOnInit(): void {
@@ -98,7 +100,7 @@ splitEqually() {
   
     // Zde provedete akce potvrzení platby
     console.log('Platba potvrzena!');
-    
+  
     // Log information from the form
     console.log('Selected User ID:', this.selectedUserId);
     console.log('Payment Amount:', this.paymentAmount);
@@ -106,21 +108,45 @@ splitEqually() {
     console.log('User Shares:', this.userShares);
     console.log('Is Button Enabled:', this.isButtonEnabled);
   
+    // Uložte si pole všech requestů
+    const paymentRequests = [];
+  
     // Iterate over each user share and send a request
     for (const userId in this.userShares) {
       const userShare = this.userShares[userId];
       if (userShare !== null && !isNaN(userShare) && userShare > 0) {
         const numericUserId = parseInt(userId, 10); // Convert userId to integer
-        this.grouplistservice.sendNewPay(this.groupId, this.selectedUserId, numericUserId, userShare, "czk", "123", this.paymentReason, "1.1.2024")
-          .subscribe(response => {
-            console.log('Payment sent successfully for user', numericUserId, ':', response);
-            // You can handle the response or perform other actions as needed
-          }, error => {
-            console.error('Error sending payment for user', numericUserId, ':', error);
-            // Handle errors appropriately
-          });
+        const paymentRequest = this.grouplistservice.sendNewPay(
+          this.groupId,
+          this.selectedUserId,
+          numericUserId,
+          userShare,
+          'czk',
+          '123',
+          this.paymentReason,
+          '1.1.2024'
+        );
+        paymentRequests.push(paymentRequest);
       }
     }
+  
+    // Vytvořte jeden request, který bude čekat na dokončení všech asynchronních operací
+    const combinedRequest = forkJoin(paymentRequests);
+  
+    // Předpokládáme, že combinedRequest je Observable, takže můžeme na něj subscribe
+    combinedRequest.subscribe(
+      (responses) => {
+        // Všechny platby byly úspěšně provedeny
+        console.log('All payments were successful:', responses);
+        // Uzavřeme dialog
+        this.dialogRef.close();
+      },
+      (error) => {
+        // Něco se pokazilo při provádění platby
+        console.error('Error during payments:', error);
+        // Můžete přidat vhodné chování zde
+      }
+    );
   }
   
   

@@ -9,13 +9,13 @@
     </div>
 
     <div class="user-list">
-        <div class="users" *ngFor="let user of groupInfo?.group.users">
-            <div class="user">
-                <h2>{{ user.user_firstname }}</h2>
-                <h3>300</h3><!-- tady dodelat + - -->
-            </div>
+        <div class="users" *ngFor="let user of groupInfo?.group.users; let i = index">
+          <div class="user">
+            <h2>{{ user.user_firstname }}</h2>
+            <h3>{{ userBalances && userBalances[i]?.balance || 0 }}</h3>
+          </div>
         </div>
-    </div>
+      </div>
 
     <button (click)="openDialogAddNewPay()" class="nova-platba">Přidat novou platbu</button>
 

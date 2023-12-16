@@ -34,6 +34,23 @@ i {
   flex-direction: row;
 }
 
+.pic {
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  border-radius: 50%;
+  overflow: hidden;
+  /* box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  width: 3rem;
+  height: 3rem;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   
+}
+
 .home {
   display: flex;
   flex-direction: row;

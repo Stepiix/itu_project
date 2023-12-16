@@ -62,6 +62,9 @@ export class ServiceGroupListService {
     return this.http.post(`${this.apiUrl}add-message`, newChatMessage);
   }
   
+  removeMessage(messageId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}remove-message/${messageId}`);
+  }
 
   removeUserFromGroup(groupId: number, userId: number): Observable<any> {
     const removeUserData = {

@@ -46,15 +46,18 @@ export class ServiceGroupListService {
     return this.http.get(`${this.apiUrl}group-invite/${link}?user_id=${userId}`);
   }
 
-  updateGroup(groupId: number, groupName: string, groupLabel: string): Observable<any> {
+  updateGroup(groupId: number, groupName: string, groupLabel: string, imageBase64: string | null): Observable<any> {
     const updateData = {
       group_id: groupId,
       group_name: groupName,
       group_label: groupLabel,
+      group_photo: imageBase64  
     };
-
+  
     return this.http.put(`${this.apiUrl}update-group`, updateData);
   }
+
+  
 
   removeUserFromGroup(groupId: number, userId: number): Observable<any> {
     const removeUserData = {

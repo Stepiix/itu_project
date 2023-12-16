@@ -19,6 +19,8 @@ export class EditgroupComponent implements OnInit {
   userId: any;
   isGroupLeader: boolean = false;
   groupId: any;
+  selectedFile: File | null = null;
+  selectedImageBase64: string | null = null;
 
 
   constructor(
@@ -59,6 +61,21 @@ export class EditgroupComponent implements OnInit {
       }
     );
   }
+  handleFileInput(event: any): void {
+    this.selectedFile = event.target.files[0];
+    this.displayImage(); // Update the image when a new file is selected
+  }
+  displayImage(): string | null {
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = () => {
+        this.selectedImageBase64 = reader.result as string;
+      };
+      return this.selectedImageBase64;
+    }
+    return null;
+  }
 
   toggleLink() {
     this.isLinkVisible = !this.isLinkVisible;
@@ -70,20 +87,24 @@ export class EditgroupComponent implements OnInit {
   }
 
   updateGroup() {
+    // Convert the selected image to base64 before sending it to the backend
+    const imageBase64 = this.selectedImageBase64 ? this.selectedImageBase64.split(',')[1] : null;
+  
     this.groupservice.updateGroup(
       this.groupInfo.group.group_id,
       this.groupName,
-      this.groupLabel
+      this.groupLabel,
+      imageBase64  // Add the imageBase64 parameter to the updateGroup method
     ).subscribe(
       (response) => {
         console.log('Group updated successfully:', response);
         this.dialogRef.close();
         
-        // Zde můžeš provést další akce po úspěšném updatu
+        // Additional actions after a successful update
       },
       (error) => {
         console.error('Error updating group:', error);
-        // Zde můžeš provést akce po neúspěšném updatu
+        // Actions to be performed after an unsuccessful update
       }
     );
   }

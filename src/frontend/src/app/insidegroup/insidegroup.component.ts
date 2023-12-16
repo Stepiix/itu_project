@@ -40,9 +40,9 @@ export class InsidegroupComponent {
       this.loadInfoAboutGroup(this.groupId);
     });
     this.getLeader();
-    this.loadUsersBalances();
+    this.loadUsersBalances(); //tohle pouzit
     this.loadTransactions();
-    this.calculateDebts();
+    this.calculateDebts(); //tohle pouzit
     }
     
   }
@@ -70,6 +70,7 @@ export class InsidegroupComponent {
       (data: any) => {
         console.log('Debts from backend:', data.debts);
         this.debts = this.transformDebts(data.debts);
+        this.dataSharingService.setDebts(this.debts);
       },
       (error) => {
         console.error('Error fetching debts from backend:', error);
@@ -119,6 +120,7 @@ export class InsidegroupComponent {
       (data: any) => {
         this.userBalances = data.users;
         console.log('User balances from backend:', this.userBalances);
+        this.dataSharingService.setBalances(this.userBalances);
       },
       (error) => {
         console.error('Error fetching user balances from backend:', error);

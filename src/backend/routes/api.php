@@ -49,4 +49,4 @@ Route::get('/group-balance', [TransactionController::class, 'calculateUserBalanc
 
 Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);//coto kurva je?
 
-Route::get('/group-leader', [GroupsController::class, 'getGroupLeader']);//done
+Route::get('/group-leader', [GroupsController::class, 'getGroupLeader']);

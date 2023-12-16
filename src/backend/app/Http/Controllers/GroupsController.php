@@ -20,6 +20,48 @@ class GroupsController extends Controller
         }
     }
 
+    public function createGroup(Request $request)
+    {
+        $request->validate([
+            'group_name' => 'required|string|max:32',
+            'group_label' => 'nullable|string|max:64',
+            'group_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $userId = $request->input('user_id'); // Předpokládáme, že máte nějaký způsob získání user_id
+        if (!$userId) {
+            return response()->json(['message' => 'User ID is required.'], 400);
+        }
+        // Získání base64 kódované fotky z requestu
+        //$base64Image = $request->input('group_photo');
+        
+        // Dekódování base64 kódu do binární podoby
+        //$imageData = base64_decode($base64Image);
+        $imageData = $request->file('group_photo')->get();
+
+        $group = groups::create([
+            'group_name' => $request->input('group_name'),
+            'group_label' => $request->input('group_label'),
+            'group_photo' => $imageData,
+        ]);
+
+        GroupUser::create([
+            'group_id' => $group->group_id,
+            'user_id' => $userId,
+        ]);
+
+        // Vygenerování unikátního kódu (hash z ID skupiny)
+        $invitationCode = hash('sha256', $group->group_id);
+
+        // Přidání kódu do skupiny
+        $group->group_link = $invitationCode;
+        $group->save();
+        // Vytvoření odkazu
+        // $invitationLink = route('group.invite', ['code' => $invitationCode]);
+
+        return response()->json(['invitationLink' => $invitationCode, 'message' => 'Group created successfully']);
+    }
+
     public function getGroupLeader(Request $request)
     {
         $group_id = $request->input('group_id');
@@ -115,46 +157,7 @@ class GroupsController extends Controller
         return response()->json($groups);
     }
     
-    public function createGroup(Request $request)
-    {
-        $request->validate([
-            'group_name' => 'required|string|max:32',
-            'group_label' => 'nullable|string|max:64',
-            'group_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
 
-        $userId = $request->input('user_id'); // Předpokládáme, že máte nějaký způsob získání user_id
-        if (!$userId) {
-            return response()->json(['message' => 'User ID is required.'], 400);
-        }
-        // Získání base64 kódované fotky z requestu
-        $base64Image = $request->input('group_photo');
-        
-        // Dekódování base64 kódu do binární podoby
-        $imageData = base64_decode($base64Image);
-
-        $group = groups::create([
-            'group_name' => $request->input('group_name'),
-            'group_label' => $request->input('group_label'),
-            'group_photo' => $imageData,
-        ]);
-
-        GroupUser::create([
-            'group_id' => $group->group_id,
-            'user_id' => $userId,
-        ]);
-
-        // Vygenerování unikátního kódu (hash z ID skupiny)
-        $invitationCode = hash('sha256', $group->group_id);
-
-        // Přidání kódu do skupiny
-        $group->group_link = $invitationCode;
-        $group->save();
-        // Vytvoření odkazu
-        // $invitationLink = route('group.invite', ['code' => $invitationCode]);
-
-        return response()->json(['group' => $group, 'invitationLink' => $invitationCode, 'message' => 'Group created successfully']);
-    }
 
     public function getUsersInGroup(Request $request)
     {
@@ -173,6 +176,7 @@ class GroupsController extends Controller
     
         // Získání všech uživatelů této skupiny
         $users = $group->users;
+        $group->group_photo = null;
     
         return response()->json(['group' => $group]);
     }

@@ -79,5 +79,13 @@ export class ServiceGroupListService {
     // Return the observable without subscribing here
     return this.http.get(`${this.apiUrl}group-depts`, { params: requestData });
   }
+
+  getLeader(groupId: number): Observable<any> {
+    // Assuming the backend endpoint is '/group-leader'
+    const apiUrl = `${this.apiUrl}group-leader?group_id=${groupId}`;
+  
+    // Return the observable without subscribing here
+    return this.http.get(apiUrl);
+  }
   
 }

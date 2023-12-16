@@ -53,10 +53,16 @@ export class CreateNewGroupComponent {
   }
   handleFileInput(event: any): void {
     this.selectedFile = event.target.files[0];
+    this.displayImage(); // Update the image when a new file is selected
   }
-  displayImage(): Blob | null {
+  displayImage(): string | null {
     if (this.selectedFile) {
-      return new Blob([this.selectedFile], { type: this.selectedFile.type });
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = () => {
+        this.selectedImageBase64 = reader.result as string;
+      };
+      return this.selectedImageBase64;
     }
     return null;
   }

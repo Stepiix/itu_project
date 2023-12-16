@@ -34,7 +34,7 @@
         <li *ngFor="let member of groupInfo.group.users">
           <span>{{ member.user_firstname }}</span>
           <button mat-icon-button (click)="removeMember(member.user_id)" class="delete">
-            <mat-icon >delete</mat-icon>
+            <mat-icon *ngIf="isGroupLeader">delete</mat-icon>
           </button>
         </li>
       </ul>

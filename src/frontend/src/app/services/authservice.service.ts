@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthserviceService {
   private apiUrlRegister =   'http://localhost:8000/api/register';
   private apiUrlLogin =      'http://localhost:8000/api/login';
-  private apiIrlUpdateUser = 'http://localhost:8000/api/update-user';
+  private apiUrlUpdateUser = 'http://localhost:8000/api/update-user';
 
   constructor(private http: HttpClient) { }
 
@@ -26,8 +26,8 @@ export class AuthserviceService {
     return this.http.post(this.apiUrlLogin, Credentials);
   }
 
-  editUser(userInformation: any): Observable<any> {
-    return this.http.put(this.apiIrlUpdateUser, userInformation);
+  editUser(userInformation: FormData): Observable<any> {
+    return this.http.post(this.apiUrlUpdateUser, userInformation);
   }
   
 }

@@ -21,10 +21,13 @@ export class InsidegroupComponent {
   userBalances: any;
   userId: any;
   debts: { [debtorName: string]: { [payerName: string]: number } } = {};
+  isGroupLeader: boolean = false;
 
 
 
-  constructor(private router: Router, private route: ActivatedRoute, private groupservice: ServiceGroupListService,  public dialog: MatDialog, private dataSharingService: DataSharingService, private session: SessionService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private groupservice: ServiceGroupListService,  public dialog: MatDialog, private dataSharingService: DataSharingService, private session: SessionService) {
+    this.userId = this.session.getID();
+  }
 
   ngOnInit() {
     if(!this.session.isLoggedIn()){ // neni prihlaseny
@@ -36,12 +39,28 @@ export class InsidegroupComponent {
       console.log('Group ID from route:', this.groupId);
       this.loadInfoAboutGroup(this.groupId);
     });
+    this.getLeader();
     this.loadUsersBalances();
     this.loadTransactions();
     this.calculateDebts();
     }
     
   }
+  getLeader() {
+    this.groupservice.getLeader(this.groupId).subscribe(
+      (data: any) => {
+        // Handle the response from the backend
+        console.log('Group leader:', data);
+
+        this.isGroupLeader = this.userId === data.user_id;
+      },
+      (error) => {
+        // Handle errors
+        console.error('Error fetching group leader:', error);
+      }
+    );
+  }
+
   getKeys(obj: any): string[] {
     return Object.keys(obj);
   }

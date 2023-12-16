@@ -4,6 +4,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ClipboardService } from 'ngx-clipboard';
 import { ServiceGroupListService } from 'src/app/services/service-group-list.service';
+import { SessionService } from 'src/app/services/session.service';
 @Component({
   selector: 'app-editgroup',
   templateUrl: './editgroup.component.html',
@@ -15,6 +16,9 @@ export class EditgroupComponent implements OnInit {
   groupLabel: string = '';  // Přidáno pro popis skupiny
   groupLink: string = '';
   isLinkVisible: boolean = false; 
+  userId: any;
+  isGroupLeader: boolean = false;
+  groupId: any;
 
 
   constructor(
@@ -22,11 +26,14 @@ export class EditgroupComponent implements OnInit {
     private dialogRef: MatDialogRef<EditgroupComponent>,
     private clipboardService: ClipboardService,
     private groupservice: ServiceGroupListService,
+    private session: SessionService,
   ) {
     this.groupInfo = data.groupInfo;
     this.groupName = this.groupInfo.group.group_name;  // Předvyplnění hodnoty názvu skupiny
     this.groupLabel = this.groupInfo.group.group_label;  // Předvyplnění hodnoty popisu skupiny
     this.groupLink = this.groupInfo.group.group_link;
+    this.groupId = this.groupInfo.group.group_id;
+    this.userId = this.session.getID();
   }
 
   ngOnInit() {
@@ -34,6 +41,23 @@ export class EditgroupComponent implements OnInit {
     console.log('id skupiny', this.groupInfo.group.group_id)
     console.log('jmeno skupiny', this.groupInfo.group.group_name)
     console.log('popis skupiny', this.groupInfo.group.group_label)
+    this.getLeader();
+  }
+
+  getLeader() {
+    this.groupservice.getLeader(this.groupId).subscribe(
+      (data: any) => {
+        // Handle the response from the backend
+        console.log('Group leader:', data);
+
+        this.isGroupLeader = this.userId === data.user_id;
+        console.log('velitel skupiny ano nebo ne',this.isGroupLeader);
+      },
+      (error) => {
+        // Handle errors
+        console.error('Error fetching group leader:', error);
+      }
+    );
   }
 
   toggleLink() {

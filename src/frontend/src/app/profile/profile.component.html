@@ -1,6 +1,7 @@
 <div class="profile">
     <div class="profile-pic">
         <!-- <h1>tady bude jeho fotka</h1> -->
+        <img [src]="'data:image/jpeg;base64,' + userInfo.photo" alt="profilova fotka" /> 
         <mat-icon (click)="openEditDialog()" class="edit-pen">edit</mat-icon>
     </div>
 

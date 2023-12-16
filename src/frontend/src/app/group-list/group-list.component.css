@@ -1,6 +1,36 @@
 .group-menu{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.group-list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 30rem;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    height: 8rem;
+    width: 8rem;
+    /* border-radius: 50%; */
 }
 
 h1 {
@@ -13,7 +43,7 @@ h1 {
 
 .searchInput {
     width: 300px;
-    margin: 20px auto;
+    margin: 1rem auto;
     margin-top: 0;
     display: flex;
     align-items: center;

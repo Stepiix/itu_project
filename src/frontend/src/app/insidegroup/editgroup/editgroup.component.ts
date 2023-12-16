@@ -19,6 +19,8 @@ export class EditgroupComponent implements OnInit {
   userId: any;
   isGroupLeader: boolean = false;
   groupId: any;
+  selectedFile: File | null = null;
+  selectedImageBase64: string | null = null;
 
 
   constructor(
@@ -59,6 +61,21 @@ export class EditgroupComponent implements OnInit {
       }
     );
   }
+  handleFileInput(event: any): void {
+    this.selectedFile = event.target.files[0];
+    this.displayImage(); // Update the image when a new file is selected
+  }
+  displayImage(): string | null {
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = () => {
+        this.selectedImageBase64 = reader.result as string;
+      };
+      return this.selectedImageBase64;
+    }
+    return null;
+  }
 
   toggleLink() {
     this.isLinkVisible = !this.isLinkVisible;
@@ -70,20 +87,24 @@ export class EditgroupComponent implements OnInit {
   }
 
   updateGroup() {
-    this.groupservice.updateGroup(
-      this.groupInfo.group.group_id,
-      this.groupName,
-      this.groupLabel
-    ).subscribe(
+    const formData = new FormData();
+    formData.append('group_id', this.groupInfo.group.group_id.toString());
+    formData.append('group_name', this.groupName);
+    formData.append('group_label', this.groupLabel);
+    if (this.selectedFile) {
+      formData.append('group_photo', this.selectedFile, this.selectedFile.name);
+    }
+  
+    this.groupservice.updateGroup(formData).subscribe(
       (response) => {
         console.log('Group updated successfully:', response);
         this.dialogRef.close();
-        
-        // Zde můžeš provést další akce po úspěšném updatu
+  
+        // Additional actions after a successful update
       },
       (error) => {
         console.error('Error updating group:', error);
-        // Zde můžeš provést akce po neúspěšném updatu
+        // Actions to be performed after an unsuccessful update
       }
     );
   }

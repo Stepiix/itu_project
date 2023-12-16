@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+
     public function createTransaction(Request $request)
     {
         // Validace vstupních dat
@@ -50,7 +51,16 @@ class TransactionController extends Controller
             ->with(['payer', 'debtor'])
             ->get();
 
-        // Můžete přizpůsobit návratový formát podle potřeby
+
+        foreach ($transactions as $transaction) {
+            // Dekodovat payerův obrázek
+            $transaction->payer->user_photo = null;
+    
+            // Dekodovat debtorův obrázek
+            $transaction->debtor->user_photo = null;
+        }
+        
+            // Můžete přizpůsobit návratový formát podle potřeby
         $result = [
             'transactions' => $transactions,
         ];
@@ -90,6 +100,9 @@ class TransactionController extends Controller
         // Přidání informací o saldu do asociativního pole
         foreach ($users as $user) {
             $user->balance = $userBalances[$user->user_id] ?? 0;
+        }
+        foreach ($users as $user) {
+            $user->user_photo = null;
         }
 
         return response()->json(['users' => $users]);

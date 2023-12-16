@@ -31,7 +31,7 @@ export class RegisterComponent {
           console.log("prijmeni: ", response.user.user_lastname);
           console.log("email: ", response.user.user_email)  ;
           
-          this.session.startUserSession(response.user.user_id, response.user.user_firstname, response.user.user_lastname, response.user.user_email);
+          this.session.startUserSession(response.user.user_id, response.user.user_firstname, response.user.user_lastname, response.user.user_email, response.user.user_photo);
           alert("uspesne ses prihlasil");//TODO vylepsit
           this.router.navigate(['/']);
 

@@ -19,11 +19,13 @@
       <input type="text" id="description" placeholder="Popis" [(ngModel)]="groupLabel">
     </div>
     
-    <div class="form-group">
-      <label for="myfile">Fotka</label>
-      <input type="file" id="myfile" name="myfile">
-    </div>
-    <p>pridat fotku TODO</p>  
+    <input id="photo" type="file" (change)="handleFileInput($event)" style="display: none">
+    <label for="photo" class="file-input-label">
+    <mat-icon class="icon">camera_alt</mat-icon>
+    </label>
+    <img *ngIf="selectedFile" [src]="displayImage()" alt="Selected Image" class="selected-image">
+
+    <!-- Display selected image -->
     
   </div>
 

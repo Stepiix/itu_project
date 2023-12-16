@@ -30,6 +30,7 @@
         <label for="photo" class="file-input-label">
             <mat-icon class="icon">camera_alt</mat-icon>
         </label>
+        <img *ngIf="selectedFile" [src]="displayImage()" alt="Selected Image" class="selected-image">
       </div>
       
       <div class="form-group password">

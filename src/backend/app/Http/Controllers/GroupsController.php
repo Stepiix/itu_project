@@ -176,7 +176,12 @@ class GroupsController extends Controller
     
         // Získání všech uživatelů této skupiny
         $users = $group->users;
-        $group->group_photo = null;
+
+        foreach ($users as $user) {
+            $user->user_photo = $this->getBase64Image($user->user_photo);
+        }
+
+        $group->group_photo = $this->getBase64Image($group->group_photo);
     
         return response()->json(['group' => $group]);
     }
@@ -189,8 +194,11 @@ class GroupsController extends Controller
             'group_id' => 'required|integer',
             'group_name' => 'required|string|max:32',
             'group_label' => 'nullable|string|max:64',
+            'group_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
+
+        $imageData = $request->file('group_photo')->get();
         // Získání skupiny podle group_id
         $group = groups::find($request->input('group_id'));
 
@@ -201,7 +209,7 @@ class GroupsController extends Controller
         // Aktualizace údajů skupiny
         $group->group_name = $request->input('group_name');
         $group->group_label = $request->input('group_label');
-
+        $group->group_photo = $imageData;
         $group->save();
 
         return response()->json(['message' => 'Group was updated succesfully'], 200);

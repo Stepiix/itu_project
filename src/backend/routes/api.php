@@ -35,11 +35,11 @@ Route::post('/create-transactions', [TransactionController::class, 'createTransa
 
 Route::get('/getall-transactions', [TransactionController::class, 'getTransactionsByGroup']);//done
 
-Route::put('/update-user', [UserController::class, 'updateUser']); //done
+Route::post('/update-user', [UserController::class, 'updateUser']); //done
 
 Route::get('/get-user', [UserController::class, 'getUser']);//neni potreba vsechno ukladam do session (updatuju moji session)
 
-Route::put('/update-group', [GroupsController::class, 'updateGroup']);//done
+Route::post('/update-group', [GroupsController::class, 'updateGroup']);//done
 
 Route::get('/group-invite/{code}', [GroupsController::class, 'invite']);//done
 

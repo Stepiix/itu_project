@@ -24,12 +24,13 @@ export class SessionService {
     sessionStorage.removeItem("userSession");
     this.router.navigate(['/login']);
   }
-  startUserSession(userID: string, firstName: string, lastName: string, email: string){
+  startUserSession(userID: string, firstName: string, lastName: string, email: string, photo: string){
     const sessionData = {
       userID: userID,
       firstName: firstName,
       lastName: lastName,
       email: email,
+      photo: photo,
       expirationTime: new Date().getTime() + 10 * 60 * 1000 * 6 * 2
     };
     console.log(sessionData)
@@ -48,7 +49,8 @@ export class SessionService {
           userID: sessionData.userID,
           firstName: sessionData.firstName,
           lastName: sessionData.lastName,
-          email: sessionData.email
+          email: sessionData.email,
+          photo: sessionData.photo
         };
       } else {
         // Session vypršela, odstranění dat

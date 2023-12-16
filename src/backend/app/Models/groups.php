@@ -22,4 +22,5 @@ class groups extends Model
     {
         return $this->belongsToMany(userMy::class, 'GroupUser', 'group_id', 'user_id');
     }
+
 }

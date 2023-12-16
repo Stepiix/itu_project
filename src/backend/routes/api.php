@@ -52,6 +52,12 @@ Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);//c
 
 Route::get('/group-leader', [GroupsController::class, 'getGroupLeader']);
 
+Route::delete('/remove-transaction/{id}', [TransactionController::class, 'removeTransaction']); //done
+
+Route::get('/user-balance', [TransactionController::class, 'calculateUserBalance']);//done
+
+Route::get('/getall-transactions-user', [TransactionController::class, 'getTransactionsByUser']);//done
+
 Route::get('/all-messages', [ChatController::class, 'index']);
 
 Route::post('/add-message', [ChatController::class, 'addMessage']);

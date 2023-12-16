@@ -19,6 +19,7 @@ export class ServiceGroupListService {
     return this.http.post(`${this.apiUrl}create-group`, formData);
   }
   
+
   getInfoAboutGroup(groupId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}group?group_id=${groupId}`);
   }
@@ -50,6 +51,13 @@ export class ServiceGroupListService {
     return this.http.post(`${this.apiUrl}update-group`, formData);
   }
 
+  getAllMessages(groupId: number, user_id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}all-messages?group_id=${groupId}&user_id=${user_id}`);
+  }
+
+  addMessage(newChatMessage: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}add-message`, newChatMessage);
+  }
   
 
   removeUserFromGroup(groupId: number, userId: number): Observable<any> {

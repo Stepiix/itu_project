@@ -76,7 +76,6 @@ CREATE TABLE Chat (
     message_group_id INTEGER NOT NULL,
     message_user_id INTEGER NOT NULL,
     message_text TEXT NOT NULL,
-    message_timestamp TIMESTAMP NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 

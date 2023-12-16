@@ -16,6 +16,8 @@ export class EditProfileComponent implements OnInit{
   heslo: string = '';
   zmenitHesloVisible: boolean = false;
   userInfo: any;
+  selectedFile: File | null = null;
+  selectedImageBase64: string | null = null;
 
   constructor(private dialogRef: MatDialogRef<EditProfileComponent>, private session: SessionService, private dialog: MatDialog, private authservice: AuthserviceService) {}
 
@@ -24,6 +26,21 @@ export class EditProfileComponent implements OnInit{
     // Například můžete načíst data o uživateli pro úpravu profilu.
     console.log("beru veci ze session")
     this.userInfo = this.session.getUserSession();
+  }
+  handleFileInput(event: any): void {
+    this.selectedFile = event.target.files[0];
+    this.displayImage(); // Update the image when a new file is selected
+  }
+  displayImage(): string | null {
+    if (this.selectedFile) {
+      const reader = new FileReader();
+      reader.readAsDataURL(this.selectedFile);
+      reader.onload = () => {
+        this.selectedImageBase64 = reader.result as string;
+      };
+      return this.selectedImageBase64;
+    }
+    return null;
   }
 
   zmenitHeslo() {
@@ -50,14 +67,26 @@ export class EditProfileComponent implements OnInit{
   private performProfileUpdate(): void {
     // Prepare user information for update
     const updatedUserInfo = {
-      user_id: this.userInfo.userID, // Add user ID property based on your user object structure
+      user_id: this.userInfo.userID,
       user_firstname: this.userInfo.firstName,
       user_lastname: this.userInfo.lastName,
       user_email: this.userInfo.email,
     };
   
-    // Call editUser method
-    this.authservice.editUser(updatedUserInfo).subscribe(
+    // Create a FormData object to send both text and file data
+    const formData = new FormData();
+    formData.append('user_id', updatedUserInfo.user_id.toString());
+    formData.append('user_firstname', updatedUserInfo.user_firstname);
+    formData.append('user_lastname', updatedUserInfo.user_lastname);
+    formData.append('user_email', updatedUserInfo.user_email);
+  
+    // Check if an image is selected
+    if (this.selectedFile) {
+      formData.append('user_image', this.selectedFile, this.selectedFile.name);
+    }
+  
+    // Call editUser method with FormData
+    this.authservice.editUser(formData).subscribe(
       (response) => {
         console.log('Profile updated successfully');
         this.session.updateUserSession(updatedUserInfo);

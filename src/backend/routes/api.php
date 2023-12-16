@@ -48,3 +48,5 @@ Route::delete('/group-remove-user', [GroupsController::class, 'removeUserFromGro
 Route::get('/group-balance', [TransactionController::class, 'calculateUserBalances']);//done
 
 Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);//coto kurva je?
+
+Route::get('/group-leader', [GroupsController::class, 'getGroupLeader']);//done

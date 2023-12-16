@@ -26,6 +26,7 @@ import { PaymenthistoryComponent } from './insidegroup/paymenthistory/paymenthis
 import { EditgroupComponent } from './insidegroup/editgroup/editgroup.component';
 import { FilterComponent } from './insidegroup/paymenthistory/filter/filter.component';
 import { ClipboardModule } from 'ngx-clipboard';
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     PaymenthistoryComponent,
     EditgroupComponent,
     FilterComponent,
+    ChatComponent,
   ],
   imports: [
     BrowserModule,

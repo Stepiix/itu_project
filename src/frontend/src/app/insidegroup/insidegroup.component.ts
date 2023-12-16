@@ -9,6 +9,7 @@ import { PaymenthistoryComponent } from './paymenthistory/paymenthistory.compone
 import { SettledebtComponent } from './settledebt/settledebt.component';
 import { DataSharingService } from './services/data-sharing.service';
 import { SessionService } from '../services/session.service';
+import { ChatComponent } from '../chat/chat.component';
 @Component({
   selector: 'app-insidegroup',
   templateUrl: './insidegroup.component.html',
@@ -208,6 +209,17 @@ openDialogEditGroup(): void {
 
   openDialogPaymentHistory(): void {
     const dialogRef = this.dialog.open(PaymenthistoryComponent, {
+      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
+    });
+  }
+
+  openChat(): void {
+    const dialogRef = this.dialog.open(ChatComponent, {
       panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
     });
   

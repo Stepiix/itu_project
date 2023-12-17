@@ -19,31 +19,32 @@ export class ProfileComponent {
     if(!this.session.isLoggedIn()){ // neni prihlaseny
       this.router.navigate(['/login']);
     } else { // je prihlaseny
-      this.userInfo = this.session.getUserSession();
-      console.log(this.userInfo)
-      console.log('fotka -',this.userInfo.photo)
-      // this.loadInfoAboutUser();
+      // this.userInfo = this.session.getUserSession();
+      // console.log(this.userInfo)
+      // console.log('fotka -',this.userInfo.photo)
+      this.loadInfoAboutUser();
     }
   }
-  // loadInfoAboutUser() {
-  //   const userId = this.session.getID();
+  loadInfoAboutUser() {
+    const userId = this.session.getID();
   
-  //   if (userId) {
-  //     // If userId is not null
-  //     this.auth.loadInfoAboutUser(Number(userId)).subscribe(
-  //       (user) => {
-  //         this.userInfo = user;
-  //       },
-  //       (error) => {
-  //         console.error('Error loading user information:', error);
-  //         // Handle the error as needed
-  //       }
-  //     );
-  //   } else {
-  //     console.error('User ID is null');
-  //     // Handle the case where the user ID is null (not logged in or no valid user ID)
-  //   }
-  // }
+    if (userId) {
+      // If userId is not null
+      this.auth.loadInfoAboutUser(Number(userId)).subscribe(
+        (user) => {
+          this.userInfo = user;
+          console.log('user info',this.userInfo)
+        },
+        (error) => {
+          console.error('Error loading user information:', error);
+          // Handle the error as needed
+        }
+      );
+    } else {
+      console.error('User ID is null');
+      // Handle the case where the user ID is null (not logged in or no valid user ID)
+    }
+  }
 
 
 

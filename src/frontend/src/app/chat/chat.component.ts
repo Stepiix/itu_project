@@ -44,7 +44,7 @@ export class ChatComponent {
     // this.serviceGroupListService.getAllMessages(groupId, user_id).subscribe((messages) => {
     this.serviceGroupListService.getAllMessages(groupId).subscribe((messages) => {
       console.log('Získané zprávy:', messages);
-      this.messages.push(...messages);
+      this.messages=messages;
     });
   }
 
@@ -58,8 +58,9 @@ export class ChatComponent {
     };
   
     this.serviceGroupListService.addMessage(newChatMessage).subscribe(() => {
-      this.loadMessages(this.groupId);  // aktualizace zpráv po odeslání nové zprávy
-      this.newMessage = '';
+      // this.loadMessages(this.groupId);  // aktualizace zpráv po odeslání nové zprávy
+      this.newMessage = '';  
+      this.loadMessages(this.groupId);
     });
   }
 

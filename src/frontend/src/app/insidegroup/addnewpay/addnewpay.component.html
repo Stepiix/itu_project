@@ -13,7 +13,7 @@
     <label for="selectedUserId">Platil:</label>
     <select id="selectedUserId" [(ngModel)]="selectedUserId" (ngModelChange)="checkButtonAvailability()">
       <option *ngFor="let user of personInfo.group.users" [value]="user.user_id">
-        {{ user.user_firstname }} ({{ user.user_id }})
+        {{ user.user_firstname }} 
       </option>
     </select>
   </div>

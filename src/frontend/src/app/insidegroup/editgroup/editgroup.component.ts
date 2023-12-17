@@ -104,6 +104,7 @@ export class EditgroupComponent implements OnInit {
     this.groupservice.removeUserFromGroup(this.groupInfo.group.group_id, memberId)
       .subscribe(
         (response) => {
+          this.dialogRef.close();
         },
         (error) => {
           console.error('Error removing member:', error);

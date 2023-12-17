@@ -210,12 +210,13 @@ openDialogEditGroup(): void {
 
   openDialogPaymentHistory(): void {
     const dialogRef = this.dialog.open(PaymenthistoryComponent, {
-      data: { transactions : this.transactions },
+      data: { transactions : this.transactions, groupId:this.groupId },
       panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
     });
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.loadTransactions();
     });
   }
 

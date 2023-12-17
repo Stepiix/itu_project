@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AuthserviceService } from '../services/authservice.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DataSharingService } from '../insidegroup/services/data-sharing.service';
 //pridat novou componentu
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,7 @@ export class ProfileComponent {
   userId:any;
   userBalance: number = 0;
 
-  constructor( private session: SessionService, private router: Router, private dialog: MatDialog,private auth:AuthserviceService,  private sanitizer: DomSanitizer) {}
+  constructor( private session: SessionService, private router: Router, private dialog: MatDialog,private auth:AuthserviceService,  private sanitizer: DomSanitizer, private dataSharingService: DataSharingService) {}
 
   ngOnInit() {
     if(!this.session.isLoggedIn()){ // neni prihlaseny
@@ -80,6 +81,7 @@ export class ProfileComponent {
     this.session.odhlasitSe();
   }
   openEditDialog() {
+    this.dataSharingService.setSharedUserInfo(this.userInfo);
     const dialogRef = this.dialog.open(EditProfileComponent, {
         panelClass: 'custom-dialog-container', 
         data: { userInfo: this.userInfo } // předání dat do dialogu

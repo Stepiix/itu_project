@@ -88,6 +88,7 @@ export class EditProfileComponent implements OnInit{
     }
   
     // Call editUser method with FormData
+    console.log('ahooooooooooooooooooooooooj',formData)
     this.authservice.editUser(formData).subscribe(
       (response) => {
         console.log('Profile updated successfully');

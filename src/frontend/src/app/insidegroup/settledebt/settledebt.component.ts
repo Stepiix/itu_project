@@ -92,14 +92,14 @@ export class SettledebtComponent implements OnInit {
   srovnatDluh() {
     if (this.selectedDebt && this.selectedDebtAmount !== null) {
       const selectedUserId = this.userBalances.find((user: any) => user.user_firstname === this.selectedDebt)?.user_id;
-
+  
       if (selectedUserId) {
         // Do something with the selected user ID and amount
         console.log('Selected User ID:', selectedUserId);
         console.log('Selected Debt Amount:', this.selectedDebtAmount);
       }
-
-      this.groupservice.sendNewPay(
+  
+      const settleDebtRequest = this.groupservice.sendNewPay(
         this.groupId,
         this.userID.toString(),
         selectedUserId,
@@ -109,8 +109,20 @@ export class SettledebtComponent implements OnInit {
         ''.toString(),
         '1.1.2024'.toString()
       );
-
-      this.dialogRef.close();
+  
+      settleDebtRequest.subscribe(
+        (response) => {
+          // Request was successful
+          console.log('Debt settlement successful:', response);
+          this.dialogRef.close();
+        },
+        (error) => {
+          // Something went wrong with the request
+          console.error('Error settling debt:', error);
+          // You can add appropriate behavior here
+        }
+      );
     }
   }
+  
 }

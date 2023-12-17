@@ -41,6 +41,12 @@ export class RegisterComponent {
         },
         (error) => {
           console.error('Chyba při registraci', error);
+          if (error.error && error.error.message === "The user password field must be at least 6 characters.") {
+            alert("Moc krátké heslo. Heslo musí být alespoň 6 znaků dlouhé.");
+          }
+          if (error.error && error.error.message === "The user email has already been taken.") {
+            alert("E-mail již existuje. Zvolte prosím jiný e-mail.");
+          }
           // Zde můžete zpracovat chybu, například zobrazením chybové zprávy uživateli
           // this.errorMessage = 'Chyba při registraci: ' + error.message;
         }

@@ -10,6 +10,7 @@ export class DataSharingService {
   private groupInfoSource = new BehaviorSubject<any>(null);
   private shareduserBalances = new BehaviorSubject<any>(null);
   private sharedDebts = new BehaviorSubject<any>(null);
+  private sharedUserInfo = new BehaviorSubject<any>(null);
   groupInfoUpdated = new EventEmitter<any>();
 
   sharedValue$ = this.sharedValue.asObservable();
@@ -17,6 +18,7 @@ export class DataSharingService {
   groupInfo$ = this.groupInfoSource.asObservable();
   shareduserBalances$ = this.shareduserBalances.asObservable();
   sharedDebts$ = this.sharedDebts.asObservable();
+  sharedUserInfo$ = this.sharedUserInfo.asObservable();
 
   setSharedValue(value: any): void {
     this.sharedValue.next(value);
@@ -34,6 +36,13 @@ export class DataSharingService {
   }
   setDebts(debts:any): void{
     this.sharedDebts.next(debts);
+  }
+
+  setSharedUserInfo(userInfo: any): void {
+    this.sharedUserInfo.next(userInfo);
+  }
+  getSharedUserInfo(): any {
+    return this.sharedUserInfo.value;
   }
   
 }

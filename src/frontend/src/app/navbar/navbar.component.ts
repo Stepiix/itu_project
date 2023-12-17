@@ -1,40 +1,51 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../services/session.service';
 import { AuthserviceService } from '../services/authservice.service';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  showNavbar: boolean = true; //promena pro login a register aby se potom nezobrazoval navbare
+  showNavbar: boolean = true;
   userInfo: any;
-  constructor(private session: SessionService,private auth:AuthserviceService) { }
+
+  constructor(private session: SessionService, private auth: AuthserviceService, private router: Router) {}
 
   ngOnInit(): void {
-    if(!this.session.isLoggedIn()){
-    } else {
+    if (this.session.isLoggedIn()) {
       this.loadInfoAboutUser();
     }
+
+    // Poslouchat události navigace
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        // Znovu načíst informace o uživateli po každé změně navigace
+        if (this.session.isLoggedIn()) {
+          this.loadInfoAboutUser();
+        }
+      });
   }
+
   loadInfoAboutUser() {
     const userId = this.session.getID();
-  
+
     if (userId) {
-      // If userId is not null
       this.auth.loadInfoAboutUser(Number(userId)).subscribe(
         (user) => {
           this.userInfo = user;
-          console.log('user info',this.userInfo)
+          console.log('user info', this.userInfo);
         },
         (error) => {
           console.error('Error loading user information:', error);
-          // Handle the error as needed
         }
       );
     } else {
       console.error('User ID is null');
-      // Handle the case where the user ID is null (not logged in or no valid user ID)
     }
   }
 }

@@ -1,0 +1,130 @@
+.history {
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    padding: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+h1 { margin-bottom: 0; }
+
+.search {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+#searchInput {
+    width: 200px;
+    border-radius: 25px;
+    border: 2px solid lightgray;
+    padding: 8px 10px;
+    padding-left: 38px;
+    flex-grow: 8;
+}
+
+.icon {
+    position: absolute;
+    left: 10px;
+}
+
+.close-button, .filter-button {
+    background-color: transparent;
+    border: 0;
+}
+
+.filter{ 
+    width: 20px; 
+    flex-grow: 1;
+}
+
+.payment-list {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    padding: 0.5em 1em;
+    margin-bottom: 1rem;
+    max-height: 600px;
+    width: 400px;
+    overflow-y: scroll;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.platby-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.platba-detail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.platby-item:last-child .platba-detail {
+    margin-bottom: 0;
+}
+
+.arrow {
+    font-size: 14px;
+    display: inline;
+}
+
+.castka{
+    font-size: 14px;
+    font-weight: 600;
+    background-color: lightgray;
+    padding: 0.2em 0.8rem;
+    border-radius: 1rem;
+    margin-bottom: 0;
+    max-height: 20px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    line-height: 12px;
+    font-size: 16px;
+}
+
+.description span, .dluh-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.description span:last-child {
+    font-size: 10px;
+    color: gray;
+    margin-top: 2px;
+}
+
+.end-delete {
+    display: flex;
+    flex-direction: row;
+}
+
+.trash {
+    width: 1rem;
+    margin-left: 0.5rem;
+    color: red;
+}
+
+@media only screen and (max-width: 670px) {
+    .payment-list {
+        width: 255px;
+    }
+
+}

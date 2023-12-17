@@ -2,30 +2,33 @@
     <div class="profile-pic">
         <!-- <h1>tady bude jeho fotka</h1> -->
         <div class="pic">
-            <ng-container *ngIf="userInfo?.photo; else defaultImage">
-            <img [src]="'data:image/jpeg;base64,' + userInfo.photo" alt="profilova fotka" /> 
-          </ng-container>
-          <ng-template #defaultImage>
-            <i class="material-icons">account_circle</i>
-          </ng-template>
-        </div>
+            <ng-container *ngIf="userInfo?.user_photo; else defaultImage">
+              <img [src]="getUserPhotoUrl()" alt="profilova fotka" />
+            </ng-container>
+            <ng-template #defaultImage>
+              <i class="material-icons">account_circle</i>
+            </ng-template>
+          </div>
     </div>
     
     <div *ngIf="userInfo" class="user-name">
-        <h1>{{ userInfo.firstName }} {{ userInfo.lastName }}</h1>
+        <h1>{{ userInfo.user_firstname }} {{ userInfo.user_lastname }}</h1>
         <mat-icon (click)="openEditDialog()" class="edit-pen">edit</mat-icon>
     </div>
    
     <div class="info">
         <div class="balanc"> 
-            <h3>Aktuální balanc: TODO</h3>
-            <p>+25</p> 
+            <h3>Aktuální balanc:</h3>
+            <p [ngStyle]="{'color': userBalance < 0 ? 'red' : 'green'}">
+                {{ userBalance > 0 ? '+' : '' }}{{ userBalance }}
+            </p> 
             <select>
                 <option>CZK</option>
                 <option>CZK</option>
                 <option>CZK</option>
             </select>
         </div>
+        
 
         <div class="payment-history">
             <h3>Historie plateb TODO</h3>

@@ -192,12 +192,9 @@ img {
     display: inline;
 }
 
-.castka {
+.castka{
     font-size: 14px;
     font-weight: 600;
-}
-
-.castka{
     background-color: lightgray;
     padding: 0.2em 0.8rem;
     border-radius: 1rem;

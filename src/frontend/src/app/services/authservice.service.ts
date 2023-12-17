@@ -10,6 +10,7 @@ export class AuthserviceService {
   private apiUrlLogin =      'http://localhost:8000/api/login';
   private apiUrlUpdateUser = 'http://localhost:8000/api/update-user';
   private apiUrlGetUser = 'http://localhost:8000/api/get-user';
+  private apiUrlLoadBalance = 'http://localhost:8000/api/user-balance';
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +36,11 @@ export class AuthserviceService {
   loadInfoAboutUser(user_id: number): Observable<any> {
     const params = { user_id: user_id.toString() };
     return this.http.get(this.apiUrlGetUser, { params });
+  }
+
+  loadBalance(user_id: number): Observable<any> {
+    const params = { user_id: user_id.toString() };
+    return this.http.get(this.apiUrlLoadBalance, { params });
   }
   
 }

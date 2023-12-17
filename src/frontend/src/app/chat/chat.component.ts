@@ -1,3 +1,5 @@
+// Author: Milan Takac (xtakac09)
+
 import { Component , Input } from '@angular/core';
 import { ServiceGroupListService } from '../services/service-group-list.service';
 import { DataSharingService } from '../insidegroup/services/data-sharing.service';

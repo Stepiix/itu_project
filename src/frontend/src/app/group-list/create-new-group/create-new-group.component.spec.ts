@@ -1,3 +1,6 @@
+/*
+Author: Tomas Valik (xvalik04)
+*/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CreateNewGroupComponent } from './create-new-group.component';

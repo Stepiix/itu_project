@@ -30,7 +30,7 @@ class TransactionController extends Controller
 
     public function createTransaction(Request $request)
     {
-        // Validace vstupních dat
+
         $request->validate([
             't_group_id' => 'required|integer',
             't_user_payer_id' => 'required|integer',
@@ -41,7 +41,7 @@ class TransactionController extends Controller
             't_label' => 'nullable|string|max:64',
         ]);
 
-        // Vytvoření nové transakce
+
         $transaction = Transaction::create([
             't_group_id' => $request->input('t_group_id'),
             't_user_payer_id' => $request->input('t_user_payer_id'),

@@ -1,4 +1,7 @@
 <?php
+/*
+Author: Tomas Valik (xvalik04)
+*/
 
 namespace App\Http\Controllers;
 
@@ -10,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class GroupsController extends Controller
 {
-    // Funkce pro získání base64 kódovaného obrázku z binárních dat
+    //Function to decode image
     private function getBase64Image($imageData)
     {
         if ($imageData) {
@@ -28,16 +31,10 @@ class GroupsController extends Controller
             'group_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $userId = $request->input('user_id'); // Předpokládáme, že máte nějaký způsob získání user_id
+        $userId = $request->input('user_id'); 
         if (!$userId) {
             return response()->json(['message' => 'User ID is required.'], 400);
         }
-        // Získání base64 kódované fotky z requestu
-        //$base64Image = $request->input('group_photo');
-        
-        // Dekódování base64 kódu do binární podoby
-        //$imageData = base64_decode($base64Image);
-
         if ($request->hasFile('group_photo')) {
             $imageData = $request->file('group_photo')->get();
         }else{
@@ -55,14 +52,12 @@ class GroupsController extends Controller
             'user_id' => $userId,
         ]);
 
-        // Vygenerování unikátního kódu (hash z ID skupiny)
+        //generate unique hash from group id
         $invitationCode = hash('sha256', $group->group_id);
 
-        // Přidání kódu do skupiny
+        // add code to group
         $group->group_link = $invitationCode;
         $group->save();
-        // Vytvoření odkazu
-        // $invitationLink = route('group.invite', ['code' => $invitationCode]);
 
         return response()->json(['invitationLink' => $invitationCode, 'message' => 'Group created successfully']);
     }
@@ -98,7 +93,6 @@ class GroupsController extends Controller
         $groupId = $request->input('group_id');
         $userId = $request->input('user_id');
 
-        // Zkontrolujte, zda uživatel patří do skupiny
         $groupUser = GroupUser::where('group_id', $groupId)
             ->where('user_id', $userId)
             ->first();
@@ -114,17 +108,15 @@ class GroupsController extends Controller
 
     public function invite(Request $request, $code)
     {
-        // Najdeme skupinu podle kódu
+        // Find group by link
         $group = Groups::where('group_link', $code)->first();
 
-        // Získáme ID uživatele z parametru URL
         $userId = $request->query('user_id');
 
         if (!$group || !$userId) {
             return response()->json(['message' => 'Invalid invitation link.'], 404);
         }
 
-        // Zkontrolujeme, zda uživatel není již v této skupině
         $isUserInGroup = GroupUser::where('group_id', $group->group_id)
             ->where('user_id', $userId)
             ->exists();
@@ -133,7 +125,7 @@ class GroupsController extends Controller
             return response()->json(['message' => 'User is already in the group.'], 400);
         }
 
-        // Přidáme uživatele do skupiny
+        //add user to group
         GroupUser::create([
             'group_id' => $group->group_id,
             'user_id' => $userId,
@@ -150,7 +142,7 @@ class GroupsController extends Controller
             return response()->json(['message' => 'User ID is required.'], 400);
         }
 
-        // Získání skupin pro konkrétního uživatele
+        //get groups for certain user
         $groups = Groups::whereHas('users', function ($query) use ($userId) {
             $query->where('GroupUser.user_id', $userId);
         })->get();
@@ -172,14 +164,13 @@ class GroupsController extends Controller
             return response()->json(['message' => 'Group ID is required.'], 400);
         }
     
-        // Získání informací o skupině
         $group = groups::find($groupId);
     
         if (!$group) {
             return response()->json(['message' => 'Group not found.'], 404);
         }
     
-        // Získání všech uživatelů této skupiny
+        //get all users from group
         $users = $group->users;
 
         foreach ($users as $user) {
@@ -194,7 +185,7 @@ class GroupsController extends Controller
 
     public function updateGroup(Request $request)
     {
-        // Validace vstupních dat
+
         $request->validate([
             'group_id' => 'required|integer',
             'group_name' => 'required|string|max:32',
@@ -203,15 +194,20 @@ class GroupsController extends Controller
         ]);
 
 
-        $imageData = $request->file('group_photo')->get();
-        // Získání skupiny podle group_id
+        if ($request->hasFile('group_photo')) {
+            $imageData = $request->file('group_photo')->get();
+        }else{
+            $imageData = null;
+        }
+
+
         $group = groups::find($request->input('group_id'));
 
         if (!$group) {
             return response()->json(['message' => 'Group not found'], 404);
         }
 
-        // Aktualizace údajů skupiny
+
         $group->group_name = $request->input('group_name');
         $group->group_label = $request->input('group_label');
         $group->group_photo = $imageData;

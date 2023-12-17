@@ -1,3 +1,7 @@
+/*
+Author: Tomas Valik (xvalik04)
+*/
+
 import { Component } from '@angular/core';
 import { ServiceGroupListService } from '../../services/service-group-list.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -27,9 +31,7 @@ export class CreateNewGroupComponent {
     formData.append('group_name', this.name);
     formData.append('group_label', this.label);
 
-    // Check if selectedFile is not null before appending
     if (this.selectedFile !== null) {
-      // Append the original File to FormData
       formData.append('group_photo', this.selectedFile, this.selectedFile.name);
     }
 

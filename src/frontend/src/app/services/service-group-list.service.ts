@@ -1,3 +1,9 @@
+/*
+Authors: Tomas Valik (xvalik04)
+         Stepan Barta (xbarta50)
+         Milan Takac (xtakac09)
+*/
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -36,7 +42,6 @@ export class ServiceGroupListService {
     };
     console.log('posilam na backend ----------------',paymentData)
 
-    // Return the observable without subscribing here
     return this.http.post(`${this.apiUrl}create-transactions`, paymentData);
   }
 
@@ -55,10 +60,6 @@ export class ServiceGroupListService {
   getAllMessages(groupId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}all-messages/${groupId}`);
   }
-  // getAllMessages(groupId: number, user_id: string): Observable<any> {
-  //   return this.http.get(`${this.apiUrl}all-messages?group_id=${groupId}&user_id=${user_id}`);
-  // }
-
   addMessage(newChatMessage: any): Observable<any> {
     return this.http.post(`${this.apiUrl}add-message`, newChatMessage);
   }
@@ -74,7 +75,7 @@ export class ServiceGroupListService {
     };
     console.log('tohle posilam na backend po delete',removeUserData)
 
-    // Return the observable without subscribing here
+
     return this.http.delete(`${this.apiUrl}group-remove-user`, { body: removeUserData });
   }
 
@@ -87,15 +88,14 @@ export class ServiceGroupListService {
       group_id: groupId,
     };
   
-    // Return the observable without subscribing here
+
     return this.http.get(`${this.apiUrl}group-depts`, { params: requestData });
   }
 
   getLeader(groupId: number): Observable<any> {
-    // Assuming the backend endpoint is '/group-leader'
     const apiUrl = `${this.apiUrl}group-leader?group_id=${groupId}`;
   
-    // Return the observable without subscribing here
+
     return this.http.get(apiUrl);
   }
   

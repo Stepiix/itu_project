@@ -1,3 +1,7 @@
+/*
+Author: Tomas Valik (xvalik04)
+*/
+
 .new-group {
   display: flex;
   flex-direction: column;
@@ -40,7 +44,7 @@
   width: 100%;
 } */
 
-.icon {   /*tady to vymyslet lip*/
+.icon {  
   position: relative;
   /* top: 53.2%; 
   left: 84%; */

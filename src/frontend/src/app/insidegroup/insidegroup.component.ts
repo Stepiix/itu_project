@@ -1,3 +1,10 @@
+
+/*
+Authors: Tomas Valik (xvalik04)
+         Stepan Barta (xbarta50)
+         Milan Takac (xtakac09)
+*/
+
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
@@ -31,19 +38,18 @@ export class InsidegroupComponent {
   }
 
   ngOnInit() {
-    if(!this.session.isLoggedIn()){ // neni prihlaseny
+    if(!this.session.isLoggedIn()){
       this.router.navigate(['/login']);
     } else {
-      // Předpokládáme, že "groupId" je název parametru z cesty definovaný v trasování
     this.route.params.subscribe(params => {
       this.groupId = params['groupId'];
       console.log('Group ID from route:', this.groupId);
       this.loadInfoAboutGroup(this.groupId);
     });
     this.getLeader();
-    this.loadUsersBalances(); //tohle pouzit
+    this.loadUsersBalances();
     this.loadTransactions();
-    this.calculateDebts(); //tohle pouzit
+    this.calculateDebts();
     }
     
   }
@@ -56,7 +62,6 @@ export class InsidegroupComponent {
         this.isGroupLeader = this.userId === data.user_id;
       },
       (error) => {
-        // Handle errors
         console.error('Error fetching group leader:', error);
       }
     );
@@ -81,10 +86,10 @@ export class InsidegroupComponent {
   transformDebts(rawDebts: any): any {
     const transformedDebts: any = {};
     Object.keys(rawDebts).forEach((debtorId) => {
-      const debtorName = this.getUserNameById(parseInt(debtorId)) || ''; // Provide a default value
+      const debtorName = this.getUserNameById(parseInt(debtorId)) || '';
       const transactions: any = {};
       Object.keys(rawDebts[debtorId]).forEach((payerId) => {
-        const payerName = this.getUserNameById(parseInt(payerId)) || ''; // Provide a default value
+        const payerName = this.getUserNameById(parseInt(payerId)) || '';
         transactions[payerName] = rawDebts[debtorId][payerId];
       });
       transformedDebts[debtorName] = transactions;
@@ -101,17 +106,14 @@ export class InsidegroupComponent {
     console.log('----------', this.userId);
   
     if (data && data.group && data.group.users) {
-      // Iterate through users in the group
       for (const user of data.group.users) {
         if (user.user_id === this.userId) {
-          // User is in the group, should see what is in the group
           console.log("ma pravo na tuto stranku")
           return false;
         }
       }
     }
     console.log('nema pravo na tuto stranku')
-    // User is not in the group, should not see what is in the group
     return true;
   }
 
@@ -132,7 +134,6 @@ export class InsidegroupComponent {
   loadTransactions() {
     this.groupservice.loadTransactions(this.groupId).subscribe(
       (data: any) => {
-        // Zpracování dat z backendu
         this.transactions = data.transactions;
         console.log('Transactions from backend:', this.transactions);
       },
@@ -145,7 +146,6 @@ export class InsidegroupComponent {
   loadInfoAboutGroup(id: number) {
     this.groupservice.getInfoAboutGroup(id).subscribe(
       (data: any) => {
-        // Zpracování dat z backendu
         if (this.shouldNotSeeWhatIsInThisGroup(data)) {
           this.router.navigate(['']);
         }
@@ -178,14 +178,13 @@ export class InsidegroupComponent {
       this.loadUsersBalances();
       this.loadTransactions();
       this.calculateDebts();
-      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }
 
   openDialogSettleDebt(): void {
     this.dataSharingService.setSharedID(this.groupId);
     const dialogRef = this.dialog.open(SettledebtComponent, {
-      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
+      panelClass: 'custom-dialog-container',
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -193,44 +192,40 @@ export class InsidegroupComponent {
       this.loadUsersBalances();
       this.loadTransactions();
       this.calculateDebts();
-      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }
 
 openDialogEditGroup(): void {
   const dialogRef = this.dialog.open(EditgroupComponent, {
     panelClass: 'custom-dialog-container',
-    data: { groupInfo: this.groupInfo }, // Předejte data dialogu
+    data: { groupInfo: this.groupInfo },
   });
 
   dialogRef.afterClosed().subscribe(result => {
     console.log('The dialog was closed');
     this.loadInfoAboutGroup(this.groupId);
-    // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
   });
 }
 
 
   openDialogPaymentHistory(): void {
     const dialogRef = this.dialog.open(PaymenthistoryComponent, {
-      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
+      panelClass: 'custom-dialog-container',
     });
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }
 
   openChat(): void {
     this.dataSharingService.setSharedID(this.groupId);
     const dialogRef = this.dialog.open(ChatComponent, {
-      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
+      panelClass: 'custom-dialog-container',
     });
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }
 

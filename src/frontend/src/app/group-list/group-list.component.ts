@@ -1,9 +1,12 @@
+/*
+Author: Tomas Valik (xvalik04)
+*/
 import { Component, OnInit } from '@angular/core';
 import { ServiceGroupListService } from '../services/service-group-list.service';
 import { SessionService } from './../services/session.service';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateNewGroupComponent } from '../group-list/create-new-group/create-new-group.component'; // Vytvořte komponentu pro dialog
+import { CreateNewGroupComponent } from '../group-list/create-new-group/create-new-group.component';
 import { JoinGroupComponent } from './join-group/join-group.component';
 
 @Component({
@@ -17,9 +20,9 @@ export class GroupListComponent {
   constructor(private serviceGroupListService: ServiceGroupListService, private session: SessionService, private router: Router, public dialog: MatDialog) {}
   
   ngOnInit() {
-    if(!this.session.isLoggedIn()){ // neni prihlaseny
+    if(!this.session.isLoggedIn()){
       this.router.navigate(['/login'])
-    } else { // je prihlaseny
+    } else {
       this.loadGroups();
     }
   }
@@ -47,31 +50,26 @@ export class GroupListComponent {
   openCreateGroup(): void {
     const dialogRef = this.dialog.open(CreateNewGroupComponent, {
       panelClass: 'custom-dialog-container',
-      // Další možnosti konfigurace dialogu
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog zavřen');
       this.loadGroups();
-      // Zde můžete zpracovat výsledek dialogu (pokud potřebujete)
     });
   }
 
   openJoinGroup(): void {
     const dialogRef = this.dialog.open(JoinGroupComponent, {
       panelClass: 'custom-dialog-container',
-      // Další možnosti konfigurace dialogu
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('Dialog zavřen');
       this.loadGroups();
-      // Zde můžete zpracovat výsledek dialogu (pokud potřebujete)
     });
   }
   showGroupId(groupId: number) {
     console.log('Clicked on group with ID:', groupId);
-    // Zde můžete provést další akce s ID skupiny, např. získání dat této skupiny nebo navigace na jinou stránku.
     this.router.navigate(['/group', groupId]);
   }
 }

@@ -1,5 +1,11 @@
 <?php
 
+/*
+Authors: Tomas Valik (xvalik04)
+         Stepan Barta (xbarta50)
+         Milan Takac (xtakac09)
+*/
+
 use App\Http\Controllers\ChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -32,31 +38,31 @@ Route::post('/create-group', [GroupsController::class, 'createGroup']);
 
 Route::get('/group', [GroupsController::class, 'getUsersInGroup']);
 
-Route::post('/create-transactions', [TransactionController::class, 'createTransaction']); //done
+Route::post('/create-transactions', [TransactionController::class, 'createTransaction']); 
 
-Route::get('/getall-transactions', [TransactionController::class, 'getTransactionsByGroup']);//done
+Route::get('/getall-transactions', [TransactionController::class, 'getTransactionsByGroup']);
 
-Route::post('/update-user', [UserController::class, 'updateUser']); //done
+Route::post('/update-user', [UserController::class, 'updateUser']); 
 
-Route::get('/get-user', [UserController::class, 'getUser']);//neni potreba vsechno ukladam do session (updatuju moji session)
+Route::get('/get-user', [UserController::class, 'getUser']);
 
-Route::post('/update-group', [GroupsController::class, 'updateGroup']);//done
+Route::post('/update-group', [GroupsController::class, 'updateGroup']);
 
-Route::get('/group-invite/{code}', [GroupsController::class, 'invite']);//done
+Route::get('/group-invite/{code}', [GroupsController::class, 'invite']);
 
-Route::delete('/group-remove-user', [GroupsController::class, 'removeUserFromGroup']);//nefunguje ti to Valiku??
+Route::delete('/group-remove-user', [GroupsController::class, 'removeUserFromGroup']);
 
-Route::get('/group-balance', [TransactionController::class, 'calculateUserBalances']);//done
+Route::get('/group-balance', [TransactionController::class, 'calculateUserBalances']);
 
-Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);//coto kurva je?
+Route::get('/group-depts', [TransactionController::class, 'calculateDebts']);
 
 Route::get('/group-leader', [GroupsController::class, 'getGroupLeader']);
 
-Route::delete('/remove-transaction/{id}', [TransactionController::class, 'removeTransaction']); //done
+Route::delete('/remove-transaction/{id}', [TransactionController::class, 'removeTransaction']); 
 
 Route::get('/user-balance', [TransactionController::class, 'calculateUserBalance']);
 
-Route::get('/getall-transactions-user', [TransactionController::class, 'getTransactionsByUser']);//done
+Route::get('/getall-transactions-user', [TransactionController::class, 'getTransactionsByUser']);
 
 Route::get('/all-messages/{id}', [ChatController::class, 'index']);
 

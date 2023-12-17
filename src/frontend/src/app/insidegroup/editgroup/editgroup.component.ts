@@ -1,5 +1,6 @@
-// editgroup.component.ts
-
+/*
+Author: Tomas Valik (xvalik04)
+*/
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ClipboardService } from 'ngx-clipboard';
@@ -12,8 +13,8 @@ import { SessionService } from 'src/app/services/session.service';
 })
 export class EditgroupComponent implements OnInit {
   groupInfo: any;
-  groupName: string = '';  // Přidáno pro název skupiny
-  groupLabel: string = '';  // Přidáno pro popis skupiny
+  groupName: string = '';  
+  groupLabel: string = '';  
   groupLink: string = '';
   isLinkVisible: boolean = false; 
   userId: any;
@@ -31,8 +32,8 @@ export class EditgroupComponent implements OnInit {
     private session: SessionService,
   ) {
     this.groupInfo = data.groupInfo;
-    this.groupName = this.groupInfo.group.group_name;  // Předvyplnění hodnoty názvu skupiny
-    this.groupLabel = this.groupInfo.group.group_label;  // Předvyplnění hodnoty popisu skupiny
+    this.groupName = this.groupInfo.group.group_name;  
+    this.groupLabel = this.groupInfo.group.group_label;
     this.groupLink = this.groupInfo.group.group_link;
     this.groupId = this.groupInfo.group.group_id;
     this.userId = this.session.getID();
@@ -82,7 +83,6 @@ export class EditgroupComponent implements OnInit {
   }
 
   copyLink() {
-    // Zkopírujte obsah do schránky
     this.clipboardService.copyFromContent(this.groupLink);
   }
 
@@ -100,12 +100,10 @@ export class EditgroupComponent implements OnInit {
         console.log('Group updated successfully:', response);
         this.dialogRef.close();
   
-        // Additional actions after a successful update
       },
       (error) => {
         console.error('Error updating group:', error);
-        // Actions to be performed after an unsuccessful update
-      }
+       }
     );
   }
 
@@ -115,8 +113,6 @@ export class EditgroupComponent implements OnInit {
       .subscribe(
         (response) => {
           console.log('Member removed successfully:', response);
-          // Aktualizovat skupinu po odebrání člena
-          // this.updateGroupInfo(); ///tohle TODO
         },
         (error) => {
           console.error('Error removing member:', error);

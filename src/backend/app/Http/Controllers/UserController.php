@@ -1,5 +1,7 @@
 <?php
-
+/*
+Author: Tomas Valik (xvalik04)
+*/
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -22,7 +24,7 @@ class UserController extends Controller
     {
 
         $user_id = $request->user_id;
-        // Získání informací o uživateli
+
         $user = userMy::find($user_id);
 
         if (!$user) {
@@ -37,7 +39,7 @@ class UserController extends Controller
     {
 
         $user_id = $request->input('user_id');
-        // Validace vstupních dat
+
         $request->validate([
             'user_firstname' => 'required|string|max:32',
             'user_lastname' => 'required|string|max:32',
@@ -45,8 +47,12 @@ class UserController extends Controller
             'user_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imageData = $request->file('user_photo')->get();
-        // Aktualizace údajů uživatele
+        if ($request->hasFile('group_photo')) {
+            $imageData = $request->file('group_photo')->get();
+        }else{
+            $imageData = null;
+        }
+
         $user = userMy::find($user_id);
 
         if (!$user) {

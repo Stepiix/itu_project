@@ -1,5 +1,6 @@
-// join-group.component.ts
-
+/*
+Author: Tomas Valik (xvalik04)
+*/
 import { Component } from '@angular/core';
 import { ServiceGroupListService } from 'src/app/services/service-group-list.service';
 import { SessionService } from 'src/app/services/session.service';
@@ -19,7 +20,6 @@ export class JoinGroupComponent {
   }
 
   pridatSeKeSkupine() {
-    // Předpokládáme, že chcete odeslat odkaz, který byl zadaný do vstupu
     console.log("chci se pripojit - ", this.link)
     console.log('moje id je ', this.session.getID);
     this.user_id = this.session.getID() ?? '';
@@ -27,12 +27,10 @@ export class JoinGroupComponent {
       response => {
         console.log('Odpověď z backendu:', response);
         this.dialogRef.close();
-        // Zpracujte odpověď z backendu podle potřeby
       },
       error => {
         console.error('Chyba při komunikaci s backendem:', error);
         alert('neco se nepovedlo')
-        // Zpracujte chybu podle potřeby
       }
     );
   }

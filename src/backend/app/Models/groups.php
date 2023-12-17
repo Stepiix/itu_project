@@ -1,4 +1,7 @@
 <?php
+/*
+Author: Tomas Valik (xvalik04)
+*/
 
 namespace App\Models;
 
@@ -12,9 +15,9 @@ class groups extends Model
     protected $table = 'AGroup';
     protected $primaryKey = 'group_id';
     protected $fillable = [   
-    'group_name', // upraveno z 'name' na 'user_firstname'
-    'group_label',  // upraveno z 'name' na 'user_lastname'
-    'group_link',     // upraveno z 'email' na 'user_email'
+    'group_name',
+    'group_label', 
+    'group_link',  
     'group_photo', 
     ];
 

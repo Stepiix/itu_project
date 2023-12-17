@@ -14,6 +14,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 export class ProfileComponent {
   userInfo: any;
   userId:any;
+  userBalance: number = 0;
 
   constructor( private session: SessionService, private router: Router, private dialog: MatDialog,private auth:AuthserviceService,  private sanitizer: DomSanitizer) {}
 
@@ -39,9 +40,19 @@ export class ProfileComponent {
     }
   }
 
-  loadBalance(){
-
+  loadBalance() {
+    this.auth.loadBalance(this.userId).subscribe(
+      (balanceResponse) => {
+        this.userBalance = balanceResponse.balance;
+        console.log('User balance:', this.userBalance);
+      },
+      (error) => {
+        console.error('Error loading user balance:', error);
+        // Handle the error as needed
+      }
+    );
   }
+
   loadInfoAboutUser() {
     const userId = this.session.getID();
   

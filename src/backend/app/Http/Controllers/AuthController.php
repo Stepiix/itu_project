@@ -1,6 +1,8 @@
 <?php
+/*
+Author: Tomas Valik (xvalik04)
+*/
 
-// app/Http/Controllers/AuthController.php
 
 namespace App\Http\Controllers;
 

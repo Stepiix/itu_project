@@ -18,14 +18,17 @@
    
     <div class="info">
         <div class="balanc"> 
-            <h3>Aktuální balanc: TODO</h3>
-            <p>+25</p> 
+            <h3>Aktuální balanc:</h3>
+            <p [ngStyle]="{'color': userBalance < 0 ? 'red' : 'green'}">
+                {{ userBalance > 0 ? '+' : '' }}{{ userBalance }}
+            </p> 
             <select>
                 <option>CZK</option>
                 <option>CZK</option>
                 <option>CZK</option>
             </select>
         </div>
+        
 
         <div class="payment-history">
             <h3>Historie plateb TODO</h3>

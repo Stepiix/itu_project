@@ -1,4 +1,7 @@
 <?php
+/*
+Author: Tomas Valik (xvalik04)
+*/
 
 namespace App\Models;
 

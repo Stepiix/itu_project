@@ -1,3 +1,12 @@
+
+/*
+Authors: Tomas Valik (xvalik04)
+         Stepan Barta (xbarta50)
+         Milan Takac (xtakac09)
+*/
+.user-list::-webkit-scrollbar {
+    visibility: hidden;
+}
 .inside-group {
     display: flex;
     flex-direction: column;

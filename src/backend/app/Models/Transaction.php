@@ -22,7 +22,7 @@ class Transaction extends Model
         't_label',
     ];
 
-    // Definice vztahů s dalšími tabulkami (AGroup a User)
+
     public function group()
     {
         return $this->belongsTo(AGroup::class, 't_group_id');

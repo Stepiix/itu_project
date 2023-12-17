@@ -6,7 +6,9 @@
     /* margin-top: 3rem; */
     height: 90%;
 }
-
+/*
+Author: Tomas Valik (xvalik04)
+*/
 .group-list {
     display: flex;
     flex-wrap: wrap;

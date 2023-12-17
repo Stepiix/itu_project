@@ -16,7 +16,12 @@ class ChatController extends Controller
             return response()->json(['message' => 'Group ID is required.'], 400);
         }
 
-        $chats = Chat::where('message_group_id', $groupId)->get();
+           // Přidáme JOIN na tabulku User, abychom získali jména uživatelů
+        $chats = Chat::join('User', 'Chat.message_user_id', '=', 'User.user_id')
+        ->select('Chat.*', 'User.user_firstname', 'User.user_lastname')
+        ->where('Chat.message_group_id', $groupId)
+        ->get();
+
         return response()->json($chats);
     }
 

@@ -31,19 +31,16 @@ export class GroupListComponent {
     const userId = this.session.getID();
     
     if (userId !== null) {
-      console.log("Userovo ID je: " + userId);
   
       this.serviceGroupListService.getGroups(userId).subscribe(
         (data) => {
           this.groups = data;
-          console.log("Tady jsou informace o skupinách:", this.groups);
         },
         (error) => {
           console.error('Error loading groups', error);
         }
       );
     } else {
-      console.error('User ID is null');
     }
   }
 
@@ -53,7 +50,6 @@ export class GroupListComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog zavřen');
       this.loadGroups();
     });
   }
@@ -64,12 +60,10 @@ export class GroupListComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog zavřen');
       this.loadGroups();
     });
   }
   showGroupId(groupId: number) {
-    console.log('Clicked on group with ID:', groupId);
     this.router.navigate(['/group', groupId]);
   }
 }

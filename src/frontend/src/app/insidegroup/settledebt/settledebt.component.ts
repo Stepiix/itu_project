@@ -1,3 +1,6 @@
+/*
+Author: Stepan Barta (xbarta50)
+*/
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { DataSharingService } from '../services/data-sharing.service';
@@ -26,30 +29,25 @@ export class SettledebtComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('SettledebtComponent initialized');
 
     this.dataSharingService.shareduserBalances$.subscribe((userBalances) => {
       if (userBalances) {
         this.userBalances = userBalances;
-        console.log('User Balances in SettledebtComponent:', this.userBalances);
       }
     });
 
     this.dataSharingService.sharedDebts$.subscribe((debts) => {
       if (debts) {
         this.debts = debts;
-        console.log('Debts in SettledebtComponent:', this.debts);
         this.updateMyUserName();
       }
     });
 
     this.dataSharingService.sharedId$.subscribe(id => {
       this.groupId = id;
-      console.log('Received groupId from addnewpay: ' + this.groupId);
    });
 
     this.userID = this.session.getID();
-    console.log('IDDDDDDDDDDDDDDDDDDDD - ', this.userID);
     this.updateMyUserName();
   }
 
@@ -58,7 +56,6 @@ export class SettledebtComponent implements OnInit {
       const myUser = this.userBalances.find((user: any) => user.user_id === this.userID);
       if (myUser) {
         this.myUserName = myUser.user_firstname;
-        console.log('My User Name:', this.myUserName);
         this.updateCurrentUserDebts();
       }
     }
@@ -70,7 +67,6 @@ export class SettledebtComponent implements OnInit {
         name: key,
         value: value
       }));
-      console.log('Current User Debts:', this.currentUserDebts);
     }
   }
 
@@ -94,9 +90,6 @@ export class SettledebtComponent implements OnInit {
       const selectedUserId = this.userBalances.find((user: any) => user.user_firstname === this.selectedDebt)?.user_id;
   
       if (selectedUserId) {
-        // Do something with the selected user ID and amount
-        console.log('Selected User ID:', selectedUserId);
-        console.log('Selected Debt Amount:', this.selectedDebtAmount);
       }
   
       const settleDebtRequest = this.groupservice.sendNewPay(
@@ -112,14 +105,11 @@ export class SettledebtComponent implements OnInit {
   
       settleDebtRequest.subscribe(
         (response) => {
-          // Request was successful
           console.log('Debt settlement successful:', response);
           this.dialogRef.close();
         },
         (error) => {
-          // Something went wrong with the request
           console.error('Error settling debt:', error);
-          // You can add appropriate behavior here
         }
       );
     }

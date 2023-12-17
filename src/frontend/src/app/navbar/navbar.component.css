@@ -1,7 +1,6 @@
 .vertical-navbar {
   justify-content: space-between;
   align-items: center;
-  /* border: 1px solid black; */
 }
 
 .nav{
@@ -35,12 +34,8 @@ i {
 }
 
 .pic {
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
   border-radius: 50%;
   overflow: hidden;
-  /* box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25); */
   width: 3rem;
   height: 3rem;
 }

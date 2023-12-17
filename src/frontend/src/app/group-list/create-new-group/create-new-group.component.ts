@@ -42,7 +42,6 @@ export class CreateNewGroupComponent {
 
     this.serviceGroupListService.createGroup(formData).subscribe(
       (response) => {
-        console.log('Skupina byla vytvořena úspěšně.');
       },
       (error) => {
         console.error('Chyba při vytváření skupiny:', error);
@@ -55,7 +54,7 @@ export class CreateNewGroupComponent {
   }
   handleFileInput(event: any): void {
     this.selectedFile = event.target.files[0];
-    this.displayImage(); // Update the image when a new file is selected
+    this.displayImage(); 
   }
   displayImage(): string | null {
     if (this.selectedFile) {

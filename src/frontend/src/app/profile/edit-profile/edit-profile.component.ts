@@ -24,7 +24,6 @@ export class EditProfileComponent implements OnInit{
   ngOnInit(): void {
     // Tady můžete provádět inicializace nebo načítání dat, pokud je to potřeba při inicializaci komponentu.
     // Například můžete načíst data o uživateli pro úpravu profilu.
-    console.log("beru veci ze session")
     this.userInfo = this.session.getUserSession();
   }
   handleFileInput(event: any): void {
@@ -60,7 +59,6 @@ export class EditProfileComponent implements OnInit{
         // Uživatel potvrdil, můžete provést úpravu profilu
         this.performProfileUpdate();
       } else if (!result){//dal storno
-        console.log("profil nebyl upraven protoze dal storno")
       }
     });
   }
@@ -73,7 +71,6 @@ export class EditProfileComponent implements OnInit{
       user_email: this.userInfo.email,
       user_photo : this.selectedFile
     };
-    console.log('===========',updatedUserInfo)
   
     // Create a FormData object to send both text and file data
     const formData = new FormData();
@@ -88,10 +85,8 @@ export class EditProfileComponent implements OnInit{
     }
   
     // Call editUser method with FormData
-    console.log('ahooooooooooooooooooooooooj',formData)
     this.authservice.editUser(formData).subscribe(
       (response) => {
-        console.log('Profile updated successfully');
         this.session.updateUserSession(updatedUserInfo);
         this.dialogRef.close();
         // Add any additional logic or feedback for successful update

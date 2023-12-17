@@ -1,3 +1,6 @@
+/*
+Author: Stepan Barta (xbarta50)
+*/
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -23,13 +26,11 @@ export class PaymenthistoryComponent {
   }
 
   deleteTransaction(transactionID: number): void {
-    console.log("smaz transakci: ", transactionID);
 
     const transactionRemoval = this.grouplistservice.removeTransaction(transactionID);
     
     transactionRemoval.subscribe(
       (responses) => {
-        console.log('Transaction deleted successfuly:', responses);
         this.loadTransactions();
 
       },
@@ -43,7 +44,6 @@ export class PaymenthistoryComponent {
     this.grouplistservice.loadTransactions(this.groupId).subscribe(
       (data: any) => {
         this.transactions = data.transactions;
-        console.log('Transactions from backend:', this.transactions);
       },
       (error) => {
         console.error('Error fetching transactions from backend:', error);
@@ -53,12 +53,10 @@ export class PaymenthistoryComponent {
 
   openFilterDialog(): void {
     const dialogRef = this.dialog.open(FilterComponent, {
-      width: '400px', // Nastavte šířku dialogu dle potřeby
+      width: '400px', 
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The filter dialog was closed');
-      // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }
 

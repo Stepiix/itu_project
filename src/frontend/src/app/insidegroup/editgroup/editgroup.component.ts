@@ -40,10 +40,6 @@ export class EditgroupComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('Group Info in EditgroupComponent:', this.groupInfo);
-    console.log('id skupiny', this.groupInfo.group.group_id)
-    console.log('jmeno skupiny', this.groupInfo.group.group_name)
-    console.log('popis skupiny', this.groupInfo.group.group_label)
     this.getLeader();
   }
 
@@ -51,10 +47,8 @@ export class EditgroupComponent implements OnInit {
     this.groupservice.getLeader(this.groupId).subscribe(
       (data: any) => {
         // Handle the response from the backend
-        console.log('Group leader:', data);
 
         this.isGroupLeader = this.userId === data.user_id;
-        console.log('velitel skupiny ano nebo ne',this.isGroupLeader);
       },
       (error) => {
         // Handle errors
@@ -97,7 +91,6 @@ export class EditgroupComponent implements OnInit {
   
     this.groupservice.updateGroup(formData).subscribe(
       (response) => {
-        console.log('Group updated successfully:', response);
         this.dialogRef.close();
   
       },
@@ -108,11 +101,9 @@ export class EditgroupComponent implements OnInit {
   }
 
   removeMember(memberId: number): void {
-    console.log('id clena ktereho chci vymazat',memberId)
     this.groupservice.removeUserFromGroup(this.groupInfo.group.group_id, memberId)
       .subscribe(
         (response) => {
-          console.log('Member removed successfully:', response);
         },
         (error) => {
           console.error('Error removing member:', error);

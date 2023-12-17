@@ -1,3 +1,6 @@
+/*
+Author: Stepan Barta (xbarta50)
+*/
 import { Component } from '@angular/core';
 
 @Component({

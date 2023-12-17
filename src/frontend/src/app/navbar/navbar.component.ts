@@ -20,11 +20,9 @@ export class NavbarComponent implements OnInit {
       this.loadInfoAboutUser();
     }
 
-    // Poslouchat události navigace
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
-        // Znovu načíst informace o uživateli po každé změně navigace
         if (this.session.isLoggedIn()) {
           this.loadInfoAboutUser();
         }
@@ -38,14 +36,11 @@ export class NavbarComponent implements OnInit {
       this.auth.loadInfoAboutUser(Number(userId)).subscribe(
         (user) => {
           this.userInfo = user;
-          console.log('user info', this.userInfo);
         },
         (error) => {
-          console.error('Error loading user information:', error);
         }
       );
     } else {
-      console.error('User ID is null');
     }
   }
 }

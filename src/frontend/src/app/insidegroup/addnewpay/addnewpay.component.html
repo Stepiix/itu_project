@@ -1,4 +1,6 @@
-<!-- addnewpay.component.html -->
+<!-- 
+Author: Stepan Barta (xbarta50)
+-->
 <div class="add-new-payment">
 
   <div class="header">
@@ -8,7 +10,6 @@
     </button>
   </div>
   
-  <!-- Vstup pro vybrání uživatele -->
   <div class="form-group">
     <label for="selectedUserId">Platil:</label>
     <select id="selectedUserId" [(ngModel)]="selectedUserId" (ngModelChange)="checkButtonAvailability()">
@@ -18,21 +19,16 @@
     </select>
   </div>
   
-  <!-- Vstup pro zadání částky -->
   <div class="form-group">
     <label for="paymentAmount">Částka:</label>
     <input type="number" id="paymentAmount" [(ngModel)]="paymentAmount" (ngModelChange)="checkButtonAvailability()">
   </div>
   
-  <!-- Vstup pro zadání důvodu platby -->
   <div class="form-group">
     <label for="paymentReason">Za co:</label>
     <input type="text" id="paymentReason" [(ngModel)]="paymentReason" placeholder="Např.: kino">
   </div>
     
-  <!-- Tlačítka pro výběr "Částky" a "Poměru" -->
-  
-  <!-- Vstupy pro zadání podílu pro každého uživatele -->
   <h2>Účastníci</h2>
   <div class="division-container">
 
@@ -49,13 +45,6 @@
       </div>
     </div>
     
-    <!-- <div class="division-container">
-      <p>Platil: {{ selectedUserId }}</p>
-      <p>Částka: {{ paymentAmount }}</p>
-      <p>Za co: {{ paymentReason }}</p>
-      <button class="split-equally" (click)="splitEqually()">Rozdělit rovnoměrně</button>
-  </div> -->
-  
     <button class="split-equally" (click)="splitEqually()">Rozdělit rovnoměrně</button>
   </div>
   

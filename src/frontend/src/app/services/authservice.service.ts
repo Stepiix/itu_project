@@ -15,7 +15,6 @@ export class AuthserviceService {
   constructor(private http: HttpClient) { }
 
   register(information: any): Observable<any> {
-    console.log(information);
     return this.http.post(this.apiUrlRegister, information);
   }
 
@@ -24,12 +23,10 @@ export class AuthserviceService {
       user_email: credentials.email,
       user_password: credentials.password
     };
-    console.log(Credentials);
     return this.http.post(this.apiUrlLogin, Credentials);
   }
 
   editUser(userInformation: FormData): Observable<any> {
-    console.log('xxxxxxxxxxxxxxxxxxx',userInformation)
     return this.http.post(this.apiUrlUpdateUser, userInformation);
   }
 

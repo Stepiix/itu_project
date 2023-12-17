@@ -45,7 +45,6 @@ export class ChatComponent {
 
   loadMessages(groupId: number) {
     this.serviceGroupListService.getAllMessages(groupId).subscribe((messages) => {
-      // console.log('Získané zprávy:', messages);
       this.messages = messages;
     });
   }

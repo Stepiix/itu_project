@@ -20,16 +20,12 @@ export class JoinGroupComponent {
   }
 
   pridatSeKeSkupine() {
-    console.log("chci se pripojit - ", this.link)
-    console.log('moje id je ', this.session.getID);
     this.user_id = this.session.getID() ?? '';
     this.groupService.pridatSeKeSkupine(this.link, this.user_id).subscribe(
       response => {
-        console.log('Odpověď z backendu:', response);
         this.dialogRef.close();
       },
       error => {
-        console.error('Chyba při komunikaci s backendem:', error);
         alert('neco se nepovedlo')
       }
     );

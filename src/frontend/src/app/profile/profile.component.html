@@ -1,6 +1,5 @@
 <div class="profile">
     <div class="profile-pic">
-        <!-- <h1>tady bude jeho fotka</h1> -->
         <div class="pic">
             <ng-container *ngIf="userInfo?.user_photo; else defaultImage">
               <img [src]="getUserPhotoUrl()" alt="profilova fotka" />

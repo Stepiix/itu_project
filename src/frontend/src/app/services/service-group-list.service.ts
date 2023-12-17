@@ -39,7 +39,6 @@ export class ServiceGroupListService {
       t_exchange_rate: exchangeRate,
       t_label: paymentReason,
     };
-    console.log('posilam na backend ----------------',paymentData)
 
     return this.http.post(`${this.apiUrl}create-transactions`, paymentData);
   }
@@ -80,9 +79,6 @@ export class ServiceGroupListService {
       group_id: groupId,
       user_id: userId,
     };
-    console.log('tohle posilam na backend po delete',removeUserData)
-
-
     return this.http.delete(`${this.apiUrl}group-remove-user`, { body: removeUserData });
   }
 

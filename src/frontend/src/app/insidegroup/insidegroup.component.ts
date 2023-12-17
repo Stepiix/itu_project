@@ -43,7 +43,6 @@ export class InsidegroupComponent {
     } else {
     this.route.params.subscribe(params => {
       this.groupId = params['groupId'];
-      console.log('Group ID from route:', this.groupId);
       this.loadInfoAboutGroup(this.groupId);
     });
     this.getLeader();
@@ -56,8 +55,6 @@ export class InsidegroupComponent {
   getLeader() {
     this.groupservice.getLeader(this.groupId).subscribe(
       (data: any) => {
-        // Handle the response from the backend
-        console.log('Group leader:', data);
 
         this.isGroupLeader = this.userId === data.user_id;
       },
@@ -74,7 +71,6 @@ export class InsidegroupComponent {
   calculateDebts() {
     this.groupservice.calculateDebts(this.groupId).subscribe(
       (data: any) => {
-        console.log('Debts from backend:', data.debts);
         this.debts = this.transformDebts(data.debts);
         this.dataSharingService.setDebts(this.debts);
       },
@@ -103,17 +99,14 @@ export class InsidegroupComponent {
 
   shouldNotSeeWhatIsInThisGroup(data: any) {
     this.userId = this.session.getID();
-    console.log('----------', this.userId);
   
     if (data && data.group && data.group.users) {
       for (const user of data.group.users) {
         if (user.user_id === this.userId) {
-          console.log("ma pravo na tuto stranku")
           return false;
         }
       }
     }
-    console.log('nema pravo na tuto stranku')
     return true;
   }
 
@@ -122,7 +115,6 @@ export class InsidegroupComponent {
     this.groupservice.loadUserBalances(this.groupId).subscribe(
       (data: any) => {
         this.userBalances = data.users;
-        console.log('User balances from backend:', this.userBalances);
         this.dataSharingService.setBalances(this.userBalances);
       },
       (error) => {
@@ -135,7 +127,6 @@ export class InsidegroupComponent {
     this.groupservice.loadTransactions(this.groupId).subscribe(
       (data: any) => {
         this.transactions = data.transactions;
-        console.log('Transactions from backend:', this.transactions);
       },
       (error) => {
         console.error('Error fetching transactions from backend:', error);
@@ -150,8 +141,6 @@ export class InsidegroupComponent {
           this.router.navigate(['']);
         }
         this.groupInfo = data;
-        console.log('Data from backend:', this.groupInfo);
-        console.log('data o skupine ------ ', this.groupInfo.group);
         this.dataSharingService.setGroupInfo(this.groupInfo.group);
       },
       (error) => {
@@ -174,7 +163,6 @@ export class InsidegroupComponent {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.loadUsersBalances();
       this.loadTransactions();
       this.calculateDebts();
@@ -188,7 +176,6 @@ export class InsidegroupComponent {
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.loadUsersBalances();
       this.loadTransactions();
       this.calculateDebts();
@@ -202,7 +189,6 @@ openDialogEditGroup(): void {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
     this.loadInfoAboutGroup(this.groupId);
   });
 }
@@ -211,11 +197,10 @@ openDialogEditGroup(): void {
   openDialogPaymentHistory(): void {
     const dialogRef = this.dialog.open(PaymenthistoryComponent, {
       data: { transactions : this.transactions, groupId:this.groupId },
-      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
+      panelClass: 'custom-dialog-container',
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.loadTransactions();
     });
   }
@@ -224,12 +209,10 @@ openDialogEditGroup(): void {
     this.dataSharingService.setSharedID(this.groupId);
     const dialogRef = this.dialog.open(ChatComponent, {
       width: '1000px',
-      panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
+      panelClass: 'custom-dialog-container',
     });
   
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
     });
   }
-
 }

@@ -36,7 +36,6 @@ export class SessionService {
       photo: photo,
       expirationTime: new Date().getTime() + 10 * 60 * 1000 * 6 * 2
     };
-    console.log(sessionData)
     sessionStorage.setItem('userSession', JSON.stringify(sessionData));
 
     this.userSessionSubject.next({
@@ -56,7 +55,6 @@ export class SessionService {
       
       // Kontrola, zda session nevypršela
       if (currentTime < sessionData.expirationTime) {
-        console.log('get user session-----------------------------')
         return {
           userID: sessionData.userID,
           firstName: sessionData.firstName,
@@ -65,15 +63,12 @@ export class SessionService {
           photo: sessionData.photo || null
         };
       } else {
-        // Session vypršela, odstranění dat
         sessionStorage.removeItem('userSession');
       }
     }
   
-    // Session neexistuje nebo vypršela
     return null;
   }
-  //get userovo id
   getID(): string | null { 
     const sessionData = sessionStorage.getItem('userSession');
     if (sessionData) {
@@ -89,7 +84,6 @@ export class SessionService {
     if (sessionDataString) {
       const sessionData = JSON.parse(sessionDataString);
   
-      // Update specific properties in the session data
       if (updatedUser.user_id) {
         sessionData.userID = updatedUser.user_id;
       }
@@ -105,7 +99,6 @@ export class SessionService {
       if (updatedUser.user_photo) {
         sessionData.photo = updatedUser.user_photo;
       }
-      console.log('update user session-----------------------------')
       sessionStorage.setItem('userSession', JSON.stringify(sessionData));
       this.userSessionSubject.next({
         'userID': sessionData.userID,

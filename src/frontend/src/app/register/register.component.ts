@@ -18,7 +18,7 @@ export class RegisterComponent {
       user_firstname: ['', Validators.required],
       user_lastname: ['', Validators.required],
       user_email: ['', [Validators.required, Validators.email]],
-      user_password: ['', Validators.required] //tady by se jeste mohl pridat neco ze treba heslo musi byt dlouhe aspon 6 pismen
+      user_password: ['', Validators.required] 
     });
   }
 
@@ -36,16 +36,10 @@ export class RegisterComponent {
           
           this.session.startUserSession(response.user.user_id, response.user.user_firstname, response.user.user_lastname, response.user.user_email, response.user.user_photo);
           this.router.navigate(['/']);
-
-          // Provedení dalších akcí po úspěšné registraci, například přesměrování na jinou stránku nebo zobrazení potvrzující zprávy
-          // this.router.navigate(['/success-page']); // Přesměrování
-          // this.showSuccessMessage = true; // Zobrazení potvrzující zprávy
         },
         (error) => {
           this.registrationFailed = true;
           console.error('Chyba při registraci', error);
-          // Zde můžete zpracovat chybu, například zobrazením chybové zprávy uživateli
-          // this.errorMessage = 'Chyba při registraci: ' + error.message;
         }
       );
     }

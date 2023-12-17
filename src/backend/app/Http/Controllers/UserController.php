@@ -7,6 +7,17 @@ use App\Models\userMy;
 
 class UserController extends Controller
 {
+
+    private function getBase64Image($imageData)
+    {
+        if ($imageData) {
+            return base64_encode($imageData);
+        } else {
+            return null;
+        }
+    }
+
+
     public function getUser(Request $request)
     {
 
@@ -17,6 +28,7 @@ class UserController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
+        $user->user_photo = getBase64Image($user->user_photo);
 
         return response()->json($user, 200);
     }

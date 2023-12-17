@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AuthserviceService } from '../services/authservice.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 //pridat novou componentu
 @Component({
   selector: 'app-profile',
@@ -12,8 +13,9 @@ import { AuthserviceService } from '../services/authservice.service';
 })
 export class ProfileComponent {
   userInfo: any;
+  userId:any;
 
-  constructor( private session: SessionService, private router: Router, private dialog: MatDialog,private auth:AuthserviceService) {}
+  constructor( private session: SessionService, private router: Router, private dialog: MatDialog,private auth:AuthserviceService,  private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
     if(!this.session.isLoggedIn()){ // neni prihlaseny
@@ -23,7 +25,22 @@ export class ProfileComponent {
       // console.log(this.userInfo)
       // console.log('fotka -',this.userInfo.photo)
       this.loadInfoAboutUser();
+      this.userId = this.session.getID();
+      this.loadBalance();
     }
+  }
+  getUserPhotoUrl(): SafeUrl {
+    if (this.userInfo?.user_photo) {
+      // Use DomSanitizer to ensure safe URL
+      return this.sanitizer.bypassSecurityTrustUrl('data:image/jpeg;base64,' + this.userInfo.user_photo);
+    } else {
+      // Provide a default image URL or handle the case where user_photo is not available
+      return 'path/to/default/image'; // Replace with your default image URL
+    }
+  }
+
+  loadBalance(){
+
   }
   loadInfoAboutUser() {
     const userId = this.session.getID();
@@ -59,7 +76,7 @@ export class ProfileComponent {
 
     dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');
-        this.userInfo = this.session.getUserSession();
+        this.loadInfoAboutUser();
         console.log('ukladam spravne session?',this.userInfo)
         console.log('fotka po update -',this.userInfo.photo )
         // Zpracujte výsledek z dialogu, pokud je potřeba

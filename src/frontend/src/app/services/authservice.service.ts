@@ -36,5 +36,9 @@ export class AuthserviceService {
     const params = { user_id: user_id.toString() };
     return this.http.get(this.apiUrlGetUser, { params });
   }
+
+  loadBalance(){
+    
+  }
   
 }

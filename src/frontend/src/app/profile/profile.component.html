@@ -2,17 +2,17 @@
     <div class="profile-pic">
         <!-- <h1>tady bude jeho fotka</h1> -->
         <div class="pic">
-            <ng-container *ngIf="userInfo?.photo; else defaultImage">
-            <img [src]="'data:image/jpeg;base64,' + userInfo.photo" alt="profilova fotka" /> 
-          </ng-container>
-          <ng-template #defaultImage>
-            <i class="material-icons">account_circle</i>
-          </ng-template>
-        </div>
+            <ng-container *ngIf="userInfo?.user_photo; else defaultImage">
+              <img [src]="getUserPhotoUrl()" alt="profilova fotka" />
+            </ng-container>
+            <ng-template #defaultImage>
+              <i class="material-icons">account_circle</i>
+            </ng-template>
+          </div>
     </div>
     
     <div *ngIf="userInfo" class="user-name">
-        <h1>{{ userInfo.firstName }} {{ userInfo.lastName }}</h1>
+        <h1>{{ userInfo.user_firstname }} {{ userInfo.user_lastname }}</h1>
         <mat-icon (click)="openEditDialog()" class="edit-pen">edit</mat-icon>
     </div>
    

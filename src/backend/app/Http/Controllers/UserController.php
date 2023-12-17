@@ -28,7 +28,7 @@ class UserController extends Controller
         if (!$user) {
             return response()->json(['message' => 'User not found'], 404);
         }
-        $user->user_photo = getBase64Image($user->user_photo);
+        $user->user_photo = $this->getBase64Image($user->user_photo);
 
         return response()->json($user, 200);
     }

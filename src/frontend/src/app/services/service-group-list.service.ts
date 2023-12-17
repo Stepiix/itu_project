@@ -18,7 +18,6 @@ export class ServiceGroupListService {
   createGroup(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}create-group`, formData);
   }
-  
 
   getInfoAboutGroup(groupId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}group?group_id=${groupId}`);
@@ -37,6 +36,10 @@ export class ServiceGroupListService {
 
     // Return the observable without subscribing here
     return this.http.post(`${this.apiUrl}create-transactions`, paymentData);
+  }
+
+  removeTransaction(transactionID: number){
+    return this.http.delete(`${this.apiUrl}remove-transaction/${transactionID}`);
   }
 
   loadTransactions(groupId: number): Observable<any> {

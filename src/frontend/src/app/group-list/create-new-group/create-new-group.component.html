@@ -10,19 +10,22 @@
 
     <div class="groupInput">
         <input id="name" [(ngModel)]="name" placeholder="Název" type="text">
-        <input id="label" [(ngModel)]="label" placeholder="Popis" type="text">
-
-        <input id="photo" type="file" (change)="handleFileInput($event)" style="display: none">
-        <label for="photo" class="file-input-label">
-            <mat-icon class="icon">camera_alt</mat-icon>
-        </label>
-
-
-        <img *ngIf="selectedFile" [src]="displayImage()" alt="Selected Image" class="selected-image">
     </div>
 
-    <br>
-    <h2>Přidat členy</h2>
+    <div class="groupInput">
+        <input id="label" [(ngModel)]="label" placeholder="Popis" type="text">
+    </div>
+    
+    <div class="pic">
+        <input id="photo" type="file" (change)="handleFileInput($event)" style="display: none">
+        <label for="photo" class="file-input-label">
+            <span>Přidejte fotografii <mat-icon class="icon">camera_alt</mat-icon></span> 
+        </label>
+    </div>
+    
+    <div class="groupInput">
+        <img *ngIf="selectedFile" [src]="displayImage()" alt="Selected Image" class="selected-image">
+    </div>
 
     <div class="vytvorit">
         <button (click)="vytvoritSkupinu()">Vytvořit</button>

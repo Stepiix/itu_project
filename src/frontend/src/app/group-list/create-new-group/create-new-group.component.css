@@ -40,14 +40,22 @@ Author: Tomas Valik (xvalik04)
   margin-bottom: 0.5em;
 }
 
-/* .fotka {
-  width: 100%;
-} */
+.pic {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+  font-size: 16px;
+  padding-left: 0.5em;
+}
+
+.pic label {
+  display: flex;
+  align-items: center;
+}
 
 .icon {  
   position: relative;
-  /* top: 53.2%; 
-  left: 84%; */
+  top: 6px 
 }
 
 .vytvorit {

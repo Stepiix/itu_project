@@ -53,6 +53,12 @@ span {
     padding: 0.1em 1em;
     border-radius: 10px;
     margin-right: 0.5em;
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .delete {

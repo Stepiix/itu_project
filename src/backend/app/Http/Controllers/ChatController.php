@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chat;
+//  Author: Milan Takac (xtakac09)
 
 class ChatController extends Controller
 {

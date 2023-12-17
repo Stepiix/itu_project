@@ -5,7 +5,7 @@ Authors: Tomas Valik (xvalik04)
          Milan Takac (xtakac09)
 */
 .user-list::-webkit-scrollbar {
-    visibility: hidden;
+    display: none;
 }
 .inside-group {
     display: flex;
@@ -28,7 +28,7 @@ Authors: Tomas Valik (xvalik04)
     font-weight: 350;
 }
 
-.upravit-skupinu-mobil{
+.upravit-skupinu-mobil, .chat-mobil{
     background: transparent;
     color: gray;
     width: 40px;
@@ -224,6 +224,7 @@ img {
 .bottom {
     display: flex;
     display: row;
+    gap: 1rem;
 }
 
 .bottom button {
@@ -233,24 +234,7 @@ img {
     border-radius: 40px;
     border: 0;
     padding: 0.5em 3em;
-}
-
-.bottom select {
-    border-radius: 40px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 0 0.5em;
-    margin-left: 0.5em;
-    border: 0;
-}
-
-.chat-button {
-    background-color: white;
-    position: absolute;
-    top: 94%;
-    left: 70%;
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
-    border: 0;
+    white-space: nowrap;
 }
 
 
@@ -322,7 +306,7 @@ img {
     
     .upravit-skupinu { display: none; }
     
-    .upravit-skupinu-mobil{ display: block; }
+    .upravit-skupinu-mobil, .chat-mobil{ display: block; }
 
     .bottom { display: none; }
 }

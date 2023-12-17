@@ -2,6 +2,9 @@
 Author: Tomas Valik (xvalik04)
 */
 .edit-group-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: linear-gradient(180deg, #C6C6C6 0%, #EAEAEA 100%);
     padding: 1.5rem;
     padding-bottom: 1rem;
@@ -14,9 +17,7 @@ Author: Tomas Valik (xvalik04)
     margin-bottom: 1em;
 }
 
-h1, h2 {
-    margin-bottom: 0;
-}
+h1, h2 { margin-bottom: 0; }
 
 .form-group {
     display: flex;
@@ -52,15 +53,15 @@ h1, h2 {
     padding: 0 0.5em;
 }
 
+.user-list-container span { margin-bottom: 0.5em; }
+
 li {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-li span {
-    font-size: 16px;
-}
+li span { font-size: 16px; }
 
 .add-to-group {
     display: flex;
@@ -101,10 +102,6 @@ li span {
     padding: 0.4rem 2rem;
     border-radius: 40px;
     color: white;
-    position: relative;
-    width: max-content;
-    left: 25%;
     margin-top: 1rem; 
-    padding: 0.4rem 2rem;
     font-size: 16px;
 }

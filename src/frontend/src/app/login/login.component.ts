@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
 
       this.auth.login(credentials).subscribe(
         (response) => {
-          // Zde můžete zpracovat odpověď z přihlašovacího požadavku
           console.log('Uživatel byl úspěšně přihlášen:', response);
           console.log('uzivatelo id je: ' + response.user.user_id);
           console.log('uzivatelovo jmeno je: ' + response.user.user_firstname);
@@ -43,7 +42,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
         },
         (error) => {
-          // Zde můžete zpracovat chybu při přihlášení
           console.error('Chyba při přihlašování:', error);
           this.loginFailed = true;
         }

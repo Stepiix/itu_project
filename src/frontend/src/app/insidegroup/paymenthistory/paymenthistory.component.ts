@@ -8,12 +8,24 @@ import { FilterComponent } from './filter/filter.component';
   styleUrls: ['./paymenthistory.component.css']
 })
 export class PaymenthistoryComponent {
+  transactions: any;
+  groupId: any;
 
   constructor(public dialog: MatDialog, private dialogRef: MatDialogRef<FilterComponent>) {}
+
+  ngOnInit() {  // TODO
+    // this.route.params.subscribe(params => {
+    // this.groupId = params['groupId'];
+    // this.loadTransactions();
+    // });
+    console.log()
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
+
+
   openFilterDialog(): void {
     const dialogRef = this.dialog.open(FilterComponent, {
       width: '400px', // Nastavte šířku dialogu dle potřeby

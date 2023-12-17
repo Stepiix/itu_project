@@ -12,6 +12,8 @@ interface ChatMessage {
   message_group_id: number;
   message_user_id: string;
   message_text: string;
+  user_firstname?:string;
+  user_lastname?:string;
   // Další vlastnosti zprávy podle potřeby
 }
 @Component({

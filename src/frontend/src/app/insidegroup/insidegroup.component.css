@@ -5,7 +5,7 @@ Authors: Tomas Valik (xvalik04)
          Milan Takac (xtakac09)
 */
 .user-list::-webkit-scrollbar {
-    visibility: hidden;
+    display: none;
 }
 .inside-group {
     display: flex;

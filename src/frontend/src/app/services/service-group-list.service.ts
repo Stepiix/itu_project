@@ -59,14 +59,18 @@ export class ServiceGroupListService {
   updateGroup(formData: FormData): Observable<any> {
     return this.http.post(`${this.apiUrl}update-group`, formData);
   }
-
-  getAllMessages(groupId: number): Observable<any> {
+  
+  // xtakac09
+  getAllMessages(groupId: number): Observable<any> {                  
     return this.http.get(`${this.apiUrl}all-messages/${groupId}`);
   }
+  
+  // xtakac09
   addMessage(newChatMessage: any): Observable<any> {
     return this.http.post(`${this.apiUrl}add-message`, newChatMessage);
   }
   
+  // xtakac09
   removeMessage(messageId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}remove-message/${messageId}`);
   }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+// Author: Milan Takac (xtakac09)
 
 class Chat extends Model
 {
@@ -16,6 +17,7 @@ class Chat extends Model
         'message_text',
     ];
 
+    // Vztahy
     public function group()
     {
         return $this->belongsTo(groups::class, 'message_group_id');

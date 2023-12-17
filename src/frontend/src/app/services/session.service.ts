@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
+  private userSessionSubject = new BehaviorSubject<any>(null);
+  userSession$ = this.userSessionSubject.asObservable();
 
   constructor(private router: Router) { }
   
@@ -35,6 +38,14 @@ export class SessionService {
     };
     console.log(sessionData)
     sessionStorage.setItem('userSession', JSON.stringify(sessionData));
+
+    this.userSessionSubject.next({
+      userID: sessionData.userID,
+      firstName: sessionData.firstName,
+      lastName: sessionData.lastName,
+      email: sessionData.email,
+      photo: sessionData.photo
+    });
   }
   getUserSession() {
     const sessionDataString = sessionStorage.getItem('userSession');
@@ -45,12 +56,13 @@ export class SessionService {
       
       // Kontrola, zda session nevypršela
       if (currentTime < sessionData.expirationTime) {
+        console.log('get user session-----------------------------')
         return {
           userID: sessionData.userID,
           firstName: sessionData.firstName,
           lastName: sessionData.lastName,
           email: sessionData.email,
-          photo: sessionData.photo
+          photo: sessionData.photo || null
         };
       } else {
         // Session vypršela, odstranění dat
@@ -87,13 +99,24 @@ export class SessionService {
       if (updatedUser.user_lastname) {
         sessionData.lastName = updatedUser.user_lastname;
       }
-      if (updatedUser.email) {
-        sessionData.email = updatedUser.email;
+      if (updatedUser.user_email) {
+        sessionData.email = updatedUser.user_email;
       }
+      if (updatedUser.user_photo) {
+        sessionData.photo = updatedUser.user_photo;
+      }
+      console.log('update user session-----------------------------')
       sessionStorage.setItem('userSession', JSON.stringify(sessionData));
+      this.userSessionSubject.next({
+        'userID': sessionData.userID,
+        'firstName': sessionData.firstName,
+        'lastName': sessionData.lastName,
+        'email': sessionData.email,
+        'photo': sessionData.photo
+      } as any);      
     }
   }
-  
+
   
   
 }

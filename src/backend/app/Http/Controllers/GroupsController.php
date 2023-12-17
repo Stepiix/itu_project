@@ -37,7 +37,12 @@ class GroupsController extends Controller
         
         // Dekódování base64 kódu do binární podoby
         //$imageData = base64_decode($base64Image);
-        $imageData = $request->file('group_photo')->get();
+
+        if ($request->hasFile('group_photo')) {
+            $imageData = $request->file('group_photo')->get();
+        }else{
+            $imageData = null;
+        }
 
         $group = groups::create([
             'group_name' => $request->input('group_name'),

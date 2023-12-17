@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { SessionService } from '../services/session.service';
 @Component({
   selector: 'app-navbar',
@@ -11,6 +11,13 @@ export class NavbarComponent implements OnInit {
   constructor(private session: SessionService) { }
 
   ngOnInit(): void {
-    this.userInfo = this.session.getUserSession();
+    this.session.userSession$.subscribe(userSession => {
+      this.userInfo = userSession;
+    });
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['userInfo']) {
+      this.userInfo = changes['userInfo'].currentValue;
+    }
   }
 }

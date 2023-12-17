@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef  } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { FilterComponent } from './filter/filter.component';
+import { ServiceGroupListService } from 'src/app/services/service-group-list.service';
 
 @Component({
   selector: 'app-paymenthistory',
@@ -11,20 +13,28 @@ export class PaymenthistoryComponent {
   transactions: any;
   groupId: any;
 
-  constructor(public dialog: MatDialog, private dialogRef: MatDialogRef<FilterComponent>) {}
-
-  ngOnInit() {  // TODO
-    // this.route.params.subscribe(params => {
-    // this.groupId = params['groupId'];
-    // this.loadTransactions();
-    // });
-    console.log()
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private grouplistservice: ServiceGroupListService, private router: Router, public dialog: MatDialog, private dialogRef: MatDialogRef<FilterComponent>) {
+    this.transactions = data.transactions;
   }
 
   closeDialog(): void {
     this.dialogRef.close();
   }
 
+  deleteTransaction(transactionID: number): void {
+    console.log("smaz transakci: ", transactionID);
+
+    const transactionRemoval = this.grouplistservice.removeTransaction(transactionID);
+    
+    transactionRemoval.subscribe(
+      (responses) => {
+        console.log('Transaction deleted successfuly:', responses);
+      },
+      (error) => {
+        console.error('Error deleting transaction:', error);
+      }
+    );
+  }
 
   openFilterDialog(): void {
     const dialogRef = this.dialog.open(FilterComponent, {

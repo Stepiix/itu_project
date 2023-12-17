@@ -11,6 +11,10 @@
         <label for="password">Heslo:</label>
         <input type="password" id="password" formControlName="user_password" placeholder="Heslo" required>
       </div>
+
+      <div *ngIf="loginFailed" class="user-name">
+        <strong style="color: red;">Špatné přihlašovací údaje</strong>
+      </div>
       
       <button type="submit" [disabled]="!form.valid"><p>Přihlásit se</p></button>
       <div class="crumbs">    

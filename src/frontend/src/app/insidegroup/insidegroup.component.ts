@@ -226,6 +226,7 @@ openDialogEditGroup(): void {
   openChat(): void {
     this.dataSharingService.setSharedID(this.groupId);
     const dialogRef = this.dialog.open(ChatComponent, {
+      width: '1000px',
       panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
     });
   

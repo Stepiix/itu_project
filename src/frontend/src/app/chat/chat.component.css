@@ -1,3 +1,18 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+    width: 100%;
+}
+
+h1 { margin-bottom: 0; }
+
+.close-button {
+    background-color: transparent;
+    border: 0;
+}
+
 .chat-container {
     display: flex;
     flex-direction: column;
@@ -13,9 +28,21 @@
     padding: 0.5rem 1rem;
     border-radius: 16px;
     padding-left: 0.5rem;
+    width: -webkit-fill-available;
 }
 
-.message { margin-bottom: 1em; }
+p { 
+    margin-bottom: 0; 
+    flex-grow: 1;
+}
+
+.message { 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em; 
+}
 
 .message:first-child { margin-top: 0.3em; }
 
@@ -26,6 +53,17 @@ span {
     padding: 0.1em 1em;
     border-radius: 10px;
     margin-right: 0.5em;
+}
+
+.delete {
+    background: transparent;
+    display: flex;
+    border: 0;
+}
+
+svg {
+    width: 1rem;
+    color: red;
 }
 
 .new-message-container {

@@ -43,6 +43,7 @@ body {
     .custom-dialog-container .mat-mdc-dialog-container {
         /* --mdc-dialog-container-shape: 10px; */
         width: 100%;
+        /* position: relative; */
     }
     
 }

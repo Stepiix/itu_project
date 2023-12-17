@@ -66,6 +66,10 @@ export class ChatComponent {
     });
   }
 
+  closeDialog(): void {
+    this.dialog.closeAll();
+  }
+
   getLoggedInUserId(): string {
     return this.session.getID() || '';
   }
@@ -74,16 +78,10 @@ export class ChatComponent {
     if (messageId !== undefined) {
       console.log("nemam id");
     
-    this.serviceGroupListService.removeMessage(messageId).subscribe(() => {
-      // Aktualizace zpráv po odstranění zprávy
-      this.loadMessages(this.groupId);
-    });
+      this.serviceGroupListService.removeMessage(messageId).subscribe(() => {
+        // Aktualizace zpráv po odstranění zprávy
+        this.loadMessages(this.groupId);
+      });
+    }
   }
-  }
-  // }
-  //   this.chatService.addMessage(newChatMessage).subscribe(() => {
-  //     this.loadMessages(); // Aktualizuj zprávy po odeslání nové zprávy
-  //     this.newMessage = '';
-  //   });
-  // }
 }

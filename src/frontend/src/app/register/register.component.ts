@@ -11,6 +11,7 @@ import { SessionService } from '../services/session.service';
 })
 export class RegisterComponent {
   registrationForm: FormGroup;
+  registrationFailed = false;
 
   constructor(private formBuilder: FormBuilder, private authserviceService: AuthserviceService, private router: Router, private session: SessionService) {
     this.registrationForm = this.formBuilder.group({
@@ -22,6 +23,8 @@ export class RegisterComponent {
   }
 
   onSubmit() {
+    this.registrationFailed = false;
+
     if (this.registrationForm && this.registrationForm.valid) {
       this.authserviceService.register(this.registrationForm.value).subscribe(
         (response) => {
@@ -32,7 +35,6 @@ export class RegisterComponent {
           console.log("email: ", response.user.user_email)  ;
           
           this.session.startUserSession(response.user.user_id, response.user.user_firstname, response.user.user_lastname, response.user.user_email, response.user.user_photo);
-          alert("uspesne ses prihlasil");//TODO vylepsit
           this.router.navigate(['/']);
 
           // Provedení dalších akcí po úspěšné registraci, například přesměrování na jinou stránku nebo zobrazení potvrzující zprávy
@@ -41,8 +43,8 @@ export class RegisterComponent {
         },
         (error) => {
           console.error('Chyba při registraci', error);
-          // Zde můžete zpracovat chybu, například zobrazením chybové zprávy uživateli
-          // this.errorMessage = 'Chyba při registraci: ' + error.message;
+          this.registrationFailed = true;
+          
         }
       );
     }

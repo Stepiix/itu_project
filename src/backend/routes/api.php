@@ -64,8 +64,11 @@ Route::get('/user-balance', [TransactionController::class, 'calculateUserBalance
 
 Route::get('/getall-transactions-user', [TransactionController::class, 'getTransactionsByUser']);
 
+// xtakac09
 Route::get('/all-messages/{id}', [ChatController::class, 'index']);
 
+// xtakac09
 Route::post('/add-message', [ChatController::class, 'addMessage']);
 
+// xtakac09
 Route::delete('/remove-message/{id}', [ChatController::class, 'removeMessage']);

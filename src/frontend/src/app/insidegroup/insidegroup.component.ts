@@ -183,12 +183,16 @@ export class InsidegroupComponent {
   }
 
   openDialogSettleDebt(): void {
+    this.dataSharingService.setSharedID(this.groupId);
     const dialogRef = this.dialog.open(SettledebtComponent, {
       panelClass: 'custom-dialog-container', // Nastavte šířku dialogu dle potřeby
     });
   
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.loadUsersBalances();
+      this.loadTransactions();
+      this.calculateDebts();
       // Zde můžete provést akce po zavření dialogu, pokud jsou potřeba
     });
   }

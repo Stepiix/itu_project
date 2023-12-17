@@ -11,23 +11,24 @@
 
             <div class="form-group">
                 <label for="skym">S kým:</label>
-                <select name="skym" id="skym">
-                    <option value="kuba">Jmeno clena</option>
-                    <option value="kuba">Jmeno clena</option>
+                <select name="skym" id="skym" [(ngModel)]="selectedDebt">
+                  <option *ngFor="let debt of currentUserDebts" [value]="debt.name">
+                    {{ debt.name }}
+                  </option>
                 </select>
-            </div>
-
-            <p>Váš dluh s uživatelem <span>UŽIVATEL</span> činí <span>ČÁSTKA</span></p>
+              </div>
+              
+              <p>Váš dluh s uživatelem <span>{{ selectedDebt }}</span> činí <span>{{ getDebtAmount(selectedDebt) }}</span></p>
 
             <div class="form-group">
                 <label for="kolik">Částka:</label>
-                <input type="text" name="castka" id="kolik">
+                <input type="number" name="castka" id="kolik" [(ngModel)]="selectedDebtAmount">
             </div>
 
 
             <div class="buttons">
-                <button class="srovnat-cele">Srovnat celý dluh</button>
-                <button class="srovnat">Srovnat</button>
+                <button class="srovnat-cele" (click)="setAmountForSelectedDebt()">Srovnat celý dluh</button>
+                <button class="srovnat" (click)="srovnatDluh()">Srovnat</button>
             </div>
 
         </form>

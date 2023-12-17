@@ -16,7 +16,7 @@
       <i class="material-icons">message</i>
       <a routerLink="/profile">
         <div class="pic">
-          <ng-container *ngIf="userInfo.photo; else defaultImage">
+          <ng-container *ngIf="userInfo?.photo; else defaultImage">
             <img [src]="'data:image/jpeg;base64,' + userInfo.photo" alt="profilova fotka" /> 
           </ng-container>
           <ng-template #defaultImage>

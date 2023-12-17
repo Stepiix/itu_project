@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  prihlasit(): void {
+  async prihlasit(): Promise<void> {
     this.loginFailed = false;
 
     if (this.form.valid) {

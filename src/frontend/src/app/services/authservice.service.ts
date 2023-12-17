@@ -9,6 +9,7 @@ export class AuthserviceService {
   private apiUrlRegister =   'http://localhost:8000/api/register';
   private apiUrlLogin =      'http://localhost:8000/api/login';
   private apiUrlUpdateUser = 'http://localhost:8000/api/update-user';
+  private apiUrlGetUser = 'http://localhost:8000/api/get-user';
 
   constructor(private http: HttpClient) { }
 
@@ -29,6 +30,11 @@ export class AuthserviceService {
   editUser(userInformation: FormData): Observable<any> {
     console.log('xxxxxxxxxxxxxxxxxxx',userInformation)
     return this.http.post(this.apiUrlUpdateUser, userInformation);
+  }
+
+  loadInfoAboutUser(user_id: number): Observable<any> {
+    const params = { user_id: user_id.toString() };
+    return this.http.get(this.apiUrlGetUser, { params });
   }
   
 }

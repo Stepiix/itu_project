@@ -71,7 +71,9 @@ export class EditProfileComponent implements OnInit{
       user_firstname: this.userInfo.firstName,
       user_lastname: this.userInfo.lastName,
       user_email: this.userInfo.email,
+      user_photo : this.selectedFile
     };
+    console.log('===========',updatedUserInfo)
   
     // Create a FormData object to send both text and file data
     const formData = new FormData();

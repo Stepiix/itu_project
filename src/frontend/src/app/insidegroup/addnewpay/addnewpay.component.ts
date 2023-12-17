@@ -117,8 +117,11 @@ splitEqually() {
   
     // Iterate over each user share and send a request
     for (const userId in this.userShares) {
-      const userShare = this.userShares[userId];
+      let userShare = this.userShares[userId];
       if (userShare !== null && !isNaN(userShare) && userShare > 0) {
+        if(this.isRatioSelected){
+          userShare = Math.round(this.paymentAmount * (userShare / 100));
+        }
         const numericUserId = parseInt(userId, 10); // Convert userId to integer
         const paymentRequest = this.grouplistservice.sendNewPay(
           this.groupId,

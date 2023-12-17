@@ -34,6 +34,7 @@ export class ServiceGroupListService {
       t_exchange_rate: exchangeRate,
       t_label: paymentReason,
     };
+    console.log('posilam na backend ----------------',paymentData)
 
     // Return the observable without subscribing here
     return this.http.post(`${this.apiUrl}create-transactions`, paymentData);

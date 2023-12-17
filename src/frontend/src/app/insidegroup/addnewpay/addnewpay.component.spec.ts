@@ -1,3 +1,6 @@
+/*
+Author: Stepan Barta (xbarta50)
+*/
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddnewpayComponent } from './addnewpay.component';

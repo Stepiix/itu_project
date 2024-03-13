@@ -1,6 +1,10 @@
 # Projekt naší aplikace owesme pro rozdělování peněz
 Tento projekt byl vytvořen v rámci předmětu "Tvorba uživatelských rozhraní" a slouží k dokumentaci a správě návrhu a implementace členů týmu.
 
+# Video s vysvětlením aplikace
+
+https://youtu.be/_A-sM7p1xNs
+
 # Popis instalace
 
 Pro správný běh aplikace je nutné mít nainstalovaný Angular a Laravel.
